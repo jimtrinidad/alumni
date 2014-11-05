@@ -3,12 +3,18 @@
 	var components;
 	angular.module('LazyLoad', [])
 	.config([
-		'$controllerProvider', 
+		'$routeProvider',
+	    '$controllerProvider',
+	    '$compileProvider',
+	    '$filterProvider',
 		'$provide', 
-		function ($controllerProvider, $provide){
+		function ($routeProvider, $controllerProvider, $compileProvider, $filterProvider, $provide){
 			components = {
+				route 		: $routeProvider.register,
 				controller 	: $controllerProvider.register,
-				service 	: $provide.service
+				compilte	: $compileProvider.register,
+				filter 		: $filterProvider.register,
+				provide 	: $provide
 			};
 		}
 	])
