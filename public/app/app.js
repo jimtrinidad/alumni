@@ -20,5 +20,7 @@ app.config(['$routeProvider', 'lazyProvider', function ($routeProvider, lazyProv
 				}
 			}
 		})
+
+		.otherwise({ redirectTo: '/' });
 	
 }])

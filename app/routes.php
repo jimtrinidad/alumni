@@ -22,6 +22,10 @@ Route::group(array('before' => 'auth'), function() {
 
 	Route::get('logout', 'AuthController@logout');
 
+	Route::get('test', function(){
+		return View::make('testview');
+	});
+
 });
 
 /**
