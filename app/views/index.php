@@ -39,27 +39,11 @@
 				<ul class="nav pull-right top-menu">
 
 					<!-- user login dropdown start-->
-					<a class='hidden'>
-						<img alt="" src="http://placehold.it/29x29">
-						<span class="username">John Doe</span>
-					</a>
 					<li class="dropdown">
-						<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+						<a class="dropdown-toggle">
 							<img alt="" src="http://placehold.it/29x29">
-							<span class="username">John Doe</span>
-							<b class="caret"></b>
+							<span class="username"><?php echo ucfirst(Auth::user()->firstname . ' ' . Auth::user()->lastname); ?></span>
 						</a>
-						<ul class="dropdown-menu extended logout">
-							<li>
-								<a href="#"><i class=" fa fa-suitcase"></i>Profile</a>
-							</li>
-							<li>
-								<a href="#"><i class="fa fa-cog"></i> Settings</a>
-							</li>
-							<li>
-								<a href="login.html"><i class="fa fa-power-off"></i> Log Out</a>
-							</li>
-						</ul>
 					</li>
 
 				</ul>
@@ -98,11 +82,11 @@
 							<i class="fa fa-cog"></i><span> Settings</span>
 						</a>
 						<ul class="sub">
+							<li ng-class="{ active: isActive('/settings/general') }">
+								<a href="#/settings/general">General Settings</a>
+							</li>
 							<li ng-class="{ active: isActive('/settings/notifications') }">
 								<a href="#/settings/notifications">Notifications</a>
-							</li>
-							<li ng-class="{ active: isActive('/settings/displayed') }">
-								<a href="#/settings/displayed">Displayed Data</a>
 							</li>
 							<li ng-class="{ active: isActive('/settings/security') }">
 								<a href="#/settings/security">Security</a>

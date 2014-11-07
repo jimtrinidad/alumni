@@ -30,7 +30,7 @@ Route::group(array('before' => 'auth'), function() {
 Route::group(array('prefix' => 'api/v1', 'before' => 'apiauth'), function() {
 
 	Route::resource('alumni', 'AlumniController');
-	Route::resource('programs', 'ProgramsController');
+	Route::resource('program', 'ProgramController');
 
 });
 

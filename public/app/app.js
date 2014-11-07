@@ -26,9 +26,12 @@ app.config(['$routeProvider', 'lazyProvider', function ($routeProvider, lazyProv
 		.when('/programs', {
 
 		})
-		.when('/settings/notifications', {
+		.when('/users', {
+
 		})
-		.when('/settings/displayed', {
+		.when('/settings/general', {
+		})
+		.when('/settings/notifications', {
 		})
 		.when('/settings/security', {
 		})
