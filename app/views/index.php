@@ -39,11 +39,11 @@
 				<ul class="nav pull-right top-menu">
 
 					<!-- user login dropdown start-->
-					<a>
+					<a class='hidden'>
 						<img alt="" src="http://placehold.it/29x29">
 						<span class="username">John Doe</span>
 					</a>
-					<li class="dropdown hidden">
+					<li class="dropdown">
 						<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 							<img alt="" src="http://placehold.it/29x29">
 							<span class="username">John Doe</span>
@@ -69,43 +69,43 @@
 		<!--header end-->
 
 		<aside>
-			<div id="sidebar" class="nav-collapse">
+			<div id="sidebar" class="nav-collapse" ng-controller="HeaderController">
 				<!-- sidebar menu start-->
 				<ul class="sidebar-menu" id="nav-accordion">
 					<li>
-						<a href="#/">
+						<a href="#/" ng-class="{ active: isActive('/') }">
 							<i class="fa fa-dashboard"></i><span> Dashboard</span>
 						</a>
 					</li>
 					<li>
 					<li>
-						<a href="#/alumni">
+						<a href="#/alumni" ng-class="{ active: isActive('/alumni') }">
 							<i class="fa fa-group"></i><span> Alumni</span>
 						</a>
 					</li>
 					<li>
-						<a href="#/programs">
+						<a href="#/programs" ng-class="{ active: isActive('/programs') }">
 							<i class="fa fa-institution"></i><span> Programs</span>
 						</a>
 					</li>
 					<li>
-						<a href="#/programs">
+						<a href="#/users" ng-class="{ active: isActive('/users') }">
 							<i class="fa fa-institution"></i><span> Users</span>
 						</a>
 					</li>
 					<li class="sub-menu">
-						<a href="javascript:;">
+						<a href="javascript:;" ng-class="{ active: isActive('/settings', 1) }">
 							<i class="fa fa-cog"></i><span> Settings</span>
 						</a>
 						<ul class="sub">
-							<li>
-								<a href="basic_table.html">Notifications</a>
+							<li ng-class="{ active: isActive('/settings/notifications') }">
+								<a href="#/settings/notifications">Notifications</a>
 							</li>
-							<li>
-								<a href="responsive_table.html">Displayed Data</a>
+							<li ng-class="{ active: isActive('/settings/displayed') }">
+								<a href="#/settings/displayed">Displayed Data</a>
 							</li>
-							<li>
-								<a href="dynamic_table.html">Security</a>
+							<li ng-class="{ active: isActive('/settings/security') }">
+								<a href="#/settings/security">Security</a>
 							</li>
 						</ul>
 					</li>
@@ -135,15 +135,14 @@
 	<script type="text/javascript" src="assets/libs/angular/angular-animate.min.js"></script>
 	<script type="text/javascript" src="assets/libs/require.js"></script>
 
+	<script type="text/javascript" src="app/app.js"></script>
+	<script type="text/javascript" src="app/shared/modules.js"></script>
+	<script type="text/javascript" src="app/shared/controllers.js"></script>
+
 	<script type="text/javascript" src="assets/libs/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="assets/libs/jquery/jquery.dcjqaccordion.2.7.js"></script>
 	<script type="text/javascript" src="assets/libs/jquery/jquery.scrollTo.min.js"></script>
 	<script type="text/javascript" src="assets/libs/jquery/jquery.nicescroll.js" type="text/javascript"></script>
-
-	<script type="text/javascript" src="app/app.js"></script>
-	<script type="text/javascript" src="app/shared/modules/lazyload.module.js"></script>
-	<script type="text/javascript" src="app/shared/modules/ui-bootstrap-tpls.min.js"></script>
-	<script type="text/javascript" src="app/shared/modules/loading-bar.min.js"></script>
 
 	<script type="text/javascript" src="assets/js/scripts.js"></script>
 

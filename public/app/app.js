@@ -23,6 +23,15 @@ app.config(['$routeProvider', 'lazyProvider', function ($routeProvider, lazyProv
 				}
 			}
 		})
+		.when('/programs', {
+
+		})
+		.when('/settings/notifications', {
+		})
+		.when('/settings/displayed', {
+		})
+		.when('/settings/security', {
+		})
 
 		.otherwise({ redirectTo: '/' });
 	

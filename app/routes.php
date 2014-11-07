@@ -22,10 +22,6 @@ Route::group(array('before' => 'auth'), function() {
 
 	Route::get('logout', 'AuthController@logout');
 
-	Route::get('test', function(){
-		return View::make('testview');
-	});
-
 });
 
 /**
@@ -34,5 +30,14 @@ Route::group(array('before' => 'auth'), function() {
 Route::group(array('prefix' => 'api/v1', 'before' => 'apiauth'), function() {
 
 	Route::resource('alumni', 'AlumniController');
+	Route::resource('programs', 'ProgramsController');
+
+});
+
+/**
+* Patial views for angular template
+*/
+Route::group(array(), function() {
+
 
 });
