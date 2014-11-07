@@ -226,7 +226,6 @@
         <section id="main-content">
             <section class="wrapper">
                 <!-- page start-->
-
                 <div class="row">
                     <div class="col-sm-12">
                         <section class="panel">
@@ -258,6 +257,9 @@
     <script src="assets/libs/jquery/jquery.dcjqaccordion.2.7.js"></script>
     <script src="assets/libs/jquery/jquery.scrollTo.min.js"></script>
     <script src="assets/libs/jquery/jquery.nicescroll.js" type="text/javascript"></script>
+    <script type="text/javascript" src="assets/libs/angular/angular.min.js"></script>
+    <script type="text/javascript" src="assets/libs/ui-bootstrap-tpls.min.js"></script>
+
     <!--common script init for all pages-->
     <script src="assets/js/scripts.js"></script>
 

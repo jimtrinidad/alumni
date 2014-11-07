@@ -3,12 +3,15 @@
 /**
 * This is the main app.
 */
-var app = angular.module('app', ['ngRoute', 'LazyLoad']);
+var app = angular.module('app', ['ngRoute', 'LazyLoad', 'ui.bootstrap', 'angular-loading-bar', 'ngAnimate']);
 
 app.config(['$routeProvider', 'lazyProvider', function ($routeProvider, lazyProvider) {
 
 	var $lazy = lazyProvider.$get();
 	$routeProvider
+		.when('/', {
+			templateUrl: 'app/dashboard/views/main.html'
+		})
 		.when('/alumni', {
 			templateUrl: 'app/alumni/views/main.html',
 			resolve: {
@@ -23,4 +26,12 @@ app.config(['$routeProvider', 'lazyProvider', function ($routeProvider, lazyProv
 
 		.otherwise({ redirectTo: '/' });
 	
-}])
+}]);
+
+
+/**
+* Disable RequestJS  cache while on development
+*/
+require.config({
+    urlArgs: "bust=" + (new Date()).getTime()
+});

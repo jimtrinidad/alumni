@@ -7,7 +7,7 @@
 
     # Redirect Trailing Slashes...
     #RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(.*)/$ /alumni/public/$1 [L,R=301]
+    RewriteRule ^(.*)/$ /bsi/alumni/public/$1 [L,R=301]
 
     # Handle Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
