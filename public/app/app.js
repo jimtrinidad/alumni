@@ -17,8 +17,8 @@ app.config(['$routeProvider', 'lazyProvider', function ($routeProvider, lazyProv
 			resolve: {
 				load: function (){
 					return $lazy('app').load([
-						'app/alumni/controllers/AlumniController',
-						'app/alumni/services/alumniService'
+						'app/alumni/controllers',
+						'app/alumni/services'
 					]);
 				}
 			}
