@@ -6,23 +6,23 @@ class Alumni extends Eloquent {
 
 	use SoftDeletingTrait;
 	
-	protected $dates 		= ['dateDeleted'];
+	protected $dates 		= ['deleted_at'];
 	protected $softDelete 	= true;
 
-	protected $table		= 'tb_alumni';
+	protected $table		= 'alumni';
 
 	
 	public static function get_listing() {
 
-		$query	= DB::table('tb_alumni');
+		$query	= DB::table('alumni');
 
-		$query->join('tb_program', 'tb_alumni.programID', '=', 'tb_program.id');
+		$query->join('programs', 'alumni.program_id', '=', 'programs.id');
 
-		$query->select(DB::raw('tb_alumni.*, longname, name, logo'));
+		$query->select(DB::raw('alumni.*, name, acronym, logo'));
 
 		if (Input::get('program')) {
 
-			$query->where('programID', '=', Input::get('program'));
+			$query->where('program_id', '=', Input::get('program'));
 
 		}
 

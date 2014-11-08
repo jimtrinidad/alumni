@@ -55,7 +55,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'db_alumni',
+			'database'  => 'alumni',
 			'username'  => 'root',
 			'password'  => '',
 			'charset'   => 'utf8',

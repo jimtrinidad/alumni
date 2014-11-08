@@ -9,9 +9,7 @@ class ProgramController extends BaseController {
 
 		foreach ($program_results as $item) {
 
-			$filepath 		= 'assets/img/program_logo/';		
-			$item['logo'] 	= File::exists(public_path($filepath . $item['logo'])) ? asset($filepath . $item['logo']) : asset($filepath . 'default.jpg');
-			$programs[] 	= $item;
+			$programs[] 	= $this->format_program($item);
 
 		}
 
@@ -41,7 +39,7 @@ class ProgramController extends BaseController {
 
 			return Response::json(array(
 					'status'	=> true,
-					'data'		=> $result
+					'data'		=> $this->format_program($result)
 				));
 
 		} else {
@@ -84,6 +82,16 @@ class ProgramController extends BaseController {
 				));
 
 		}
+
+	}
+
+
+	private function format_program($item) {
+
+		$filepath 		= 'assets/img/program_logo/';		
+		$item['logo'] 	= File::exists(public_path($filepath . $item['logo'])) ? asset($filepath . $item['logo']) : asset($filepath . 'default.jpg');
+		
+		return $item;
 
 	}
 

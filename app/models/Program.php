@@ -6,9 +6,9 @@ class Program extends Eloquent {
 
 	use SoftDeletingTrait;
 	
-	protected $dates 		= ['dateDeleted'];
+	protected $dates 		= ['deleted_at'];
 	protected $softDelete 	= true;
 
-	protected $table		= 'tb_program';
+	protected $table		= 'programs';
 
 }
