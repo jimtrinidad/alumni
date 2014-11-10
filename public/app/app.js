@@ -3,7 +3,7 @@
 /**
 * This is the main app.
 */
-var app = angular.module('app', ['ngRoute', 'LazyLoad', 'ui.bootstrap', 'angular-loading-bar', 'ngAnimate']);
+var app = angular.module('app', ['ngRoute', 'LazyLoad', 'ui.bootstrap', 'angular-loading-bar', 'ngAnimate', 'ngResource']);
 
 app.config(['$routeProvider', 'lazyProvider', function ($routeProvider, lazyProvider) {
 
@@ -18,7 +18,8 @@ app.config(['$routeProvider', 'lazyProvider', function ($routeProvider, lazyProv
 				load: function (){
 					return $lazy('app').load([
 						'app/alumni/controllers',
-						'app/alumni/services'
+						'app/alumni/services',
+						'app/program/services'
 					]);
 				}
 			}
@@ -39,6 +40,12 @@ app.config(['$routeProvider', 'lazyProvider', function ($routeProvider, lazyProv
 		.otherwise({ redirectTo: '/' });
 	
 }]);
+
+app.run(function($rootScope, $templateCache) {
+   $rootScope.$on('$viewContentLoaded', function() {
+      $templateCache.removeAll();
+   });
+});
 
 
 /**

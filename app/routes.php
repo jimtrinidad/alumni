@@ -29,6 +29,8 @@ Route::group(array('before' => 'auth'), function() {
 */
 Route::group(array('prefix' => 'api/v1', 'before' => 'apiauth'), function() {
 
+	Route::get('program/user', 'ProgramController@get_assigned_programs');
+
 	Route::resource('alumni', 'AlumniController');
 	Route::resource('program', 'ProgramController');
 

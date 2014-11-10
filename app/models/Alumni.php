@@ -20,19 +20,19 @@ class Alumni extends Eloquent {
 
 		$query->select(DB::raw('alumni.*, name, acronym, logo'));
 
-		if (Input::get('program')) {
+		if (Input::get('program') != '') {
 
 			$query->where('program_id', '=', Input::get('program'));
 
 		}
 
-		if (Input::get('batch')) {
+		if (Input::get('batch') != '') {
 
 			$query->where('batch', '=', Input::get('batch'));
 
 		}
 
-		if (Input::get('search') && in_array(Input::get('field'), array('firstname', 'lastname', 'position', 'company'))) {
+		if (Input::get('search') != '' && in_array(Input::get('field'), array('firstname', 'lastname', 'position', 'company'))) {
 
 			$query->where(function($q) {
 
@@ -42,7 +42,9 @@ class Alumni extends Eloquent {
 
 		}
 
-		return $query->paginate(Input::get('size', 100));
+		$query->orderBy(Input::get('sort', 'firstname'));
+
+		return $query->paginate(Input::get('size', 50));
 
 	}
 

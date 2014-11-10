@@ -17,9 +17,9 @@
 	                    </div>
 	                    <div class="form-group">
 	                    	<input type="text" ng-model="filters.batch" style="width:35%" class="form-control" placeholder="Batch">
-	                    	<select ng-model='filters.program' class="form-control" style="width:50%">
+	                    	<select ng-model='filters.field' class="form-control" style="width:50%">
 	                    		<option value="">All Programs</option>
-	                        	<option  ng-repeat="item in programs.data" value="{{item.id}}">{{item.acronym}}</option>
+	                        	<option  ng-repeat="field in ['Firstname','Lastname','Position','Company']" value="{{field|lowercase}}">{{field}}</option>
 	                        </select>
 	                   	</div>
                 	</div>

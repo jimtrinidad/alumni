@@ -6,13 +6,14 @@
 	<title>Alumni Panel</title>
 
 	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap-theme.min.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap-reset.min.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/loading-bar.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/animations.css">
 
 	<!-- Custom styles for this template -->
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/overwrites.css">
 
 </head>
 <body>
@@ -117,11 +118,13 @@
 	<script type="text/javascript" src="assets/libs/angular/angular.min.js"></script>
 	<script type="text/javascript" src="assets/libs/angular/angular-route.min.js"></script>
 	<script type="text/javascript" src="assets/libs/angular/angular-animate.min.js"></script>
+	<script type="text/javascript" src="assets/libs/angular/angular-resource.min.js"></script>
 	<script type="text/javascript" src="assets/libs/require.js"></script>
 
 	<script type="text/javascript" src="app/app.js"></script>
 	<script type="text/javascript" src="app/shared/modules.js"></script>
 	<script type="text/javascript" src="app/shared/controllers.js"></script>
+	<script type="text/javascript" src="app/shared/directives.js"></script>
 
 	<script type="text/javascript" src="assets/libs/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="assets/libs/jquery/jquery.dcjqaccordion.2.7.js"></script>
