@@ -5,11 +5,13 @@ angular.module('app').components.controller('AlumniController', ['$scope', '$tim
 
         $scope.alumni 			= [];
         $scope.currentPage 		= 1;
-        $scope.filters 			= {};
-        $scope.filters.field 	= 'firstname';
-        $scope.filters.sort 	= 'firstname';
-        $scope.filters.program  = '';
-        $scope.filters.size 	= 50;
+
+        $scope.filters 			= {
+            field   : 'firstname',
+            sort    : 'firstname',
+            program : '',
+            size    : 50
+        };
 
         $scope.fields_options	= {
         	firstname	: 'Firstname',
@@ -26,7 +28,7 @@ angular.module('app').components.controller('AlumniController', ['$scope', '$tim
         };
 
         $scope.get_alumni = function() {
-            $scope.alumni = [];
+            //$scope.alumni = [];
             var params = angular.copy($scope.filters);
             params = angular.extend(params, {
                 page: $scope.currentPage
@@ -34,6 +36,7 @@ angular.module('app').components.controller('AlumniController', ['$scope', '$tim
             Alumni.query(params, function(response) {
                 $timeout(function() {
                     $scope.alumni = response;
+                    $scope.$broadcast("alumni_list_changed");
                 }, 500);
             });
         };

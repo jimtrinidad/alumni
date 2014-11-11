@@ -41,13 +41,6 @@ app.config(['$routeProvider', 'lazyProvider', function ($routeProvider, lazyProv
 	
 }]);
 
-app.run(function($rootScope, $templateCache) {
-   $rootScope.$on('$viewContentLoaded', function() {
-      $templateCache.removeAll();
-   });
-});
-
-
 /**
 * Disable RequestJS  cache while on development
 */

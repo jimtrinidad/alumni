@@ -9,6 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap-reset.min.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/loading-bar.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/animate.min.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/animations.css">
 
 	<!-- Custom styles for this template -->
@@ -75,7 +76,7 @@
 					</li>
 					<li>
 						<a href="#/users" ng-class="{ active: isActive('/users') }">
-							<i class="fa fa-institution"></i><span> Users</span>
+							<i class="fa fa-user"></i><span> Users</span>
 						</a>
 					</li>
 					<li class="sub-menu">
