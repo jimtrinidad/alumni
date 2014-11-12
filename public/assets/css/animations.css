@@ -1,22 +1,12 @@
-.animate-repeat {
-  -webkit-transition: color 1s, background-color 0.6s;
-  -moz-transition: color 1s, background-color 0.6s;
-  -ms-transition: color 1s, background-color 0.6s;
-  transition: color 1s, background-color 0.6s;
-}
+.animate-repeat {}
+
+.animate-repeat.ng-leave {}
 
 .animate-repeat.ng-enter {
-  -webkit-animation: fadeInLeft 1s;
-  -moz-animation: fadeInLeft 1s;
-  -ms-animation: fadeInLeft 1s;
-  animation: fadeInLeft 1s;
-}
-
-.animate-repeat.ng-leave {
-  -webkit-animation: bounceOut 0.2s;
-  -moz-animation: bounceOut 0.2s;
-  -ms-animation: bounceOut 0.2s;
-  animation: bounceOut 0.2s;
+  -webkit-animation: fadeIn 0.5s;
+  -moz-animation: fadeIn 0.5s;
+  -ms-animation: fadeIn 0.5s;
+  animation: fadeIn 0.5s;
 }
 
 
@@ -24,6 +14,6 @@
 * FOR VIEW
 */
 div[ng-view].ng-enter {
-    -webkit-animation: fadeIn 1.5s;
-    animation: fadeIn 1.5s;
+    -webkit-animation: fadeIn 0.5s;
+    animation: fadeIn 0.5s;
 }

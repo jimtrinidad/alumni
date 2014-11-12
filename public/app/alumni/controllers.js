@@ -28,7 +28,6 @@ angular.module('app').components.controller('AlumniController', ['$scope', '$tim
         };
 
         $scope.get_alumni = function() {
-            //$scope.alumni = [];
             var params = angular.copy($scope.filters);
             params = angular.extend(params, {
                 page: $scope.currentPage
@@ -37,7 +36,7 @@ angular.module('app').components.controller('AlumniController', ['$scope', '$tim
                 $timeout(function() {
                     $scope.alumni = response;
                     $scope.$broadcast("alumni_list_changed");
-                }, 500);
+                }, 100);
             });
         };
         $scope.$on('page.changed', function(event, page) {

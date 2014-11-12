@@ -3,7 +3,15 @@
 /**
 * This is the main app.
 */
-var app = angular.module('app', ['ngRoute', 'LazyLoad', 'ui.bootstrap', 'angular-loading-bar', 'ngAnimate', 'ngResource']);
+var app = angular.module('app', [
+			'ngRoute', 
+			'LazyLoad', 
+			'ui.bootstrap', 
+			'angular-loading-bar', 
+			'ngAnimate', 
+			'ngResource', 
+			'blockUI'
+		]);
 
 app.config(['$routeProvider', 'lazyProvider', function ($routeProvider, lazyProvider) {
 
@@ -40,6 +48,20 @@ app.config(['$routeProvider', 'lazyProvider', function ($routeProvider, lazyProv
 		.otherwise({ redirectTo: '/' });
 	
 }]);
+
+app.config(function(blockUIConfig) {
+
+	blockUIConfig.message = 'Loading...';
+
+	blockUIConfig.requestFilter = function(config) {
+		// If the request starts with '/api/quote' ...
+		if(!config.url.match(/^api\/v1\/alumni*/)) {
+			return false; // ... don't block it.
+		}
+	};
+
+});
+
 
 /**
 * Disable RequestJS  cache while on development

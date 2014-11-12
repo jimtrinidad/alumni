@@ -9,6 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap-reset.min.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/loading-bar.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/angular-block-ui.min.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/animate.min.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/animations.css">
 
