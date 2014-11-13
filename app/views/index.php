@@ -35,7 +35,6 @@
 				</div>
 			</div>
 				<!--logo end-->
-
 			<div class="top-nav clearfix">
 
 				<!--search & user info start-->
@@ -107,7 +106,7 @@
 
 		<!--main content start-->
 		<section id="main-content">
-			<section class="wrapper">
+			<section class="wrapper" scroll>
 				<!-- page start-->
 				<div ng-view></div>
 				<!-- page end-->

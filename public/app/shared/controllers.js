@@ -3,10 +3,6 @@
 */
 angular.module('app').controller('GlobalController', ['$scope', '$window', function($scope, $window){
 	
-	/*var w = angular.element($window);
-	w.bind('resize', function () {
-		console.log('resize');
-	});*/
 
 }]);
 

@@ -76,3 +76,19 @@ angular.module('app').directive("scrollToTopWhen", [ '$timeout',
         };
     }
 ]);
+
+angular.module('app').directive("scroll", function ($window) {
+    return function(scope, element, attrs) {
+
+        scope.boolScrolledOnTop = false;
+        angular.element($window).bind("scroll", function() {
+             if (this.pageYOffset >= 80) {
+                 scope.boolScrolledOnTop = true;
+             } else {
+                 scope.boolScrolledOnTop = false;
+             }
+            scope.$apply();
+        });
+
+    };
+});

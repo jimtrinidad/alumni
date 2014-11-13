@@ -2,6 +2,40 @@ header {
 	min-width: 400px !important;
 }
 
+#subheader {
+	position: fixed;
+	padding: 0px 15px;
+	margin: -15px;
+	z-index: 100;
+	background: #f1f2f7;
+	right: 15px;
+	left: 255px;
+	-webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out
+}
+
+.merge-left #subheader {
+	left: 15px !important;
+	padding-left: 15px;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out
+}
+
+#subheader .panel, #subheader .panel-body {
+	margin: 0;
+	border-radius: 0;
+    -webkit-border-radius: 0
+}
+#subheader .panel {
+	-webkit-box-shadow: 0 3px 1px -1px #aaa;
+       -moz-box-shadow: 0 3px 1px -1px #aaa;
+            box-shadow: 0 3px 1px -1px #aaa;
+}
+
 .listing_summary .pagination {
 	margin: 0;
 }
@@ -13,11 +47,11 @@ header {
 }
 
 .panel header .right-button-group {
-	float: right;
+	padding-left: 10px;	
 	margin-top: -5px;
 }
 
 .panel header .right-button-group > a{
 	font-weight: 400;
-	font-size: 11px;
+	font-size: 10px;
 }
