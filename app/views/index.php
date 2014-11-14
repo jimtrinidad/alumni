@@ -126,6 +126,7 @@
 	<script type="text/javascript" src="app/shared/modules.js"></script>
 	<script type="text/javascript" src="app/shared/controllers.js"></script>
 	<script type="text/javascript" src="app/shared/directives.js"></script>
+	<script type="text/javascript" src="app/shared/services.js"></script>
 
 	<script type="text/javascript" src="assets/libs/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="assets/libs/jquery/jquery.dcjqaccordion.2.7.js"></script>
