@@ -1,5 +1,8 @@
+"use strict";
+
 /**
 * Lazy Load
+* https://github.com/pgarciacamou/angular-require-resolve
 */
 !function(){"use strict";var a;angular.module("LazyLoad",[]).config(["$routeProvider","$controllerProvider","$compileProvider","$filterProvider","$provide",function(b,c,d,e,f){a={route:b.register,controller:c.register,compilte:d.register,filter:e.register,provide:f}}]).factory("lazy",function(){var b=angular.injector(["ng"]),c=b.get("$rootScope"),d=b.get("$q");return function(b){var e=angular.module(b);return e.components=e.components||a,{load:function(a){a=a||[];var b=d.defer();return require(a,function(){c.$apply(function(){b.resolve()})}),b.promise}}}})}();
 

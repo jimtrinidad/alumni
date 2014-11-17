@@ -1,3 +1,8 @@
+/**
+* Pagination directive
+* usage : add (paginate="alumni") value is the paginate result of laravel including pagination properties
+* option : add (middle="5") attribute, value is integer to set how many pages visible before the current page
+*/
 angular.module('app').directive('paginate', [ 
     function() {
         // Runs during compile
@@ -59,6 +64,10 @@ angular.module('app').directive('paginate', [
     }
 ]);
 
+/**
+* move scroll to top on set element when triggered
+* usage: (scroll-to-top-when="alumni_list_changed"), just $broadcast the event
+*/
 angular.module('app').directive("scrollToTopWhen", [ '$timeout', 
     function($timeout) {
         return {
@@ -77,6 +86,11 @@ angular.module('app').directive("scrollToTopWhen", [ '$timeout',
     }
 ]);
 
+/**
+* detect when scroll reach certain value,
+* used on scrolling results, keep headers visible
+* return (boolean) boolScrolledOnTop
+*/
 angular.module('app').directive("scroll", function ($window) {
     return function(scope, element, attrs) {
 

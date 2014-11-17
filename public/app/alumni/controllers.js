@@ -1,3 +1,6 @@
+/**
+* ALUMNI MAIN ANGULAR CONTROLLER
+*/
 angular.module('app').components.controller('AlumniController', [
     '$scope', 
     '$timeout', 
@@ -95,7 +98,7 @@ angular.module('app').components.controller('AlumniFormController', [
     function($scope, $modalInstance) {
 
         $scope.save       = function() {
-            $modalInstance.close('some data');
+            $modalInstance.close($scope.body);
         };
         $scope.close    = function(result) {
             $modalInstance.dismiss('cancel');

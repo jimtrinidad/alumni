@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="app" ng-controller="GlobalController">
+<html lang="en" ng-controller="GlobalController">
 <head>
 
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Alumni Panel</title>
 
 	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
@@ -115,7 +116,9 @@
 		<!--main content end-->
 
 	</section>
-	
+
+	<input type="hidden" id="user-rights" value='<?php echo $permissions ?>'>
+
 	<script type="text/javascript" src="assets/libs/angular/angular.min.js"></script>
 	<script type="text/javascript" src="assets/libs/angular/angular-route.min.js"></script>
 	<script type="text/javascript" src="assets/libs/angular/angular-animate.min.js"></script>
@@ -123,6 +126,7 @@
 	<script type="text/javascript" src="assets/libs/require.js"></script>
 
 	<script type="text/javascript" src="app/app.js"></script>
+	<script type="text/javascript" src="app/shared/permissions.js"></script>
 	<script type="text/javascript" src="app/shared/modules.js"></script>
 	<script type="text/javascript" src="app/shared/controllers.js"></script>
 	<script type="text/javascript" src="app/shared/directives.js"></script>

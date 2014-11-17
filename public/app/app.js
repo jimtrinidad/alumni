@@ -3,6 +3,9 @@
 /**
 * This is the main app.
 */
+
+//INIT
+var permissionList;
 var app = angular.module('app', [
 			'ngRoute', 
 			'LazyLoad', 
@@ -13,6 +16,9 @@ var app = angular.module('app', [
 			'blockUI'
 		]);
 
+/**
+* Page routing
+*/
 app.config(['$routeProvider', 'lazyProvider', function ($routeProvider, lazyProvider) {
 
 	var $lazy = lazyProvider.$get();
@@ -30,7 +36,8 @@ app.config(['$routeProvider', 'lazyProvider', function ($routeProvider, lazyProv
 						'app/program/services'
 					]);
 				}
-			}
+			},
+			permission: 'admin'
 		})
 		.when('/programs', {
 
@@ -44,21 +51,46 @@ app.config(['$routeProvider', 'lazyProvider', function ($routeProvider, lazyProv
 		})
 		.when('/settings/security', {
 		})
+		.when('/unauthorized', {
+			templateUrl: 'app/shared/views/404.html'
+		})
 
 		.otherwise({ redirectTo: '/' });
 	
 }]);
 
-app.config(function(blockUIConfig) {
+
+/**
+* Block element config, set what request to automatically block
+*/
+app.config(['blockUIConfig', function(blockUIConfig) {
 
 	blockUIConfig.message = 'Loading...';
 
 	blockUIConfig.requestFilter = function(config) {
-		// If the request starts with '/api/quote' ...
-		if(!config.url.match(/^api\/v1\/alumni*/)) {
+
+		if (!config.url.match(/^api\/v1\/alumni*/)) {
 			return false; // ... don't block it.
 		}
 	};
+
+}]);
+
+/**
+* Set user permissions from server data to memory variable
+*/
+app.run(function(permissions) {
+	permissions.setPermissions(permissionList);
+});
+
+
+angular.element(document).ready(function() {
+
+	//get data from hidden input and decrypt
+    permissionList = angular.fromJson(window.atob(document.getElementById("user-rights").value));
+
+    //Run angular application
+    angular.bootstrap(document, ['app']);
 
 });
 

@@ -3,7 +3,12 @@
 class AppController extends BaseController {
 
 	public function index() {
-		return View::make('index');
+
+		$viewData	= array(
+				'permissions' => base64_encode(User::rights())
+			);
+		
+		return View::make('index', $viewData);
 	}
 
 }

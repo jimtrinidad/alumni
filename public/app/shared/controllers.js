@@ -1,8 +1,15 @@
 /**
 * Global Controller
+* mostly function/data for the whole application
 */
-angular.module('app').controller('GlobalController', ['$scope', '$window', function($scope, $window){
+angular.module('app').controller('GlobalController', ['$scope', '$location', 'permissions', function($scope, $location, permissions){
 	
+	$scope.$on('$routeChangeStart', function(scope, next, current) {
+        var permission = next.$$route.permission;
+        if (!angular.isUndefined(permission) && !permissions.hasPermission(permission)) {
+            $location.path('/unauthorized');
+        }
+    });
 
 }]);
 

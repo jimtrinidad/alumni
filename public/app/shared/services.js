@@ -1,3 +1,6 @@
+/**
+* Modal service
+*/
 angular.module('app').service('modalService', ['$modal',
     function($modal) {
 
