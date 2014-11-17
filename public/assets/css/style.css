@@ -283,10 +283,10 @@ ul.sidebar-menu li a.active i, ul.sidebar-menu li a:focus i, ul.sidebar-menu li 
     right: 0;
     z-index: 1002;
     background: #fff;
-    -webkit-transition: all .3s ease-in-out;
-    -moz-transition: all .3s ease-in-out;
-    -o-transition: all .3s ease-in-out;
-    transition: all .3s ease-in-out
+/*     -webkit-transition: all .3s ease-in-out;
+-moz-transition: all .3s ease-in-out;
+-o-transition: all .3s ease-in-out;
+transition: all .3s ease-in-out */
 }
 .merge-header {
     margin-right: 240px
@@ -1999,7 +1999,13 @@ ul.inbox-pagination li {
 }
 .body-404 {
     background: #35bcb5;
-    color: #fff
+    color: #fff;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1010;
 }
 .error-head {
     background: #fff;
@@ -2052,14 +2058,34 @@ ul.inbox-pagination li {
 }
 .body-500 {
     background: #a48ad4;
-    color: #fff
+    color: #fff;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1010;
 }
-.error-wrapper p.page-500 {
+.body-401 {
+    background: #ff6c60;
+    color: #fff;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1010;    
+}
+.error-wrapper p.page-500, .error-wrapper p.page-401 {
     color: #afa5f1
 }
 .body-500 .back-btn:hover {
     background: #fff;
     color: #a48ad4
+}
+.body-401 .back-btn:hover {
+    background: #fff;
+    color: #ff6c60
 }
 .error-wrapper p.nrml-txt-alt {
     color: #fff;

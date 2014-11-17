@@ -16,12 +16,13 @@
 
 	<!-- Custom styles for this template -->
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/style-responsive.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/overwrites.css">
 
 </head>
 <body>
-
-    <section id="container">
+	
+    <section id="container" ng-hide="fullpage()">
 
 		<!--header start-->
 		<header class="header fixed-top clearfix">
@@ -116,6 +117,8 @@
 		<!--main content end-->
 
 	</section>
+	
+	<section ng-show="fullpage()" ng-view></section>
 
 	<input type="hidden" id="user-rights" value='<?php echo $permissions ?>'>
 

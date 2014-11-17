@@ -37,7 +37,7 @@ app.config(['$routeProvider', 'lazyProvider', function ($routeProvider, lazyProv
 					]);
 				}
 			},
-			permission: 'admin'
+			permission: 'admins'
 		})
 		.when('/programs', {
 
@@ -51,8 +51,11 @@ app.config(['$routeProvider', 'lazyProvider', function ($routeProvider, lazyProv
 		})
 		.when('/settings/security', {
 		})
-		.when('/unauthorized', {
+		.when('/404', {
 			templateUrl: 'app/shared/views/404.html'
+		})
+		.when('/401', {
+			templateUrl: 'app/shared/views/401.html'
 		})
 
 		.otherwise({ redirectTo: '/' });
