@@ -37,7 +37,7 @@ app.config(['$routeProvider', 'lazyProvider', function ($routeProvider, lazyProv
 					]);
 				}
 			},
-			permission: 'admins'
+			permission: 'admin'
 		})
 		.when('/programs', {
 

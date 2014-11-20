@@ -1,4 +1,4 @@
-@media (min-width: 768px) and (max-width: 980px) {
+@media (min-width: 1170px) {
     /*-*/
     
     .prd-row .action {
@@ -21,7 +21,7 @@
         margin: 25px 0;
     }
 }
-@media (min-width: 480px) and (max-width: 767px) {
+@media (min-width: 480px) and (max-width: 1170px) {
     
     .header {
         position: relative! important;
@@ -123,7 +123,7 @@
         float: left !important;
     }
 }
-@media (max-width: 767px) {
+@media (max-width: 1170px) {
     #sidebar {
         margin-left: -240px;
         -webkit-transition: all .3s ease-in-out;

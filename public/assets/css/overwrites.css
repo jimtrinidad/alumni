@@ -21,11 +21,18 @@
     transition: all .3s ease-in-out
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1170px) {
 	#subheader {
 		right: 15px !important;
 		left: 15px !important;
 		margin-top: -95px !important;
+	}
+}
+
+@media (min-width: 1300px) {
+	.visible-xlg {
+		display: inline-block !important;
+		visibility: visible !important;
 	}
 }
 
@@ -58,4 +65,11 @@
 .panel header .right-button-group > a{
 	font-weight: 400;
 	font-size: 10px;
+}
+
+@media (min-width: 768px) and (max-width: 1270px) {
+
+.form-inline .form-group .form-control.small {width: 100px;}
+.form-inline .form-group .form-control.x-small {width: 80px;}
+
 }

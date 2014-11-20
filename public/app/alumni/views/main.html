@@ -51,7 +51,7 @@
 <script type="text/ng-template" id="alumniFilters">
     <div class="row">
         
-        <div class="col-xs-12 col-md-12 col-md-8">
+        <div class="col-xs-12 col-sm-8">
             
             <div class="row">
 
@@ -65,7 +65,7 @@
                     
                     <div class='form-group'>
                         <label class='sr-only'>Keyword</label>
-                        <input type="text" ng-model="filters.search" class="form-control" placeholder="Keyword">
+                        <input type="text" ng-model="filters.search" class="form-control small" placeholder="Keyword">
                     </div>
 
                     <div class='form-group '>
@@ -78,29 +78,29 @@
 
                     <div class='form-group'>
                         <label class='sr-only'>Batch</label>
-                        <input type="text" ng-model="filters.batch" class="form-control" placeholder="Batch">
+                        <input type="text" ng-model="filters.batch" class="form-control x-small" placeholder="Batch">
                     </div>
                 </form>
             </div>
 
         </div>
         
-        <div class="col-xs-12 col-md-12  col-md-4">
+        <div class="col-xs-12 col-sm-4">
             
             <div class="row">
                 <form class='form-inline col-xs-12 text-right' role='form' >
-                    <div class='form-group'>
-                        <span class="small hidden-md hidden-sm hidden-xs">sort by</span>
-                        <select ng-model='filters.sort' class="form-control" >
+                    <div class='form-group' title="sory by">
+                        <span class="small hidden visible-xlg">sort by</span>
+                        <select ng-model='filters.sort' class="form-control">
                             <option  ng-repeat="(key, value) in sort_options" ng-selected="filters.sort == key" value="{{key}}">{{value}}</option>
                         </select>
                     </div>
 
-                    <div class='form-group'>
+                    <div class='form-group' title="records per page">
                         <select ng-model="filters.size" class="form-control">
                             <option ng-repeat="n in [10,20,30,40,50,60,70,80,90,100]" ng-selected="filters.size == n" value="{{n}}">{{n}}</option>
                         </select>
-                        <span class="small hidden-md hidden-sm hidden-xs">records per page</span>
+                        <span class="small hidden visible-xlg">records</span>
                     </div>
                 </form>
             </div>

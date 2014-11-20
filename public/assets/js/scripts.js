@@ -26,7 +26,7 @@ var Script = function() {
     });
 
     // toggle bar
-    $(function() {
+    /*$(function() {
         var wd;
         wd = $(window).width();
 
@@ -51,7 +51,7 @@ var Script = function() {
 
         $(window).on('load', responsiveView);
         $(window).on('resize', responsiveView);
-    });
+    });*/
 
     $('.sidebar-toggle-box .fa-bars').click(function(e) {
         $('#sidebar').toggleClass('hide-left-bar');
