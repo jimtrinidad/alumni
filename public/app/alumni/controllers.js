@@ -12,6 +12,7 @@ angular.module('app').components.controller('AlumniController', [
 
         $scope.programs         = Program.user();
         $scope.alumni 			= [];
+        $scope.showedFields     = [];
         $scope.currentPage 		= 1;
         $scope.filters 			= {
                 field   : 'firstname',

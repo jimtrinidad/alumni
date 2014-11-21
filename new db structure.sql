@@ -185,3 +185,4 @@ CREATE TABLE `users` (
 INSERT INTO privilege (user_id,`key`,`value`) VALUES(16,'rights','["admin","add_alumni","edit_alumni","delete_alumni"]');
 INSERT INTO `alumni`.`privilege`(`id`,`user_id`,`key`,`value`) VALUES ( NULL,'16','viewables','[]');
 UPDATE `alumni`.`privilege` SET `value`='{\"firstname\":\"Firstname\",\"lastname\":\"Lastname\",\"mi\":\"Mi\",\"nickname\":\"Nickname\",\"gender\":\"Gender\",\"batch\":\"Batch\",\"position\":\"Position\",\"company\":\"Company\",\"no_work\":\"Work No.\",\"no_home\":\"Home No.\",\"no_fax\":\"Fax No.\",\"no_mobile\":\"Mobile No.\",\"email_prefer\":\"Email\",\"email_other\":\"Alt Email\",\"birthday\":\"Birthday\",\"address\":\"Address\"}' WHERE `id`='2';
+ALTER TABLE `alumni`.`alumni`     CHANGE `birthday` `birthday` DATE NULL ;
