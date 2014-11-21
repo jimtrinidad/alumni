@@ -23,16 +23,32 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 */
 	protected $hidden = array('password', 'remember_token');
 
-	public static function rights() {
 
-		$query	= DB::table('privilege')->where('key', '=', 'rights');
+	/**
+	* Check user rights
+	*/
+	public static function can($key) {
+
+		$rights = json_decode(self::privilege('rights'), true);
+
+		return (bool) in_array($key, $rights);
+
+	}
+
+	/**
+	* Get user privilege
+	*/
+	public static function privilege($key) {
+
+		$query	= DB::table('privilege')->where('key', '=', $key);
 
 		$query->where('user_id', '=', Auth::id());
 
-		$rights	= $query->pluck('value');
+		$privilege	= $query->pluck('value');
 
-		return ($rights ? $rights : '[]');
+		return ($privilege ? $privilege : '[]');
 
 	}
+
 
 }

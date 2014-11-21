@@ -62,7 +62,7 @@ class UserController extends BaseController {
 
 	public function getRights() {
 
-		$result = User::rights();
+		$result = User::privilege('rights');
 
 		if ($result) {
 

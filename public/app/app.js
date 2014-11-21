@@ -13,7 +13,8 @@ var app = angular.module('app', [
 			'angular-loading-bar', 
 			'ngAnimate', 
 			'ngResource', 
-			'blockUI'
+			'blockUI',
+			//'angular.filter'
 		]);
 
 /**
@@ -37,7 +38,7 @@ app.config(['$routeProvider', 'lazyProvider', function ($routeProvider, lazyProv
 					]);
 				}
 			},
-			permission: 'admin'
+			//permission: 'admin'
 		})
 		.when('/programs', {
 

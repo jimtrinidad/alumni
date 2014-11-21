@@ -14,15 +14,25 @@ class Alumni extends Eloquent {
 	
 	public static function get_listing() {
 
-		$query	= DB::table('alumni');
+		$user_fields	= User::can('admin') ? json_decode(Settings::get('viewables'), true) : json_decode(User::privilege('viewables'), true);
+
+		$query			= DB::table('alumni');
+
+		$query->select(DB::raw('alumni.id, name, acronym, logo'));
+		$query->addSelect( array_keys($user_fields) );
 
 		$query->join('programs', 'alumni.program_id', '=', 'programs.id');
 
-		$query->select(DB::raw('alumni.*, name, acronym, logo'));
+		if (!User::can('admin')) {
+
+			$query->join('user_program', 'user_program.program_id', '=', 'programs.id');
+			$query->where('user_program.user_id', '=', Auth::id());
+			
+		} 
 
 		if (Input::get('program') != '') {
 
-			$query->where('program_id', '=', Input::get('program'));
+			$query->where('alumni.program_id', '=', Input::get('program'));
 
 		}
 
@@ -44,7 +54,10 @@ class Alumni extends Eloquent {
 
 		$query->orderBy(Input::get('sort', 'firstname'));
 
-		return $query->paginate(Input::get('size', 50));
+		$results			= $query->paginate(Input::get('size', 50))->toArray();
+		$results['fields'] 	= $user_fields;
+
+		return $results;
 
 	}
 

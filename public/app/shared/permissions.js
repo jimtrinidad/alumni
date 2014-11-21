@@ -1,5 +1,11 @@
 'use strict';
 
+/**
+* base on this tutorial
+* http://nadeemkhedr.wordpress.com/2013/11/25/how-to-do-authorization-and-role-based-permissions-in-angularjs/
+*/
+
+
 angular.module('app').factory('permissions', function($rootScope) {
     var permissionList;
     return {

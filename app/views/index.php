@@ -17,6 +17,7 @@
 	<!-- Custom styles for this template -->
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/style-responsive.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/table-responsive.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/overwrites.css">
 
 </head>
