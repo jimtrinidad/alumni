@@ -13,6 +13,7 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/angular-block-ui.min.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/animate.min.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/animations.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/angular-modules.css">
 
 	<!-- Custom styles for this template -->
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
@@ -119,9 +120,16 @@
 
 	</section>
 	
-	<section ng-show="fullpage()" ng-view></section>
+	<section ng-if="fullpage()">
+		<section ng-view></section>
+	</section>
 
 	<input type="hidden" id="user-rights" value='<?php echo $permissions ?>'>
+	
+	<script type="text/javascript" src="assets/libs/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="assets/libs/jquery/jquery.dcjqaccordion.2.7.js"></script>
+	<script type="text/javascript" src="assets/libs/jquery/jquery.scrollTo.min.js"></script>
+	<script type="text/javascript" src="assets/libs/jquery/jquery.nicescroll.js" type="text/javascript"></script>
 
 	<script type="text/javascript" src="assets/libs/angular/angular.min.js"></script>
 	<script type="text/javascript" src="assets/libs/angular/angular-route.min.js"></script>
@@ -135,11 +143,6 @@
 	<script type="text/javascript" src="app/shared/controllers.js"></script>
 	<script type="text/javascript" src="app/shared/directives.js"></script>
 	<script type="text/javascript" src="app/shared/services.js"></script>
-
-	<script type="text/javascript" src="assets/libs/jquery/jquery.min.js"></script>
-	<script type="text/javascript" src="assets/libs/jquery/jquery.dcjqaccordion.2.7.js"></script>
-	<script type="text/javascript" src="assets/libs/jquery/jquery.scrollTo.min.js"></script>
-	<script type="text/javascript" src="assets/libs/jquery/jquery.nicescroll.js" type="text/javascript"></script>
 
 	<script type="text/javascript" src="assets/js/scripts.js"></script>
 

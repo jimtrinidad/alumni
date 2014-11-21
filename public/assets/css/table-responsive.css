@@ -44,7 +44,7 @@
 
 /*no more table*/
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 768px) {
     /* Force table to not be like tables anymore */
     #no-more-tables table,
     #no-more-tables thead,

@@ -14,18 +14,18 @@
                 <div ng-include="'alumniFilters'"></div>
                 <div class="clearfix"></div>
                 <hr>
-                <section id="no-more-tables">
+                <section id="no-more-tables" class='table-responsive'>
                     <table ng-show="alumni.data.length > 0" class="table table-condensed table-hover table-bordered">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th ng-repeat="(key, value) in alumni.fields">{{value}}</th>
+                                <th ng-repeat="key in alumni.fields">{{alumni.labels[key]}}</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="animate-repeat" ng-repeat="item in alumni.data">
                                 <td data-title="#">{{ alumni.from + $index }}</td>
-                                <td ng-repeat="(key, value) in alumni.fields" data-title="{{value}}">{{item[key] != '' ? item[key] : '&nbsp;'}}</td>
+                                <td ng-repeat="key in alumni.fields" data-title="{{alumni.labels[key]}}">{{item[key] != '' ? item[key] : '&nbsp;'}}</td>
                             </tr>
                         </tbody>
                     </table>

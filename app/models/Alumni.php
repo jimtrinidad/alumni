@@ -55,7 +55,8 @@ class Alumni extends Eloquent {
 		$query->orderBy(Input::get('sort', 'firstname'));
 
 		$results			= $query->paginate(Input::get('size', 50))->toArray();
-		$results['fields'] 	= $user_fields;
+		$results['fields']	= array_keys($user_fields);
+		$results['labels'] 	= $user_fields;
 
 		return $results;
 
