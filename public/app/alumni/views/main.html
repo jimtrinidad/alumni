@@ -19,13 +19,13 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th ng-repeat="key in alumni.fields">{{alumni.labels[key]}}</th>
+                                <th ng-repeat="key in alumni.fields" ng-show="viewable(key)">{{alumni.labels[key]}}</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="animate-repeat" ng-repeat="item in alumni.data">
                                 <td data-title="#">{{ alumni.from + $index }}</td>
-                                <td ng-repeat="key in alumni.fields" data-title="{{alumni.labels[key]}}">{{item[key] != '' ? item[key] : '&nbsp;'}}</td>
+                                <td ng-repeat="key in alumni.fields" ng-show="viewable(key)" data-title="{{alumni.labels[key]}}">{{item[key] != '' ? item[key] : '&nbsp;'}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -111,6 +111,8 @@
             <a href="javascript:;" class="btn btn-primary btn-sm" ng-click="openForm()">Add <i class="fa fa-file-o"></i></a>
             <a href="javascript:;" class="btn btn-primary btn-sm">Upload <i class="fa fa-file-excel-o"></i></a>
          </span>
+         <span class="tools pull-right">
+            <checklist model="displayedFields" options="alumni.labels" label="Displayed Fields"></checklist>
+         </span>
     </header>
-    <dropdown-multiselect pre-selected="showedFields" model="showedFields" options="alumni.labels"></dropdown-multiselect>
 </script>

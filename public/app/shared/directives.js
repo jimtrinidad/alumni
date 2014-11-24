@@ -1,7 +1,7 @@
 /**
  * Pagination directive
  * usage : add (paginate="alumni") value is the paginate result of laravel including pagination properties
- * option : add (middle="5") attribute, value is integer to set how many pages visible before the current page
+ * option : add (mkeydle="5") attribute, value is integer to set how many pages visible before the current page
  */
 angular.module('app').directive('paginate', [
     function() {
@@ -19,11 +19,11 @@ angular.module('app').directive('paginate', [
                     scope.total = results.total;
                     scope.totalPages = results.last_page;
                     scope.pages = [];
-                    var middle = attrs.middle ? parseInt(attrs.middle) : 5,
+                    var mkeydle = attrs.mkeydle ? parseInt(attrs.mkeydle) : 5,
                         min = 1,
-                        max = scope.currentPage + middle - 1;
-                    if (scope.currentPage > middle) {
-                        min = scope.currentPage - middle + 1;
+                        max = scope.currentPage + mkeydle - 1;
+                    if (scope.currentPage > mkeydle) {
+                        min = scope.currentPage - mkeydle + 1;
                     }
                     if (max >= scope.totalPages) {
                         max = scope.totalPages;
@@ -102,57 +102,37 @@ angular.module('app').directive("scroll", function($window) {
     };
 });
 
-angular.module('app').directive('dropdownMultiselect', function() {
+angular.module('app').directive('checklist', function() {
     return {
         restrict: 'E',
         scope: {
             model: '=',
-            options: '=',
-            pre_selected: '=preSelected'
+            options: '='
         },
-        template: "<div class='btn-group' ng-class='{open: open}'>" +
-                     "<button class='btn btn-small'>Select</button>" + 
-                     "<button class='btn btn-small dropdown-toggle' ng-click='open=!open;openDropdown()'><span class='caret'></span></button>" + 
-                     "<ul class='dropdown-menu' aria-labelledby='dropdownMenu'>" + 
-                        //"<li><a data-ng-click='selectAll()'><i class='icon-ok-sign'></i>  Check All</a></li>" + 
-                        //"<li><a data-ng-click='deselectAll();'><i class='icon-remove-sign'></i>  Uncheck All</a></li>" + 
-                        //"<li class='divider'></li>" + 
-                        "<li ng-repeat='(value, label) in options'> <a href='javascript:;' ng-click='setSelectedItem(value)'><i class='fa' ng-class='isChecked(value)'></i>{{label}}</a></li>" + 
+        template: "<div class='btn-group dropdown'>" +
+                     "<button class='btn btn-xs btn-primary dropdown-toggle'>{{label}} <span class='caret'></span></button>" + 
+                     //"<button class='btn btn-xs btn-primary'><span class='caret'></span></button>" + 
+                     "<ul class='dropdown-menu dropdown-menu-right' aria-labelledby='dropdownMenu'>" + 
+                        "<li ng-repeat='(value, label) in options' class='checklist'> <a href='javascript:;' ng-click='setSelectedItem(value); $event.stopPropagation()'><i class='fa' ng-class='isChecked(value)'></i><span>{{label}}</span></a></li>" + 
                     "</ul>" + 
                 "</div>",
-        link: function(scope) {
+        link: function(scope, element, attrs) { 
 
-            console.log(scope.options);
-            scope.openDropdown = function() {
-                scope.selected_items = [];
-                for (var i = 0; i < scope.pre_selected.length; i++) {
-                    scope.selected_items.push(scope.pre_selected[i].id);
-                }
-            };
+            scope.label = attrs.label;
 
-            scope.selectAll = function() {
-                scope.model = Object.keys(scope.options);
-            };
+            scope.setSelectedItem = function(key) {
 
-            scope.deselectAll = function() {
-                scope.model = [];
-            };
-
-            scope.setSelectedItem = function(id) {
-                console.log(id);
-                if (scope.model.indexOf(id) > -1) {
-                    console.log('remove');
-                    scope.model = scope.model.splice(scope.model.indexOf(id), 1);
+                if (scope.model.indexOf(key) > -1) {
+                    scope.model.splice(scope.model.indexOf(key), 1);
                 } else {
-                    console.log('add');
-                    scope.model.push(id);
+                    scope.model.push(key);
                 }
 
                 return false;
             };
 
-            scope.isChecked = function(id) {
-                if (scope.model.indexOf(id) > -1) {
+            scope.isChecked = function(key) {
+                if (scope.model.indexOf(key) > -1) {
                     return 'fa-check';
                 }
                 return false;

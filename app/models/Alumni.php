@@ -18,7 +18,12 @@ class Alumni extends Eloquent {
 
 		$query			= DB::table('alumni');
 
-		$query->select(DB::raw('alumni.id, name, acronym, logo'));
+		$user_fields	= array_merge($user_fields, array(
+								'name'		=> 'Program',
+								'acronym'	=> 'Acronym'
+							));	
+
+		$query->select(DB::raw('alumni.id, logo'));
 		$query->addSelect( array_keys($user_fields) );
 
 		$query->join('programs', 'alumni.program_id', '=', 'programs.id');

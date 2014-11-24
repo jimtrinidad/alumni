@@ -12,7 +12,7 @@ angular.module('app').components.controller('AlumniController', [
 
         $scope.programs         = Program.user();
         $scope.alumni 			= [];
-        $scope.showedFields     = [];
+        $scope.displayedFields  = ['firstname','lastname', 'batch', 'company', 'position'];
         $scope.currentPage 		= 1;
         $scope.filters 			= {
                 field   : 'firstname',
@@ -67,6 +67,10 @@ angular.module('app').components.controller('AlumniController', [
                 $scope.get_alumni();
             }, 1000);
         }, true);
+
+        $scope.viewable = function(key) {
+            return ($scope.displayedFields.indexOf(key) > -1);
+        }
 
 
         /**
