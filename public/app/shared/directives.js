@@ -62,6 +62,7 @@ angular.module('app').directive('paginate', [
         };
     }
 ]);
+
 /**
  * move scroll to top on set element when triggered
  * usage: (scroll-to-top-when="alumni_list_changed"), just $broadcast the event
@@ -83,6 +84,7 @@ angular.module('app').directive("scrollToTopWhen", ['$timeout',
         };
     }
 ]);
+
 /**
  * detect when scroll reach certain value,
  * used on scrolling results, keep headers visible
@@ -102,6 +104,9 @@ angular.module('app').directive("scroll", function($window) {
     };
 });
 
+/**
+* dropdown checklist
+*/
 angular.module('app').directive('checklist', function() {
     return {
         restrict: 'E',
@@ -111,7 +116,6 @@ angular.module('app').directive('checklist', function() {
         },
         template: "<div class='btn-group dropdown'>" +
                      "<button class='btn btn-xs btn-primary dropdown-toggle'>{{label}} <span class='caret'></span></button>" + 
-                     //"<button class='btn btn-xs btn-primary'><span class='caret'></span></button>" + 
                      "<ul class='dropdown-menu dropdown-menu-right' aria-labelledby='dropdownMenu'>" + 
                         "<li ng-repeat='(value, label) in options' class='checklist'> <a href='javascript:;' ng-click='setSelectedItem(value); $event.stopPropagation()'><i class='fa' ng-class='isChecked(value)'></i><span>{{label}}</span></a></li>" + 
                     "</ul>" + 
