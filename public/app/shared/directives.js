@@ -90,57 +90,160 @@ angular.module('app').directive("scrollToTopWhen", ['$timeout',
  * used on scrolling results, keep headers visible
  * return (boolean) boolScrolledOnTop
  */
-angular.module('app').directive("scroll", function($window) {
-    return function(scope, element, attrs) {
-        scope.boolScrolledOnTop = false;
-        angular.element($window).bind("scroll", function() {
-            if (this.pageYOffset >= 80) {
-                scope.boolScrolledOnTop = true;
-            } else {
-                scope.boolScrolledOnTop = false;
-            }
-            scope.$apply();
-        });
-    };
-});
+angular.module('app').directive("scroll", ['$window', 
+    function($window) {
+        return function(scope, element, attrs) {
+            scope.boolScrolledOnTop = false;
+            angular.element($window).bind("scroll", function() {
+                if (this.pageYOffset >= 80) {
+                    scope.boolScrolledOnTop = true;
+                } else {
+                    scope.boolScrolledOnTop = false;
+                }
+                scope.$apply();
+            });
+        };
+    }
+]);
 
 /**
 * dropdown checklist
 */
-angular.module('app').directive('checklist', function() {
-    return {
-        restrict: 'E',
-        scope: {
-            model: '=',
-            options: '='
-        },
-        template: "<div class='btn-group dropdown'>" +
-                     "<button class='btn btn-xs btn-primary dropdown-toggle'>{{label}} <span class='caret'></span></button>" + 
-                     "<ul class='dropdown-menu dropdown-menu-right' aria-labelledby='dropdownMenu'>" + 
-                        "<li ng-repeat='(value, label) in options' class='checklist'> <a href='javascript:;' ng-click='setSelectedItem(value); $event.stopPropagation()'><i class='fa' ng-class='isChecked(value)'></i><span>{{label}}</span></a></li>" + 
-                    "</ul>" + 
-                "</div>",
-        link: function(scope, element, attrs) { 
+angular.module('app').directive('checklist', ['$window',
+    function($window) {
+        return {
+            restrict: 'E',
+            scope: {
+                model: '=',
+                options: '=',
+                closeScroll: '='
+            },
+            template: "<div class='btn-group dropdown'>" +
+                         "<button class='btn btn-xs btn-primary dropdown-toggle'>{{label}} <span class='caret'></span></button>" + 
+                         "<ul class='dropdown-menu dropdown-menu-right' aria-labelledby='dropdownMenu'>" + 
+                            "<li ng-repeat='(value, label) in options' class='checklist'> <a href='javascript:;' ng-click='setSelectedItem(value); $event.stopPropagation()'><i class='fa' ng-class='isChecked(value)'></i><span>{{label}}</span></a></li>" + 
+                        "</ul>" + 
+                    "</div>",
+            link: function(scope, element, attrs) { 
 
-            scope.label = attrs.label;
+                scope.label = attrs.label;
 
-            scope.setSelectedItem = function(key) {
+                scope.setSelectedItem = function(key) {
 
-                if (scope.model.indexOf(key) > -1) {
-                    scope.model.splice(scope.model.indexOf(key), 1);
-                } else {
-                    scope.model.push(key);
+                    if (scope.model.indexOf(key) > -1) {
+                        scope.model.splice(scope.model.indexOf(key), 1);
+                    } else {
+                        scope.model.push(key);
+                    }
+
+                    return false;
+                };
+
+                scope.isChecked = function(key) {
+                    if (scope.model.indexOf(key) > -1) {
+                        return 'fa-check';
+                    }
+                    return false;
+                };
+
+                if (scope.closeScroll) {
+
+                    angular.element($window).bind("scroll", function() {
+                        if (this.pageYOffset >= 80) {
+                            angular.element( '#' + attrs.id + ' .dropdown.open .dropdown-toggle').triggerHandler('click');
+                        }
+                    });
+
                 }
-
-                return false;
-            };
-
-            scope.isChecked = function(key) {
-                if (scope.model.indexOf(key) > -1) {
-                    return 'fa-check';
-                }
-                return false;
-            };
+            }
         }
     }
-});
+]);
+
+
+/**
+* add checkbox to a table
+* usage add attribute (table-checkbox="alumni" checked-item="selectedItem")
+*/
+angular.module('app').directive('tableCheckbox', ['$compile', '$timeout',
+    function ($compile, $timeout) {
+        return {
+            restrict: 'A',
+            scope: {
+                results: '=tableCheckbox',
+                checkedItem: '='
+            },
+            link: function (scope, element, attrs) {
+
+                scope.init          = function() {
+                    
+                    scope.selectAllTpl  = angular.element('<th><input type="checkbox" ng-model="checkAll" ng-click=toggleAll()></th>');
+                    $compile(scope.selectAllTpl)(scope);
+                    element.find('thead > tr').prepend(scope.selectAllTpl);
+
+                };
+
+                scope.setCheckboxes = function() {
+
+                    scope.itemCount     = angular.isDefined(scope.results) ? scope.results.length : 0;
+                    scope.checkedItem   = [];
+                    scope.checkAll      = false; 
+
+                    //wrapped in timeout to wait for the angular expression to compile
+                    $timeout(function() {
+                        angular.forEach(element.find('tbody > tr'), function(e,i) {
+
+                            var rowElem     = angular.element(e);
+                            rowElem.on('click', function() {
+                                scope.toggleItem(rowElem, rowElem.data('id'));
+                            })
+                            scope.selectSingleTpl   = angular.element('<td><input type="checkbox" ng-checked="checkAll"></td>');
+                            $compile(scope.selectSingleTpl)(scope);
+                            rowElem.prepend(scope.selectSingleTpl);
+
+                        });
+                    });
+
+                };
+
+                scope.toggleAll     = function() {
+
+                    if(!scope.checkAll) {
+                        element.find('input[type=checkbox]').prop('checked', true);
+                        angular.forEach(element.find('tbody > tr'), function(e,i) {
+                            var rowElem     = angular.element(e);
+                            scope.checkedItem.push(rowElem.data('id'));
+                        });
+                    } else {
+                        element.find('input[type=checkbox]').prop('checked', false);
+                        scope.checkedItem = [];
+                    }
+
+                };
+
+                scope.toggleItem    = function(element, value) {
+
+                    if (scope.checkedItem.indexOf(value) > -1) {
+
+                        element.find('input[type=checkbox]').prop('checked', false);
+                        scope.checkedItem.splice(scope.checkedItem.indexOf(value), 1);
+
+                    } else {
+
+                        element.find('input[type=checkbox]').prop('checked', true);
+                        scope.checkedItem.push(value);
+
+                    }
+
+                    console.log(scope.checkedItem);
+                    return false;
+
+                };
+
+                scope.init();
+                scope.$watch("results", scope.setCheckboxes);
+
+            }
+        };
+    }
+]);

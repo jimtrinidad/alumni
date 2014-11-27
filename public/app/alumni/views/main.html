@@ -15,7 +15,7 @@
                 <div class="clearfix"></div>
                 <hr>
                 <section id="no-more-tables" class='table-responsive'>
-                    <table ng-show="alumni.data.length > 0" class="table table-condensed table-hover table-bordered">
+                    <table ng-show="alumni.data.length > 0" class="table table-condensed table-hover table-bordered" table-checkbox="alumni.data" checked-item="selectedItem">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -23,7 +23,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="animate-repeat" ng-repeat="item in alumni.data">
+                            <tr class="animate-repeat" ng-repeat="item in alumni.data" data-id="{{item.id}}">
                                 <td data-title="#">{{ alumni.from + $index }}</td>
                                 <td ng-repeat="key in alumni.fields" ng-show="viewable(key)" data-title="{{alumni.labels[key]}}">{{item[key] != '' ? item[key] : '&nbsp;'}}</td>
                             </tr>
@@ -108,11 +108,11 @@
     <header class="panel-heading">
         Alumni listing
          <span class="right-button-group" has-permission='add_alumni'>
-            <a href="javascript:;" class="btn btn-primary btn-sm" ng-click="openForm()">Add <i class="fa fa-file-o"></i></a>
-            <a href="javascript:;" class="btn btn-primary btn-sm">Upload <i class="fa fa-file-excel-o"></i></a>
+            <a href="javascript:;" class="btn btn-primary btn-sm" ng-click="openForm()"><i class="fa fa-file-o"></i> Add</a>
+            <a href="javascript:;" class="btn btn-primary btn-sm"><i class="fa fa-file-excel-o"></i> Upload</a>
          </span>
          <span class="tools pull-right">
-            <checklist model="displayedFields" options="alumni.labels" label="Displayed Fields"></checklist>
+            <checklist model="displayedFields" options="alumni.labels" label="Displayed Fields" close-scroll="true" id="displayedFields"></checklist>
          </span>
     </header>
 </script>
