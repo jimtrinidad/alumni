@@ -96,3 +96,17 @@ li.checklist > a .fa {
 	margin-top: 3px;
 	width: 14px;
 }
+
+.table-checkbox {
+	padding-left: 10px !important;
+	padding-right: 10px !important;
+	text-align:center;
+}
+
+tr > .selected:first-child, tr > .selected:first-child ~ td{
+	background: rgb(255, 255, 204);
+}
+
+tr > .currentSelected:first-child, tr > .currentSelected:first-child ~ td{
+	background: rgba(255, 255, 204, 0.35) !important;
+}

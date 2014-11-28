@@ -14,17 +14,15 @@
                 <div ng-include="'alumniFilters'"></div>
                 <div class="clearfix"></div>
                 <hr>
-                <section id="no-more-tables" class='table-responsive'>
-                    <table ng-show="alumni.data.length > 0" class="table table-condensed table-hover table-bordered" table-checkbox="alumni.data" checked-item="selectedItem">
+                <section id="no-more-tables" class='table-responsive noselect'>
+                    <table ng-show="alumni.data.length > 0" class="table table-condensed table-hover" table-checkbox="alumni.data" checked-item="selectedItem">
                         <thead>
                             <tr>
-                                <th>#</th>
                                 <th ng-repeat="key in alumni.fields" ng-show="viewable(key)">{{alumni.labels[key]}}</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="animate-repeat" ng-repeat="item in alumni.data" data-id="{{item.id}}">
-                                <td data-title="#">{{ alumni.from + $index }}</td>
                                 <td ng-repeat="key in alumni.fields" ng-show="viewable(key)" data-title="{{alumni.labels[key]}}">{{item[key] != '' ? item[key] : '&nbsp;'}}</td>
                             </tr>
                         </tbody>

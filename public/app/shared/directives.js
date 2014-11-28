@@ -175,9 +175,11 @@ angular.module('app').directive('tableCheckbox', ['$compile', '$timeout',
             },
             link: function (scope, element, attrs) {
 
+                var lastChecked     = false;
+                scope.allItems      = [];
                 scope.init          = function() {
                     
-                    scope.selectAllTpl  = angular.element('<th><input type="checkbox" ng-model="checkAll" ng-click=toggleAll()></th>');
+                    scope.selectAllTpl  = angular.element('<th class="table-checkbox" ng-click="toggleAll()"><input type="checkbox" ng-checked="isSelectedAll()"></th>');
                     $compile(scope.selectAllTpl)(scope);
                     element.find('thead > tr').prepend(scope.selectAllTpl);
 
@@ -185,19 +187,17 @@ angular.module('app').directive('tableCheckbox', ['$compile', '$timeout',
 
                 scope.setCheckboxes = function() {
 
-                    scope.itemCount     = angular.isDefined(scope.results) ? scope.results.length : 0;
                     scope.checkedItem   = [];
-                    scope.checkAll      = false; 
 
+                    angular.forEach(scope.results, function(i) {
+                        scope.allItems.push(i.id);
+                    });
                     //wrapped in timeout to wait for the angular expression to compile
                     $timeout(function() {
                         angular.forEach(element.find('tbody > tr'), function(e,i) {
 
-                            var rowElem     = angular.element(e);
-                            rowElem.on('click', function() {
-                                scope.toggleItem(rowElem, rowElem.data('id'));
-                            })
-                            scope.selectSingleTpl   = angular.element('<td><input type="checkbox" ng-checked="checkAll"></td>');
+                            var rowElem             = angular.element(e);
+                            scope.selectSingleTpl   = angular.element('<td class="table-checkbox" ng-class="{selected:isSelected('+rowElem.data('id')+'), currentSelected:isFocused('+rowElem.data('id')+')}" ng-click="toggleItem($event, '+rowElem.data('id')+')"><input type="checkbox" ng-checked="isSelected('+rowElem.data('id')+')"></td>');
                             $compile(scope.selectSingleTpl)(scope);
                             rowElem.prepend(scope.selectSingleTpl);
 
@@ -206,37 +206,81 @@ angular.module('app').directive('tableCheckbox', ['$compile', '$timeout',
 
                 };
 
-                scope.toggleAll     = function() {
+                scope.isSelectedAll = function() {
 
-                    if(!scope.checkAll) {
-                        element.find('input[type=checkbox]').prop('checked', true);
-                        angular.forEach(element.find('tbody > tr'), function(e,i) {
-                            var rowElem     = angular.element(e);
-                            scope.checkedItem.push(rowElem.data('id'));
-                        });
+                    if (angular.isDefined(scope.allItems) && scope.checkedItem.length === scope.allItems.length) {
+                        return true;
                     } else {
-                        element.find('input[type=checkbox]').prop('checked', false);
-                        scope.checkedItem = [];
+                        return false;
                     }
 
                 };
 
-                scope.toggleItem    = function(element, value) {
+                scope.isSelected    = function(id) {
 
-                    if (scope.checkedItem.indexOf(value) > -1) {
+                    return scope.checkedItem.indexOf(id) > -1;
 
-                        element.find('input[type=checkbox]').prop('checked', false);
-                        scope.checkedItem.splice(scope.checkedItem.indexOf(value), 1);
+                };
+
+                scope.isFocused     = function (id) {
+                    return id === lastChecked;
+                }
+
+                scope.toggleAll     = function() {
+
+                    if(!scope.isSelectedAll()) {
+                        angular.copy(scope.allItems, scope.checkedItem);
+                    } else {
+                        scope.checkedItem = [];
+                    }
+
+                    $timeout(function() {
+                        scope.$apply();
+                    });
+                };
+
+                scope.toggleItem    = function(event, value) {
+
+                    if (lastChecked === false) {
+                        lastChecked = value;
+                    }
+
+                    if(event.shiftKey) {
+
+                        var status  = scope.isSelected(value);
+                        var start   = Math.min(scope.allItems.indexOf(lastChecked), scope.allItems.indexOf(value));
+                        var end     = Math.max(scope.allItems.indexOf(lastChecked), scope.allItems.indexOf(value));
+
+                        angular.forEach(scope.allItems, function(v,k) {
+                            if (k >= start && k <= end) {
+                                if (status) {
+                                    if(scope.checkedItem.indexOf(v) > -1) {
+                                        scope.checkedItem.splice(scope.checkedItem.indexOf(v), 1);
+                                    }
+                                } else {
+                                    if (!scope.isSelected(v)) {
+                                        scope.checkedItem.push(v);
+                                    }
+                                }
+                            }
+                        });
+                        
 
                     } else {
 
-                        element.find('input[type=checkbox]').prop('checked', true);
-                        scope.checkedItem.push(value);
+                        if (scope.isSelected(value)) {
+                            scope.checkedItem.splice(scope.checkedItem.indexOf(value), 1);
+                        } else {
+                            scope.checkedItem.push(value);
+                        }
 
                     }
 
-                    console.log(scope.checkedItem);
-                    return false;
+
+                    lastChecked = value;
+                    $timeout(function() {
+                        scope.$apply();
+                    });
 
                 };
 
