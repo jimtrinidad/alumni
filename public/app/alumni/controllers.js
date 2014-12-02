@@ -6,10 +6,15 @@ angular.module('app').components.controller('AlumniController', [
     '$timeout', 
     'Alumni', 
     'Program',
+    'User',
     'modalService',
+    function($scope, $timeout, Alumni, Program, User, modalService) {
 
-    function($scope, $timeout, Alumni, Program, modalService) {
-
+        /**
+        * Inits
+        */
+        var timeoutPromise;
+        $scope.rights           = User.rights();
         $scope.programs         = Program.user();
         $scope.alumni 			= [];
         $scope.selectedItem     = [];
@@ -34,6 +39,32 @@ angular.module('app').components.controller('AlumniController', [
             	name 		: 'Program'
             };
 
+
+        /**
+        * Listeners
+        */
+        $scope.$on('page.changed', function(event, page) {
+
+        	if($scope.currentPage !== page) {
+	            $scope.currentPage = page;
+	            $scope.get_alumni();
+	        }
+
+        });
+
+        $scope.$watch("filters", function(e, i) {
+            $timeout.cancel(timeoutPromise);
+            timeoutPromise = $timeout(function() {
+                //return to firstpage
+                $scope.currentPage = 1;
+                $scope.get_alumni();
+            }, 1000);
+        }, true);
+
+
+        /**
+        * Functions
+        */
         $scope.get_alumni   = function() {
 
             var params  = angular.copy($scope.filters);
@@ -44,30 +75,10 @@ angular.module('app').components.controller('AlumniController', [
             Alumni.query(params, function(response) {
                 $timeout(function() {
                     $scope.alumni = response;
-                    $scope.$broadcast("alumni_list_changed");
-                }, 100);
+                });
             });
 
         };
-
-        $scope.$on('page.changed', function(event, page) {
-
-        	if($scope.currentPage !== page) {
-	            $scope.currentPage = page;
-	            $scope.get_alumni();
-	        }
-
-        });
-
-        var timeoutPromise;
-        $scope.$watch("filters", function(e, i) {
-            $timeout.cancel(timeoutPromise);
-            timeoutPromise = $timeout(function() {
-                //return to firstpage
-                $scope.currentPage = 1;
-                $scope.get_alumni();
-            }, 1000);
-        }, true);
 
         $scope.viewable = function(key) {
             return ($scope.displayedFields.indexOf(key) > -1);
@@ -77,22 +88,23 @@ angular.module('app').components.controller('AlumniController', [
         /**
         * Adding Alumni
         */
-
         $scope.openForm = function() {
 
             modalService.showModal(
             {
 
                 controller  : 'AlumniFormController',
-                templateUrl :'app/alumni/views/modal.form.alumni.html',
+                templateUrl : 'app/alumni/views/modal.form.alumni.html',
                 size        : 'lg',
                 keyboard    : false
 
             }).then(function (result) {
-                console.log(result);
+                //
+                console.log(result, 'contorl');
             });
 
         }
+
     }
 ]);
 
@@ -100,19 +112,17 @@ angular.module('app').components.controller('AlumniController', [
 angular.module('app').components.controller('AlumniFormController', [
     '$scope',
     '$modalInstance',
-
     function($scope, $modalInstance) {
 
         $scope.save       = function() {
-            $modalInstance.close($scope.body);
+
+            //to resolve promise and close modal
+            $modalInstance.close('closed triggered');
         };
+
         $scope.close    = function(result) {
             $modalInstance.dismiss('cancel');
         };
-
-        $scope.body     = 'this is a messag from controller';
-
-
 
     }
 

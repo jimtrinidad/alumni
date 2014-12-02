@@ -15,13 +15,11 @@ class Settings extends Eloquent {
 	*/
 	public static function get($key) {
 
-		$query	= DB::table('privilege')->where('key', '=', $key);
+		$query	= DB::table('settings')->where('key', '=', $key);
 
-		$query->where('user_id', '=', Auth::id());
+		$settings	= $query->pluck('value');
 
-		$privilege	= $query->pluck('value');
-
-		return ($privilege ? $privilege : '[]');
+		return ($settings ? $settings : '[]');
 
 	}
 

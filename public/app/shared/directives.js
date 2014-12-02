@@ -70,8 +70,11 @@ angular.module('app').directive('paginate', [
 angular.module('app').directive("scrollToTopWhen", ['$timeout',
     function($timeout) {
         return {
+            scope : {
+                scrollToTopWhen: '='
+            },
             link: function link(scope, element, attrs) {
-                scope.$on(attrs.scrollToTopWhen, function() {
+                scope.$watch('scrollToTopWhen', function() {
                     $timeout(function() {
                         angular.element(element)[0].scrollIntoView(true);
                         var scrolledY = window.scrollY;
@@ -86,7 +89,7 @@ angular.module('app').directive("scrollToTopWhen", ['$timeout',
 ]);
 
 /**
- * detect when scroll reach certain value,
+ * detect when scroll reach certain value on scroll down,
  * used on scrolling results, keep headers visible
  * return (boolean) boolScrolledOnTop
  */
@@ -108,6 +111,10 @@ angular.module('app').directive("scroll", ['$window',
 
 /**
 * dropdown checklist
+* model="displayedFields" - list of checked items
+* options="alumni.labels" - list of checklist items
+* label="Displayed Fields" - button label
+* close-scroll="true" - close dropdown when scrolled down
 */
 angular.module('app').directive('checklist', ['$window',
     function($window) {
@@ -121,7 +128,7 @@ angular.module('app').directive('checklist', ['$window',
             template: "<div class='btn-group dropdown'>" +
                          "<button class='btn btn-xs btn-primary dropdown-toggle'>{{label}} <span class='caret'></span></button>" + 
                          "<ul class='dropdown-menu dropdown-menu-right' aria-labelledby='dropdownMenu'>" + 
-                            "<li ng-repeat='(value, label) in options' class='checklist'> <a href='javascript:;' ng-click='setSelectedItem(value); $event.stopPropagation()'><i class='fa' ng-class='isChecked(value)'></i><span>{{label}}</span></a></li>" + 
+                            "<li ng-repeat='option in options' class='checklist'> <a href='javascript:;' ng-click='setSelectedItem(option.id); $event.stopPropagation()'><i class='fa' ng-class='isChecked(option.id)'></i><span>{{option.label}}</span></a></li>" + 
                         "</ul>" + 
                     "</div>",
             link: function(scope, element, attrs) { 
@@ -163,7 +170,8 @@ angular.module('app').directive('checklist', ['$window',
 
 /**
 * add checkbox to a table
-* usage add attribute (table-checkbox="alumni" checked-item="selectedItem")
+* usage add attribute (table-checkbox="alumni")
+* @attr checked-item="selectedItem" variable to store selected items
 */
 angular.module('app').directive('tableCheckbox', ['$compile', '$timeout',
     function ($compile, $timeout) {
@@ -284,8 +292,8 @@ angular.module('app').directive('tableCheckbox', ['$compile', '$timeout',
 
                 };
 
-                scope.init();
-                scope.$watch("results", scope.setCheckboxes);
+                //scope.init();
+                //scope.$watch("results", scope.setCheckboxes);
 
             }
         };

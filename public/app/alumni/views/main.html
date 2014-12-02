@@ -1,4 +1,4 @@
-<div class="row" ng-controller="AlumniController" scroll-to-top-when="alumni_list_changed" block-ui block-ui-pattern="/^api\/v1\/alumni*/">
+<div class="row" ng-controller="AlumniController" scroll-to-top-when="alumni" block-ui block-ui-pattern="/^api\/v1\/alumni*/">
     <div class="col-sm-12">
         <div id="subheader" ng-class="{hidden:boolScrolledOnTop == false}">
             <section class="panel">
@@ -18,12 +18,20 @@
                     <table ng-show="alumni.data.length > 0" class="table table-condensed table-hover" table-checkbox="alumni.data" checked-item="selectedItem">
                         <thead>
                             <tr>
-                                <th ng-repeat="key in alumni.fields" ng-show="viewable(key)">{{alumni.labels[key]}}</th>
+                                <th ng-repeat="item in rights.data.viewables" ng-show="viewable(item.id)">{{item.label}}</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="animate-repeat" ng-repeat="item in alumni.data" data-id="{{item.id}}">
-                                <td ng-repeat="key in alumni.fields" ng-show="viewable(key)" data-title="{{alumni.labels[key]}}">{{item[key] != '' ? item[key] : '&nbsp;'}}</td>
+                                <td ng-repeat="itm in rights.data.viewables" ng-show="viewable(itm.id)" data-title="{{itm.label}}">
+                                    {{
+                                        item[itm.id] != '' && item[itm.id] != '0000-00-00' && item[itm.id] != '1970-01-01' 
+                                        ? (itm.id == 'birthday' 
+                                            ? (item[itm.id] | date: 'mediumDate') 
+                                            : item[itm.id]) 
+                                        : '&nbsp;'
+                                    }}
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -110,7 +118,7 @@
             <a href="javascript:;" class="btn btn-primary btn-sm"><i class="fa fa-file-excel-o"></i> Upload</a>
          </span>
          <span class="tools pull-right">
-            <checklist model="displayedFields" options="alumni.labels" label="Displayed Fields" close-scroll="true" id="displayedFields"></checklist>
+            <checklist model="displayedFields" options="rights.data.viewables" label="Displayed Fields" close-scroll="true" id="displayedFields"></checklist>
          </span>
     </header>
 </script>

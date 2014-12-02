@@ -34,6 +34,7 @@ Route::group(array('prefix' => 'api/v1', 'before' => 'apiauth'), function() {
 
 	Route::resource('alumni', 'AlumniController');
 	Route::resource('program', 'ProgramController');
+	Route::resource('user', 'UserController');
 
 });
 

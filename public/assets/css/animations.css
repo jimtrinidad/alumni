@@ -30,14 +30,15 @@ div[ng-view].ng-enter {
 }
 .modal.in .modal-dialog {
     /*! editthis transform to any transform you want */
-    -webkit-animation: fadeInLeftBig 0.5s;
-    -moz-animation: fadeInLeftBig 0.5s;
-  	-ms-animation: fadeInLeftBig 0.5s;
-    animation: fadeInLeftBig 0.5s;
+    -webkit-animation: fadeInDownBig 0.1s;
+    -moz-animation: fadeInDownBig 0.1s;
+  	-ms-animation: fadeInDownBig 0.1s;
+    animation: fadeInDownBig 0.1s;
 }
 .modal.fade .modal-dialog {
-    /*! disable sliding from left/right/top/bottom */
-    -webkit-transform: translate(0, 0);
-    -ms-transform: translate(0, 0);
-    transform: translate(0, 0);
+    /*! editthis transform to any transform you want */
+    -webkit-animation: fadeInUpBig 0.5s;
+    -moz-animation: fadeInUpBig 0.5s;
+    -ms-animation: fadeInUpBig 0.5s;
+    animation: fadeInUpBig 0.5s;
 }

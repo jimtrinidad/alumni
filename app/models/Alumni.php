@@ -18,11 +18,6 @@ class Alumni extends Eloquent {
 
 		$query			= DB::table('alumni');
 
-		$user_fields	= array_merge($user_fields, array(
-								'name'		=> 'Program',
-								'acronym'	=> 'Acronym'
-							));	
-
 		$query->select(DB::raw('alumni.id, logo'));
 		$query->addSelect( array_keys($user_fields) );
 
@@ -60,7 +55,6 @@ class Alumni extends Eloquent {
 		$query->orderBy(Input::get('sort', 'firstname'));
 
 		$results			= $query->paginate(Input::get('size', 50))->toArray();
-		$results['fields']	= array_keys($user_fields);
 		$results['labels'] 	= $user_fields;
 
 		return $results;

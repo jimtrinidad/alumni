@@ -34,11 +34,12 @@ app.config(['$routeProvider', 'lazyProvider', function ($routeProvider, lazyProv
 					return $lazy('app').load([
 						'app/alumni/controllers',
 						'app/alumni/services',
-						'app/program/services'
+						'app/program/services',
+						'app/user/services'
 					]);
 				}
 			},
-			//permission: 'admin'
+			permission: 'admin'
 		})
 		.when('/programs', {
 
@@ -80,6 +81,7 @@ app.config(['blockUIConfig', function(blockUIConfig) {
 
 }]);
 
+
 /**
 * Set user permissions from server data to memory variable
 */
@@ -88,6 +90,9 @@ app.run(function(permissions) {
 });
 
 
+/**
+* boot angular when dom is ready
+*/
 angular.element(document).ready(function() {
 
 	//get data from hidden input and decrypt
