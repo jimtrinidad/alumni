@@ -66,6 +66,30 @@ app.config(['$routeProvider', 'lazyProvider', function ($routeProvider, lazyProv
 
 
 /**
+* Http Interceptor
+*/
+app.config(['$httpProvider',function($httpProvider) {
+	$httpProvider.responseInterceptors.push(['$q', '$location', function($q, $location) { 
+		return function(promise) { 
+			return promise.then( 
+				// Success: just return the response 
+				function(response){ 
+					return response; 
+				}, 
+				// Error: check the error status to get only the 401 
+				function(response) { 
+					if (response.status === 401) {
+						$location.url('/401');
+						return $q.reject(response);
+					}
+				} 
+			); 
+		} 
+	}]);
+}]);
+
+
+/**
 * Block element config, set what request to automatically block
 */
 app.config(['blockUIConfig', function(blockUIConfig) {

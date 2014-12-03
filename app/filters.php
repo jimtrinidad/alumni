@@ -36,7 +36,7 @@ App::after(function($request, $response)
 Route::filter('apiauth', function()
 {
   if (!Auth::check()) {
-    return Response::json(array('status' => false ,'message' => 'You are not authenticated! Please log in.'), 200);
+    return Response::json(array('status' => false ,'message' => 'You are not authenticated! Please log in.'), 401);
   }
 });
 

@@ -30,7 +30,7 @@ angular.module('app').controller('GlobalController', ['$scope', '$location', 'pe
 }]);
 
 /**
-* Header Controller for navication menu
+* Header Controller for navigation menu
 */
 angular.module('app').controller('HeaderController', ['$scope', '$location', function ($scope, $location) {
 
