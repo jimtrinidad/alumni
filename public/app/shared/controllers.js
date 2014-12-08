@@ -9,17 +9,15 @@ angular.module('app').controller('GlobalController', ['$scope', '$location', 'pe
 	$scope.$on('$routeChangeStart', function(scope, next, current) {
 
 		$scope.path = $location.path();
-
-        var permission = next.$$route.permission;
-        if (!angular.isUndefined(permission) && !permissions.hasPermission(permission)) {
-            $location.path('/401');
+        if (angular.isDefined(next.$$route) && angular.isDefined(next.$$route.permission) && !permissions.hasPermission(next.$$route.permission)) {
+            $location.path('/forbidden');
         }
 
     });
 
     $scope.fullpage = function() {
 
-    	var full_pages = ['/401','/404']
+    	var full_pages = ['/forbidden','/unauthorized','/404']
     	if(full_pages.indexOf($scope.path) > -1) {
     		return true;
     	}

@@ -120,7 +120,7 @@
 
 	</section>
 	
-	<section ng-if="fullpage()">
+	<section class='fullpage' ng-if="fullpage()">
 		<section ng-view></section>
 	</section>
 

@@ -20,6 +20,7 @@ angular.module('app').components.controller('AlumniController', [
         $scope.selectedItem     = [];
         $scope.displayedFields  = ['firstname','lastname', 'batch', 'company', 'position'];
         $scope.currentPage 		= 1;
+        $scope.formData         = [];
         $scope.filters 			= {
                 field   : 'firstname',
                 sort    : 'firstname',
@@ -88,7 +89,9 @@ angular.module('app').components.controller('AlumniController', [
         /**
         * Adding Alumni
         */
-        $scope.openForm = function() {
+        $scope.openForm = function(data) {
+
+            $scope.formData = data;
 
             modalService.showModal(
             {
@@ -96,10 +99,10 @@ angular.module('app').components.controller('AlumniController', [
                 controller  : 'AlumniFormController',
                 templateUrl : 'app/alumni/views/modal.form.alumni.html',
                 size        : 'lg',
-                keyboard    : false
+                keyboard    : false,
+                scope       : $scope
 
             }).then(function (result) {
-                //
                 console.log(result, 'contorl');
             });
 
@@ -114,7 +117,7 @@ angular.module('app').components.controller('AlumniFormController', [
     '$modalInstance',
     function($scope, $modalInstance) {
 
-        $scope.save       = function() {
+        $scope.save     = function() {
 
             //to resolve promise and close modal
             $modalInstance.close('closed triggered');
@@ -123,6 +126,8 @@ angular.module('app').components.controller('AlumniFormController', [
         $scope.close    = function(result) {
             $modalInstance.dismiss('cancel');
         };
+
+        console.log($scope.formData);
 
     }
 

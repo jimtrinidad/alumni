@@ -42,7 +42,7 @@ app.config(['$routeProvider', 'lazyProvider', function ($routeProvider, lazyProv
 			permission: 'admin'
 		})
 		.when('/programs', {
-
+			permission: 'asdasd'
 		})
 		.when('/users', {
 
@@ -53,11 +53,14 @@ app.config(['$routeProvider', 'lazyProvider', function ($routeProvider, lazyProv
 		})
 		.when('/settings/security', {
 		})
-		.when('/404', {
+		.when('/404', { //page not found
 			templateUrl: 'app/shared/views/404.html'
 		})
-		.when('/401', {
-			templateUrl: 'app/shared/views/401.html'
+		.when('/forbidden', { //permission denied
+			templateUrl: 'app/shared/views/403.html',
+		})
+		.when('/unauthorized', { //required login
+			templateUrl: 'app/shared/views/401.html',
 		})
 
 		.otherwise({ redirectTo: '/' });
@@ -79,7 +82,7 @@ app.config(['$httpProvider',function($httpProvider) {
 				// Error: check the error status to get only the 401 
 				function(response) { 
 					if (response.status === 401) {
-						$location.url('/401');
+						$location.path('/unauthorized');
 						return $q.reject(response);
 					}
 				} 

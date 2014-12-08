@@ -1,3 +1,7 @@
+.fullpage div[class^="body-"], fullpage div[class*="body-"]{
+	z-index: 10010;
+}
+
 .noselect {
 	 -webkit-touch-callout: none;
     -webkit-user-select: none;

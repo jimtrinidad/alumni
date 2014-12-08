@@ -19,6 +19,7 @@
                         <thead>
                             <tr>
                                 <th ng-repeat="item in rights.data.viewables" ng-show="viewable(item.id)">{{item.label}}</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -31,6 +32,9 @@
                                             : item[itm.id]) 
                                         : '&nbsp;'
                                     }}
+                                </td>
+                                <td>
+                                    <a href="javascript:;" ng-click="openForm(item)"><i class='fa fa-pencil'></i></a>
                                 </td>
                             </tr>
                         </tbody>
@@ -114,7 +118,7 @@
     <header class="panel-heading">
         Alumni listing
          <span class="right-button-group" has-permission='add_alumni'>
-            <a href="javascript:;" class="btn btn-primary btn-sm" ng-click="openForm()"><i class="fa fa-file-o"></i> Add</a>
+            <a href="javascript:;" class="btn btn-primary btn-sm" ng-click="openForm('new')"><i class="fa fa-file-o"></i> Add</a>
             <a href="javascript:;" class="btn btn-primary btn-sm"><i class="fa fa-file-excel-o"></i> Upload</a>
          </span>
          <span class="tools pull-right">

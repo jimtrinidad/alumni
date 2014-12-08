@@ -292,8 +292,8 @@ angular.module('app').directive('tableCheckbox', ['$compile', '$timeout',
 
                 };
 
-                //scope.init();
-                //scope.$watch("results", scope.setCheckboxes);
+                scope.init();
+                scope.$watch("results", scope.setCheckboxes);
 
             }
         };

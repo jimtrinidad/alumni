@@ -2076,6 +2076,16 @@ ul.inbox-pagination li {
     bottom: 0;
     z-index: 1010;    
 }
+.body-403 {
+    background: #fcb322;
+    color: #fff;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1010;    
+}
 .error-wrapper p.page-500, .error-wrapper p.page-401 {
     color: #afa5f1
 }
@@ -2086,6 +2096,10 @@ ul.inbox-pagination li {
 .body-401 .back-btn:hover {
     background: #fff;
     color: #ff6c60
+}
+.body-403 .back-btn:hover {
+    background: #fff;
+    color: #fcb322
 }
 .error-wrapper p.nrml-txt-alt {
     color: #fff;
