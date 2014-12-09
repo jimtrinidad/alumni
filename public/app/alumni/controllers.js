@@ -20,7 +20,6 @@ angular.module('app').components.controller('AlumniController', [
         $scope.selectedItem     = [];
         $scope.displayedFields  = ['firstname','lastname', 'batch', 'company', 'position'];
         $scope.currentPage 		= 1;
-        $scope.formData         = [];
         $scope.filters 			= {
                 field   : 'firstname',
                 sort    : 'firstname',
@@ -89,9 +88,9 @@ angular.module('app').components.controller('AlumniController', [
         /**
         * Adding Alumni
         */
-        $scope.openForm = function(data) {
+        $scope.openForm = function(index) {
 
-            $scope.formData = data;
+            $scope.itemIndex = index;
 
             modalService.showModal(
             {
@@ -117,17 +116,20 @@ angular.module('app').components.controller('AlumniFormController', [
     '$modalInstance',
     function($scope, $modalInstance) {
 
-        $scope.save     = function() {
+        var mode            = angular.isDefined($scope.alumni.data[$scope.itemIndex]) ? 'edit' : 'add';
+
+        $scope.formData     = mode == 'edit' ? angular.copy($scope.alumni.data[$scope.itemIndex]) : [];
+        $scope.formTitle    = mode == 'edit' ? $scope.formData.firstname + ' ' + $scope.formData.lastname : 'Add new record.';
+
+        $scope.save         = function() {
 
             //to resolve promise and close modal
             $modalInstance.close('closed triggered');
         };
 
-        $scope.close    = function(result) {
+        $scope.close        = function(result) {
             $modalInstance.dismiss('cancel');
         };
-
-        console.log($scope.formData);
 
     }
 

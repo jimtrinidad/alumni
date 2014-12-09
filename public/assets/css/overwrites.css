@@ -11,6 +11,13 @@
     user-select: none;
 }
 
+/*
+* removes the annoying effect when opening a modal
+*/
+body.modal-open {
+	margin-right: 0px !important;
+}
+
 #subheader {
 	position: fixed;
 	padding: 0px 15px;

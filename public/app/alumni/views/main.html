@@ -23,7 +23,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="animate-repeat" ng-repeat="item in alumni.data" data-id="{{item.id}}">
+                            <tr class="animate-repeat" ng-repeat="(index, item) in alumni.data" data-id="{{item.id}}">
                                 <td ng-repeat="itm in rights.data.viewables" ng-show="viewable(itm.id)" data-title="{{itm.label}}">
                                     {{
                                         item[itm.id] != '' && item[itm.id] != '0000-00-00' && item[itm.id] != '1970-01-01' 
@@ -34,7 +34,7 @@
                                     }}
                                 </td>
                                 <td>
-                                    <a href="javascript:;" ng-click="openForm(item)"><i class='fa fa-pencil'></i></a>
+                                    <a href="javascript:;" ng-click="openForm(index)"><i class='fa fa-pencil'></i></a>
                                 </td>
                             </tr>
                         </tbody>
