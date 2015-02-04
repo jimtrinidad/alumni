@@ -118,8 +118,17 @@ angular.module('app').components.controller('AlumniFormController', [
 
         var mode            = angular.isDefined($scope.alumni.data[$scope.itemIndex]) ? 'edit' : 'add';
 
-        $scope.formData     = mode == 'edit' ? angular.copy($scope.alumni.data[$scope.itemIndex]) : [];
-        $scope.formTitle    = mode == 'edit' ? $scope.formData.firstname + ' ' + $scope.formData.lastname : 'Add new record.';
+        if (mode === 'edit') {
+
+            $scope.formData     = angular.copy($scope.alumni.data[$scope.itemIndex]);
+            $scope.formTitle    = $scope.formData.firstname + ' ' + $scope.formData.lastname;
+            
+        } else {
+
+            $scope.formData     = [];
+            $scope.formTitle    = 'Add new record';
+
+        }
 
         $scope.save         = function() {
 
