@@ -4,10 +4,15 @@
 </div>
 <div class="modal-body">
 	
-	<div class="form-group">
-		<label>Test</label>
-		<input type="text" ng-model="formData.firstname">
-	</div>
+	<form name="alumniForm" ng-submit="" novalidate>
+		
+		<div class="form-group" ng-class="{ 'has-error' : alumniForm.firstname.$invalid && !alumniForm.firstname.$pristine }">
+            <label>Firstname*</label>
+            <input type="text" name="firstname" class="form-control" ng-model="formData.firstname" required>
+            <p ng-show="alumniForm.firstname.$invalid && !alumniForm.firstname.$pristine" class="help-block">Firstname is required.</p>
+        </div>
+
+	</form>
 
 </div>
 <div class="modal-footer">
