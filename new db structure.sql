@@ -162,7 +162,6 @@ CREATE TABLE `users` (
   `email` varchar(100) DEFAULT NULL,
   `firstname` varchar(100) DEFAULT NULL,
   `lastname` varchar(100) DEFAULT NULL,
-  `privilege_id` int(9) DEFAULT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
   `last_logged` datetime DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
@@ -182,8 +181,8 @@ CREATE TABLE `users` (
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 
-INSERT INTO privilege (user_id,`key`,`value`) VALUES(16,'rights','["admin","add_alumni","edit_alumni","delete_alumni"]');
-INSERT INTO `alumni`.`privilege`(`id`,`user_id`,`key`,`value`) VALUES ( NULL,'16','viewables','[]');
+INSERT INTO privilege (user_id,`key`,`value`) VALUES(1,'rights','["admin","add_alumni","edit_alumni","delete_alumni"]');
+INSERT INTO `alumni`.`privilege`(`id`,`user_id`,`key`,`value`) VALUES ( NULL,'1','viewables','[]');
 UPDATE `alumni`.`privilege` SET `value`='{\"firstname\":\"Firstname\",\"lastname\":\"Lastname\",\"mi\":\"Mi\",\"nickname\":\"Nickname\",\"gender\":\"Gender\",\"batch\":\"Batch\",\"position\":\"Position\",\"company\":\"Company\",\"no_work\":\"Work No.\",\"no_home\":\"Home No.\",\"no_fax\":\"Fax No.\",\"no_mobile\":\"Mobile No.\",\"email_prefer\":\"Email\",\"email_other\":\"Alt Email\",\"birthday\":\"Birthday\",\"address\":\"Address\"}' WHERE `id`='2';
 INSERT INTO `alumni`.`privilege`(`id`,`user_id`,`key`,`value`) VALUES ( '','1','editables','{\"firstname\":\"Firstname\",\"lastname\":\"Lastname\",\"mi\":\"Mi\",\"nickname\":\"Nickname\",\"gender\":\"Gender\",\"batch\":\"Batch\",\"position\":\"Position\",\"company\":\"Company\",\"no_work\":\"Work No.\",\"no_home\":\"Home No.\",\"no_fax\":\"Fax No.\",\"no_mobile\":\"Mobile No.\",\"birthday\":\"Birthday\",\"address\":\"Address\"}');
 

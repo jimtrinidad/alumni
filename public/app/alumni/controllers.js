@@ -4,11 +4,12 @@
 angular.module('app').components.controller('AlumniController', [
     '$scope', 
     '$timeout', 
+    '$filter',
     'Alumni', 
     'Program',
     'User',
     'modalService',
-    function($scope, $timeout, Alumni, Program, User, modalService) {
+    function($scope, $timeout, $filter, Alumni, Program, User, modalService) {
 
         /**
         * Inits
@@ -33,10 +34,11 @@ angular.module('app').components.controller('AlumniController', [
             	company 	: 'Company'
             };
         $scope.sort_options		= {
-            	firstname 	: 'Firstname',
-            	lastname 	: 'Lastname',
-            	batch 		: 'Batch',
-            	name 		: 'Program'
+            	'alumni.firstname' 	: 'Firstname',
+            	'alumni.lastname' 	: 'Lastname',
+            	'alumni.batch' 		: 'Batch',
+            	'programs.name' 	: 'Program',
+                'alumni.created_at' : 'Date Added'
             };
 
 
@@ -82,6 +84,28 @@ angular.module('app').components.controller('AlumniController', [
 
         $scope.viewable = function(key) {
             return ($scope.displayedFields.indexOf(key) > -1);
+        }
+
+        $scope.displayData  = function(data, key) {
+            if (key === 'alumni.created_at'){
+                if (data['created_at'] === '0000-00-00 00:00:00' || data['created_at'] === '1970-01-01 00:00:00') {
+                    return '';
+                } else {
+                    return $filter('date')(data['created_at'].substring(0, 10), 'mediumDate');
+                }
+            } else if (typeof(data[key]) !== 'undefined') {
+                if (data[key] === '' || data[key] === '0000-00-00' || data[key] === '1970-01-01') {
+                    return '';
+                } else {
+                    if (key === 'birthday') {
+                        return $filter('date')(data['birthday'], 'mediumDate');
+                    } else {
+                        return data[key];
+                    }
+                }
+            } else {
+                return '';
+            }
         }
 
 

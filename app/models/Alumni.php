@@ -52,7 +52,12 @@ class Alumni extends Eloquent {
 
 		}
 
-		$query->orderBy(Input::get('sort', 'firstname'));
+		$orderType	= 'ASC';
+		if (Input::get('sort') == 'alumni.created_at') {
+			$orderType = 'DESC';
+		}
+
+		$query->orderByRaw('TRIM(' . Input::get('sort', 'firstname') . ') ' . $orderType);
 
 		$results			= $query->paginate(Input::get('size', 50))->toArray();
 		$results['labels'] 	= $user_fields;

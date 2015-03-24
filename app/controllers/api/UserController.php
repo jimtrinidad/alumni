@@ -38,26 +38,6 @@ class UserController extends BaseController {
 
 	public function destroy($id) {
 
-		$result = Alumni::find($id);
-
-		if ($result) {
-
-			$result->delete();
-
-			return Response::json(array(
-					'status'	=> true,
-					'data'		=> 'Record has been deleted successfully.'
-				));
-
-		} else {
-
-			return Response::json(array(
-					'status'	=> false,
-					'message'	=> 'Deleting record failed! Record not found.'
-				));
-
-		}
-
 	}
 
 	public function getRights() {

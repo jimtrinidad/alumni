@@ -5,7 +5,7 @@ set_time_limit(0);
 if (!isset($argv[1])) die('table to migrate is required');
 
 $db1	= new Database(array(
-		'dbname'	=> 'db_alumni',
+		'dbname'	=> 'communic_alumni',
 		'user'		=> 'root',
 		'pass'		=> '',
 		'host'		=> 'localhost',
@@ -161,8 +161,8 @@ switch ($argv[1]) {
 			foreach ($results as $v) {
 				
 				echo $v['username'] . PHP_EOL;
-				$insert = "INSERT INTO users (id,username,password,email,firstname,lastname,privilege_id,last_logged,created_at) 
-							VALUE(?,?,?,?,?,?,?,?,?)";
+				$insert = "INSERT INTO users (id,username,password,email,firstname,lastname,last_logged,created_at) 
+							VALUE(?,?,?,?,?,?,?,?)";
 
 				$response = $db2->db->prepare($insert)->execute(array(
 						$v['id'],
@@ -171,9 +171,8 @@ switch ($argv[1]) {
 						$v['email'],
 						$v['firstname'],
 						$v['lastname'],
-						$v['p_id'],
 						$v['lastLoggin'],
-						$v['created_at'],
+						$v['dateAdded'],
 					));
 
 			}
