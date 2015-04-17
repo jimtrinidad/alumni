@@ -19,7 +19,7 @@ angular.module('app').components.controller('AlumniController', [
         $scope.programs         = Program.user();
         $scope.alumni 			= [];
         $scope.selectedItem     = [];
-        $scope.displayedFields  = ['firstname','lastname', 'batch', 'company', 'position'];
+        $scope.displayedFields  = ['firstname','lastname', 'batch', 'company', 'position','acronym'];
         $scope.currentPage 		= 1;
         $scope.filters 			= {
                 field   : 'firstname',
@@ -57,9 +57,11 @@ angular.module('app').components.controller('AlumniController', [
         $scope.$watch("filters", function(e, i) {
             $timeout.cancel(timeoutPromise);
             timeoutPromise = $timeout(function() {
+
                 //return to firstpage
                 $scope.currentPage = 1;
                 $scope.get_alumni();
+
             }, 1000);
         }, true);
 
@@ -69,15 +71,21 @@ angular.module('app').components.controller('AlumniController', [
         */
         $scope.get_alumni   = function() {
 
+            var resultBlocker  = uiBlocker.instances.get('alumniResultBlock');
             var params  = angular.copy($scope.filters);
+
             params      = angular.extend(params, {
                 page: $scope.currentPage
             });
+
+            resultBlocker.start('Fetching data...');
 
             Alumni.query(params, function(response) {
                 $timeout(function() {
                     $scope.alumni = response;
                 });
+
+                resultBlocker.stop();
             });
 
         };
@@ -87,24 +95,28 @@ angular.module('app').components.controller('AlumniController', [
         }
 
         $scope.displayData  = function(data, key) {
-            if (key === 'alumni.created_at'){
-                if (data['created_at'] === '0000-00-00 00:00:00' || data['created_at'] === '1970-01-01 00:00:00') {
-                    return '';
-                } else {
-                    return $filter('date')(data['created_at'].substring(0, 10), 'mediumDate');
-                }
-            } else if (typeof(data[key]) !== 'undefined') {
-                if (data[key] === '' || data[key] === '0000-00-00' || data[key] === '1970-01-01') {
-                    return '';
-                } else {
-                    if (key === 'birthday') {
-                        return $filter('date')(data['birthday'], 'mediumDate');
-                    } else {
-                        return data[key];
-                    }
-                }
+            if (typeof(data[key]) !== 'undefined' && key !== 'batch' && (data[key].toUpperCase() === 'NA' || data[key].toUpperCase() === 'N/A')) {
+                return 'n/a';
             } else {
-                return '';
+                if (key === 'alumni.created_at'){
+                    if (data['created_at'] === '0000-00-00 00:00:00' || data['created_at'] === '1970-01-01 00:00:00') {
+                        return 'n/a';
+                    } else {
+                        return $filter('date')(data['created_at'].substring(0, 10), 'mediumDate');
+                    }
+                } else if (typeof(data[key]) !== 'undefined') {
+                    if (data[key] === '' || data[key] === '0000-00-00' || data[key] === '1970-01-01') {
+                        return 'n/a';
+                    } else {
+                        if (key === 'birthday') {
+                            return $filter('date')(data['birthday'], 'mediumDate');
+                        } else {
+                            return data[key];
+                        }
+                    }
+                } else {
+                    return 'n/a';
+                }
             }
         }
 
@@ -138,26 +150,88 @@ angular.module('app').components.controller('AlumniController', [
 angular.module('app').components.controller('AlumniFormController', [
     '$scope',
     '$modalInstance',
-    function($scope, $modalInstance) {
+    '$filter',
+    'Alumni',
+    function($scope, $modalInstance, $filter, Alumni) {
 
+        var formBlock       = uiBlocker.instances.get('alumniFormBlock');
         var mode            = angular.isDefined($scope.alumni.data[$scope.itemIndex]) ? 'edit' : 'add';
+        var birthday        = '';
+        var submitted       = null;
 
         if (mode === 'edit') {
 
-            $scope.formData     = angular.copy($scope.alumni.data[$scope.itemIndex]);
-            $scope.formTitle    = $scope.formData.firstname + ' ' + $scope.formData.lastname;
+            $scope.formData         = angular.copy($scope.alumni.data[$scope.itemIndex]);
+            $scope.formTitle        = $scope.formData.firstname + ' ' + $scope.formData.lastname;
+
+            birthday                = $scope.formData.birthday;
+            if (birthday !== '' && birthday !== '0000-00-00' && birthday !== '1970-01-01') {
+                $scope.formData.birthday    = $filter('date')(birthday, 'mediumDate');
+            } else {
+                $scope.formData.birthday    = '';
+            }
             
         } else {
 
-            $scope.formData     = [];
+            $scope.formData     = {};
             $scope.formTitle    = 'Add new record';
 
         }
 
-        $scope.save         = function() {
+        $scope.setBirthday      = function(value) {
+            angular.element('#alumni-birthday-input').datepicker({
+                format: 'M d, yyyy',
+                endDate: '+0d'
+            });
+
+            if (mode === 'edit' && birthday !== '' && birthday !== '0000-00-00' && birthday !== '1970-01-01') {
+                angular.element('#alumni-birthday-input').datepicker('setDate', new Date(birthday));
+                angular.element('#alumni-birthday-input').datepicker('update');
+            } else {
+                angular.element('#alumni-birthday-input').val('');
+            }
+        }
+
+        $scope.hasError     = function(form, field) {
+
+            if (submitted) {
+                return field.$invalid && field.$dirty || (submitted && !field.$dirty && field.$invalid);
+            } else {
+                return form && field.$invalid && field.$dirty;
+            }
+
+            return false;
+
+        }
+
+        $scope.submitForm   = function() {
 
             //to resolve promise and close modal
-            $modalInstance.close('closed triggered');
+            //$modalInstance.close('closed triggered');
+
+            submitted   = true;
+
+            //check if no client error.. then submit on server to validate and save.
+            if ($scope.alumniForm.$valid) {
+                console.log('saved');
+                if (mode !== 'edit') {
+                    formBlock.start('Adding data...');
+                    Alumni.save($scope.formData, function(response) {
+                        console.log(response);
+                        formBlock.stop();
+                    });
+                } else {
+                    formBlock.start('Updating data...');
+                    Alumni.update($scope.formData, function(response) {
+                        console.log(response);
+                        formBlock.stop();
+                    });
+                }
+
+            } else {
+                console.log($scope.formData, 'invalid');
+            }
+            
         };
 
         $scope.close        = function(result) {

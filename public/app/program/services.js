@@ -11,7 +11,8 @@ angular.module('app').components.provide.factory('Program', ['$resource', functi
             },
         user 	: {
         		method	: 'GET',
-        		params 	: {action: 'user'}
+        		params 	: {action: 'user'},
+                cache   : true
         }
     });
 }]);

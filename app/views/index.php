@@ -6,14 +6,13 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Alumni Panel</title>
 
-	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap-reset.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap-libraries.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/loading-bar.min.css">
-	<link rel="stylesheet" type="text/css" href="assets/css/angular-block-ui.min.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/animate.min.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/animations.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/angular-modules.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/angular-block-ui.min.css">
 
 	<!-- Custom styles for this template -->
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
@@ -126,15 +125,9 @@
 
 	<input type="hidden" id="user-rights" value='<?php echo $permissions ?>'>
 	
-	<script type="text/javascript" src="assets/libs/jquery/jquery.min.js"></script>
-	<script type="text/javascript" src="assets/libs/jquery/jquery.dcjqaccordion.2.7.js"></script>
-	<script type="text/javascript" src="assets/libs/jquery/jquery.scrollTo.min.js"></script>
-	<script type="text/javascript" src="assets/libs/jquery/jquery.nicescroll.js" type="text/javascript"></script>
-
-	<script type="text/javascript" src="assets/libs/angular/angular.min.js"></script>
-	<script type="text/javascript" src="assets/libs/angular/angular-route.min.js"></script>
-	<script type="text/javascript" src="assets/libs/angular/angular-animate.min.js"></script>
-	<script type="text/javascript" src="assets/libs/angular/angular-resource.min.js"></script>
+	<script type="text/javascript" src="assets/libs/jquery/jquery-libraries.js"></script>
+	<script type="text/javascript" src="assets/libs/angular/angular-libraries.js"></script>
+	<script type="text/javascript" src="assets/libs/bootstrap/bootstrap-libraries.js"></script>
 	<script type="text/javascript" src="assets/libs/require.js"></script>
 
 	<script type="text/javascript" src="app/app.js"></script>

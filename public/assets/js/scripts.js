@@ -1,5 +1,6 @@
 //left side accordion
 $(function() {
+
     $('#nav-accordion').dcAccordion({
         eventType: 'click',
         autoClose: true,
@@ -10,6 +11,7 @@ $(function() {
         autoExpand: true,
         classExpand: 'dcjq-current-parent'
     });
+
 });
 
 var Script = function() {
@@ -24,34 +26,6 @@ var Script = function() {
             $("#sidebar").scrollTo("+=" + Math.abs(diff), 500);
         }
     });
-
-    // toggle bar
-    /*$(function() {
-        var wd;
-        wd = $(window).width();
-
-        function responsiveView() {
-            var newd = $(window).width();
-            if (newd == wd) {
-                return true;
-            } else {
-                wd = newd;
-            }
-            if(!$('#main-content').hasClass('merge-left')){
-                var wSize = $(window).width();
-                if (wSize <= 768) {
-                    $('#sidebar').addClass('hide-left-bar');
-                    $('#main-content').addClass('merge-left');
-                } else {
-                    $('#main-content').removeClass('merge-left');
-                    $('#sidebar').removeClass('hide-left-bar');
-                }
-            }
-        }
-
-        $(window).on('load', responsiveView);
-        $(window).on('resize', responsiveView);
-    });*/
 
     $('.sidebar-toggle-box .fa-bars').click(function(e) {
         $('#sidebar').toggleClass('hide-left-bar');

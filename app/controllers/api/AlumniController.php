@@ -30,12 +30,14 @@ class AlumniController extends BaseController {
 
 	}
 
-	public function create() {
-
+	public function store() {
+		sleep(5);
+		return Response::json(array('type'=>'add', 'data' => Input::all()));
 	}
 
 	public function update($id) {
-		
+		sleep(5);
+		return Response::json(array('type'=>'edit', 'data' => Input::all()));
 	}
 
 	public function destroy($id) {

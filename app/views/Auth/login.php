@@ -2,13 +2,12 @@
 <html>
     <head>
         <title>Alumni Login</title>
-        <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-libraries.css">
         <link rel="stylesheet" type="text/css" href="assets/css/login.css">
     </head>
     <body class="login-body">
         <div class="container">
-            <form method="post" class="form-signin">
+            <form method="post" class="form-signin" novalidate>
                 <h2 class="form-signin-heading">Alumni Panel Login</h2>
                 <div class="login-wrap">
                     <div class="user-login-info">

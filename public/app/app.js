@@ -6,6 +6,7 @@
 
 //INIT
 var permissionList;
+var uiBlocker; //value is set on global controller
 var app = angular.module('app', [
 			'ngRoute', 
 			'LazyLoad', 
@@ -14,7 +15,6 @@ var app = angular.module('app', [
 			'ngAnimate', 
 			'ngResource', 
 			'blockUI',
-			//'angular.filter'
 		]);
 
 /**
@@ -39,10 +39,10 @@ app.config(['$routeProvider', 'lazyProvider', function ($routeProvider, lazyProv
 					]);
 				}
 			},
-			permission: 'admin'
+			//permission: 'admin'
 		})
 		.when('/programs', {
-			permission: 'asdasd'
+			permission: 'admin'
 		})
 		.when('/users', {
 
@@ -97,14 +97,15 @@ app.config(['$httpProvider',function($httpProvider) {
 */
 app.config(['blockUIConfig', function(blockUIConfig) {
 
-	blockUIConfig.message = 'Loading...';
+	blockUIConfig.message 	= 'Loading data...';
+	blockUIConfig.autoBlock = false;
 
-	blockUIConfig.requestFilter = function(config) {
+	// blockUIConfig.requestFilter = function(config) {
 
-		if (!config.url.match(/^api\/v1\/alumni*/)) {
-			return false; // ... don't block it.
-		}
-	};
+	// 	if (!config.url.match(/^api\/v1\/alumni*/)) {
+	// 		return false; // ... don't block it.
+	// 	}
+	// };
 
 }]);
 

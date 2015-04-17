@@ -11,7 +11,8 @@ angular.module('app').components.provide.factory('User', ['$resource', function(
             },
         rights 	: {
         		method	: 'GET',
-        		params 	: {action: 'rights'}
+        		params 	: {action: 'rights'},
+                cache   : true
         }
     });
 }]);

@@ -1,4 +1,4 @@
-<div class="row" ng-controller="AlumniController" scroll-to-top-when="alumni" block-ui block-ui-pattern="/^api\/v1\/alumni*/">
+<div id="alumni-container" class="row" ng-controller="AlumniController" scroll-to-top-when="alumni" block-ui="alumniResultBlock">
     <div class="col-sm-12">
         <div id="subheader" ng-class="{hidden:boolScrolledOnTop == false}">
             <section class="panel">
@@ -14,7 +14,7 @@
                 <div ng-include="'alumniFilters'"></div>
                 <div class="clearfix"></div>
                 <hr>
-                <section id="no-more-tables" class='table-responsive noselect'>
+                <section id="no-more-tables" class='table-responsive'>
                     <table ng-show="alumni.data.length > 0" class="table table-condensed table-hover" table-checkbox="alumni.data" checked-item="selectedItem">
                         <thead>
                             <tr>
@@ -110,12 +110,12 @@
 </script>
 <script type="text/ng-template" id="alumniHeader">
     <header class="panel-heading">
-        Alumni listing
+        Alumni listing &nbsp;
          <span class="right-button-group" has-permission='add_alumni'>
-            <a href="javascript:;" class="btn btn-primary btn-sm" ng-click="openForm('new')"><i class="fa fa-file-o"></i> Add</a>
-            <a href="javascript:;" class="btn btn-primary btn-sm"><i class="fa fa-file-excel-o"></i> Upload</a>
+            <a href="javascript:;" class="btn btn-primary btn-responsive" ng-click="openForm('new')"><i class="fa fa-file-o"></i> Add</a>
+            <a href="javascript:;" class="btn btn-primary btn-responsive"><i class="fa fa-file-excel-o"></i> Upload</a>
          </span>
-         <span class="tools pull-right">
+         <span class="pull-right">
             <checklist model="displayedFields" options="rights.data.viewables" label="Displayed Fields" close-scroll="true" id="displayedFields"></checklist>
          </span>
     </header>

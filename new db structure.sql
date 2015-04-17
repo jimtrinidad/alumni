@@ -47,7 +47,7 @@ CREATE TABLE `alumni` (
   `lastname` varchar(100) DEFAULT NULL,
   `mi` varchar(5) DEFAULT NULL,
   `nickname` varchar(100) DEFAULT NULL,
-  `gender` varchar(2) DEFAULT NULL,
+  `gender` varchar(1) DEFAULT NULL,
   `program_id` tinyint(5) DEFAULT NULL,
   `batch` tinyint(10) DEFAULT NULL,
   `position` varchar(1000) DEFAULT NULL,

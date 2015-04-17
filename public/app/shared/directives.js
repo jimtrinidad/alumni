@@ -98,7 +98,7 @@ angular.module('app').directive("scroll", ['$window',
         return function(scope, element, attrs) {
             scope.boolScrolledOnTop = false;
             angular.element($window).bind("scroll", function() {
-                if (this.pageYOffset >= 80) {
+                if (this.pageYOffset >= 75) {
                     scope.boolScrolledOnTop = true;
                 } else {
                     scope.boolScrolledOnTop = false;
@@ -126,7 +126,7 @@ angular.module('app').directive('checklist', ['$window',
                 closeScroll: '='
             },
             template: "<div class='btn-group dropdown'>" +
-                         "<button class='btn btn-xs btn-primary dropdown-toggle'>{{label}} <span class='caret'></span></button>" + 
+                         "<a class='btn btn-primary btn-responsive btn-text-size dropdown-toggle'><i class='fa fa-list'></i> <span class='hidden-xs'>{{label}}</span> <span class='caret'></span></a>" + 
                          "<ul class='dropdown-menu dropdown-menu-right' aria-labelledby='dropdownMenu'>" + 
                             "<li ng-repeat='option in options' class='checklist'> <a href='javascript:;' ng-click='setSelectedItem(option.id); $event.stopPropagation()'><i class='fa' ng-class='isChecked(option.id)'></i><span>{{option.label}}</span></a></li>" + 
                         "</ul>" + 
@@ -156,7 +156,7 @@ angular.module('app').directive('checklist', ['$window',
                 if (scope.closeScroll) {
 
                     angular.element($window).bind("scroll", function() {
-                        if (this.pageYOffset >= 80) {
+                        if (this.pageYOffset >= 75) {
                             angular.element( '#' + attrs.id + ' .dropdown.open .dropdown-toggle').triggerHandler('click');
                         }
                     });

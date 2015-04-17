@@ -18,7 +18,7 @@ class Alumni extends Eloquent {
 
 		$query			= DB::table('alumni');
 
-		$query->select(DB::raw('alumni.id, logo'));
+		$query->select(DB::raw('alumni.id, logo, alumni.program_id'));
 		$query->addSelect( array_keys($user_fields) );
 
 		$query->join('programs', 'alumni.program_id', '=', 'programs.id');
