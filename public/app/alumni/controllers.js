@@ -23,7 +23,7 @@ angular.module('app').components.controller('AlumniController', [
         $scope.currentPage 		= 1;
         $scope.filters 			= {
                 field   : 'firstname',
-                sort    : 'firstname',
+                sort    : 'alumni.firstname',
                 program : '',
                 size    : 50
             };
