@@ -191,3 +191,22 @@ ALTER TABLE `alumni`.`alumni`     CHANGE `birthday` `birthday` DATE NULL ;
 INSERT INTO `alumni`.`settings`(`id`,`key`,`value`) VALUES ( 1,'viewables','{\"firstname\":\"Firstname\",\"lastname\":\"Lastname\",\"mi\":\"Mi\",\"nickname\":\"Nickname\",\"gender\":\"Gender\",\"batch\":\"Batch\",\"position\":\"Position\",\"company\":\"Company\",\"no_work\":\"Work No.\",\"no_home\":\"Home No.\",\"no_fax\":\"Fax No.\",\"no_mobile\":\"Mobile No.\",\"email_prefer\":\"Email\",\"email_other\":\"Alt Email\",\"birthday\":\"Birthday\",\"address\":\"Address\"}');
 INSERT INTO `alumni`.`settings`(`id`,`key`,`value`) VALUES ( 2,'editables','{\"firstname\":\"Firstname\",\"lastname\":\"Lastname\",\"mi\":\"Mi\",\"nickname\":\"Nickname\",\"gender\":\"Gender\",\"batch\":\"Batch\",\"position\":\"Position\",\"company\":\"Company\",\"no_work\":\"Work No.\",\"no_home\":\"Home No.\",\"no_fax\":\"Fax No.\",\"no_mobile\":\"Mobile No.\",\"email_prefer\":\"Email\",\"email_other\":\"Alt Email\",\"birthday\":\"Birthday\",\"address\":\"Address\"}');
 UPDATE `alumni`.`settings` SET `value`='{\"firstname\":\"Firstname\",\"lastname\":\"Lastname\",\"mi\":\"Mi\",\"nickname\":\"Nickname\",\"gender\":\"Gender\",\"batch\":\"Batch\",\"position\":\"Position\",\"company\":\"Company\",\"no_work\":\"Work No.\",\"no_home\":\"Home No.\",\"no_fax\":\"Fax No.\",\"no_mobile\":\"Mobile No.\",\"email_prefer\":\"Email\",\"email_other\":\"Alt Email\",\"birthday\":\"Birthday\",\"address\":\"Address\",\"name\":\"Program\",\"acronym\":\"Acronym\"}' WHERE `id`='1';
+
+ALTER TABLE `alumni`
+  CHANGE COLUMN `mi` `mi` VARCHAR(5) NULL DEFAULT '' AFTER `lastname`,
+  CHANGE COLUMN `nickname` `nickname` VARCHAR(100) NULL DEFAULT '' AFTER `mi`,
+  CHANGE COLUMN `gender` `gender` VARCHAR(1) NULL DEFAULT '' AFTER `nickname`,
+  CHANGE COLUMN `program_id` `program_id` TINYINT(5) NULL DEFAULT NULL AFTER `gender`,
+  CHANGE COLUMN `batch` `batch` VARCHAR(5) NULL DEFAULT '' AFTER `program_id`,
+  CHANGE COLUMN `position` `position` VARCHAR(1000) NULL DEFAULT '' AFTER `batch`,
+  CHANGE COLUMN `company` `company` VARCHAR(1000) NULL DEFAULT '' AFTER `position`,
+  CHANGE COLUMN `no_work` `no_work` VARCHAR(100) NULL DEFAULT '' AFTER `company`,
+  CHANGE COLUMN `no_home` `no_home` VARCHAR(100) NULL DEFAULT '' AFTER `no_work`,
+  CHANGE COLUMN `no_fax` `no_fax` VARCHAR(100) NULL DEFAULT '' AFTER `no_home`,
+  CHANGE COLUMN `no_mobile` `no_mobile` VARCHAR(100) NULL DEFAULT '' AFTER `no_fax`,
+  CHANGE COLUMN `email_prefer` `email_prefer` VARCHAR(100) NULL DEFAULT '' AFTER `no_mobile`,
+  CHANGE COLUMN `email_other` `email_other` VARCHAR(100) NULL DEFAULT '' AFTER `email_prefer`,
+  CHANGE COLUMN `birthday` `birthday` DATE NULL DEFAULT '0000-00-00' AFTER `email_other`,
+  CHANGE COLUMN `address` `address` TEXT NULL DEFAULT '' AFTER `birthday`,
+  CHANGE COLUMN `photo` `photo` VARCHAR(100) NULL DEFAULT '' AFTER `address`,
+  CHANGE COLUMN `created_by` `created_by` INT(9) NULL DEFAULT NULL AFTER `photo`;

@@ -10,6 +10,7 @@ class Alumni extends Eloquent {
 	protected $softDelete 	= true;
 
 	protected $table		= 'alumni';
+	protected $guarded		= array();
 
 	
 	public static function get_listing() {

@@ -8,21 +8,21 @@
 			
 		<div class="row no-gutter pad-10">
 			<div class="col-sm-5">
-				<div class="form-group" ng-class="{ 'has-error' : hasError(alumniForm, alumniForm.firstname) }">
+				<div class="form-group" ng-class="{ 'has-error' : hasError('firstname') }">
 		            <label>Firstname*</label>
 		            <input type="text" name="firstname" class="form-control" ng-model="formData.firstname" required>
-		            <p ng-show="hasError(alumniForm, alumniForm.firstname)" class="help-block">Firstname is required.</p>
+		            <span class='help-block' ng-show="hasError('firstname', 'required')">Firstname field is required.</span>
 		        </div>
 			</div>
 			<div class="col-sm-5">
-				<div class="form-group" ng-class="{ 'has-error' : hasError(alumniForm, alumniForm.lastname) }">
+				<div class="form-group" ng-class="{ 'has-error' : hasError('lastname') }">
 		            <label>Lastname*</label>
 		            <input type="text" name="lastname" class="form-control" ng-model="formData.lastname" required>
-		            <p ng-show="hasError(alumniForm, alumniForm.lastname)" class="help-block">Lastname is required.</p>
+		            <span class='help-block' ng-show="hasError('lastname', 'required')">Lastname field is required.</span>
 		        </div>
 			</div>
 			<div class="col-sm-2">
-				<div class="form-group" ng-class="{ 'has-error' : alumniForm.mi.$invalid && !alumniForm.mi.$pristine }">
+				<div class="form-group">
 		            <label>MI*</label>
 		            <input type="text" name="mi" class="form-control" ng-model="formData.mi">
 		        </div>
@@ -30,19 +30,19 @@
 		</div>
 		<div class="row no-gutter pad-10">
 			<div class="col-sm-5">
-				<div class="form-group" ng-class="{ 'has-error' : alumniForm.nickname.$invalid && !alumniForm.nickname.$pristine }">
+				<div class="form-group">
 		            <label>Nickname</label>
 		            <input type="text" name="nickname" class="form-control" ng-model="formData.nickname">
 		        </div>
 			</div>
 			<div class="col-sm-4">
-				<div class="form-group" ng-class="{ 'has-error' : alumniForm.birthday.$invalid && !alumniForm.birthday.$pristine }">
+				<div class="form-group">
 		            <label>Birthday</label>
 		            <input type="text" id='alumni-birthday-input' ng-init="setBirthday()" name="birthday" ng-model="formData.birthday" class="form-control">
 		        </div>
 			</div>
 			<div class="col-sm-3">
-				<div class="form-group" ng-class="{ 'has-error' : alumniForm.gender.$invalid && !alumniForm.gender.$pristine }">
+				<div class="form-group">
 		            <label>Gender</label><br>
 		            <label class="radio-inline">
 					  <input type="radio" name="gender" id="" value="M"> Male
@@ -55,32 +55,31 @@
 		</div>
 		<div class="row no-gutter pad-10">
 			<div class="col-sm-9 col-xs-9">
-				<div class="form-group" ng-class="{ 'has-error' : hasError(alumniForm, alumniForm.program_id) }">
+				<div class="form-group" ng-class="{ 'has-error' : hasError('program_id') }">
 		            <label>Program</label>
 		            <select name='program_id' class="form-control" ng-model="formData.program_id" required>
 		            	<option value=""></option>
                         <option ng-repeat="item in programs.data" value="{{item.id}}" ng-selected="formData.program_id === item.id">{{item.name}} - ({{item.acronym}})</option>
                     </select>
-		            <p ng-show="hasError(alumniForm, alumniForm.program_id)" class="help-block">Program is required.</p>
+                    <span class='help-block' ng-show="hasError('program_id', 'required')">Program field is required.</span>
 		        </div>
 			</div>
 			<div class="col-sm-3  col-xs-3">
-				<div class="form-group" ng-class="{ 'has-error' : hasError(alumniForm, alumniForm.batch) }">
+				<div class="form-group">
 		            <label>Batch</label>
-		            <input type="number" name="batch" class="form-control" ng-model="formData.batch">
-		            <p ng-show="hasError(alumniForm, alumniForm.batch)" class="help-block">Invalid batch.</p>
+		            <input type="text" name="batch" class="form-control" ng-model="formData.batch">
 		        </div>
 			</div>
 		</div>
 		<div class="row no-gutter pad-10">
 			<div class="col-sm-6">
-				<div class="form-group" ng-class="{ 'has-error' : alumniForm.position.$invalid && !alumniForm.position.$pristine }">
+				<div class="form-group">
 		            <label>Position</label>
 		            <input type="text" name="position" class="form-control" ng-model="formData.position">
 		        </div>
 			</div>
 			<div class="col-sm-6">
-				<div class="form-group" ng-class="{ 'has-error' : alumniForm.company.$invalid && !alumniForm.company.$pristine }">
+				<div class="form-group">
 		            <label>Company</label>
 		            <input type="text" name="company" class="form-control" ng-model="formData.company">
 		        </div>
@@ -88,25 +87,25 @@
 		</div>
 		<div class="row no-gutter pad-10">
 			<div class="col-sm-3 col-xs-6">
-				<div class="form-group" ng-class="{ 'has-error' : alumniForm.no_work.$invalid && !alumniForm.no_work.$pristine }">
+				<div class="form-group">
 		            <label>Office No</label>
 		            <input type="text" name="no_work" class="form-control" ng-model="formData.no_work">
 		        </div>
 			</div>
 			<div class="col-sm-3 col-xs-6">
-				<div class="form-group" ng-class="{ 'has-error' : alumniForm.no_fax.$invalid && !alumniForm.no_fax.$pristine }">
+				<div class="form-group">
 		            <label>Fax No</label>
 		            <input type="text" name="no_fax" class="form-control" ng-model="formData.no_fax">
 		        </div>
 			</div>
 			<div class="col-sm-3 col-xs-6">
-				<div class="form-group" ng-class="{ 'has-error' : alumniForm.no_home.$invalid && !alumniForm.no_home.$pristine }">
+				<div class="form-group">
 		            <label>Home No</label>
 		            <input type="text" name="no_home" class="form-control" ng-model="formData.no_home">
 		        </div>
 			</div>
 			<div class="col-sm-3 col-xs-6">
-				<div class="form-group" ng-class="{ 'has-error' : alumniForm.no_mobile.$invalid && !alumniForm.no_mobile.$pristine }">
+				<div class="form-group">
 		            <label>Mobile No</label>
 		            <input type="text" name="no_mobile" class="form-control" ng-model="formData.no_mobile">
 		        </div>
@@ -114,23 +113,23 @@
 		</div>
 		<div class="row no-gutter pad-10">
 			<div class="col-sm-6 col-xs-6">
-				<div class="form-group" ng-class="{ 'has-error' : alumniForm.email_prefer.$invalid && !alumniForm.email_prefer.$pristine }">
+				<div class="form-group" ng-class="{ 'has-error' : hasError('email_prefer') }">
 		            <label>Primary Email</label>
-		            <input type="text" name="email_prefer" class="form-control" ng-model="formData.email_prefer">
-		            <p ng-show="alumniForm.email_prefer.$invalid && !alumniForm.email_prefer.$pristine" class="help-block">Invalid email value.</p>
+		            <input type="email" name="email_prefer" class="form-control" ng-model="formData.email_prefer">
+		            <span class='help-block' ng-show="hasError('email_prefer', 'email')">The email field must be a valid email address.</span>
 		        </div>
 			</div>
 			<div class="col-sm-6 col-xs-6">
-				<div class="form-group" ng-class="{ 'has-error' : alumniForm.email_other.$invalid && !alumniForm.email_other.$pristine }">
+				<div class="form-group" ng-class="{ 'has-error' : hasError('email_other') }">
 		            <label>Secondary Email</label>
-		            <input type="text" name="email_other" class="form-control" ng-model="formData.email_other">
-		            <p ng-show="alumniForm.email_other.$invalid && !alumniForm.email_other.$pristine" class="help-block">Invalid email value.</p>
+		            <input type="email" name="email_other" class="form-control" ng-model="formData.email_other">
+		            <span class='help-block' ng-show="hasError('email_other', 'email')">The email field must be a valid email address.</span>
 		        </div>
 			</div>
 		</div>
 		<div class="row no-gutter pad-10">
 			<div class="col-sm-12">
-				<div class="form-group" ng-class="{ 'has-error' : alumniForm.address.$invalid && !alumniForm.address.$pristine }">
+				<div class="form-group">
 		            <label>Address</label>
 		            <input type="text" name="address" class="form-control" ng-model="formData.address">
 		        </div>

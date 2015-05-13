@@ -137,8 +137,6 @@ angular.module('app').components.controller('AlumniController', [
                 keyboard    : false,
                 scope       : $scope
 
-            }).then(function (result) {
-                console.log(result, 'contorl');
             });
 
         }
@@ -157,11 +155,13 @@ angular.module('app').components.controller('AlumniFormController', [
         var formBlock       = uiBlocker.instances.get('alumniFormBlock');
         var mode            = angular.isDefined($scope.alumni.data[$scope.itemIndex]) ? 'edit' : 'add';
         var birthday        = '';
-        var submitted       = null;
+
+        $scope.submitted    = false;
+        $scope.formData     = {};
 
         if (mode === 'edit') {
 
-            $scope.formData         = angular.copy($scope.alumni.data[$scope.itemIndex]);
+            angular.copy($scope.alumni.data[$scope.itemIndex], $scope.formData);
             $scope.formTitle        = $scope.formData.firstname + ' ' + $scope.formData.lastname;
 
             birthday                = $scope.formData.birthday;
@@ -173,7 +173,24 @@ angular.module('app').components.controller('AlumniFormController', [
             
         } else {
 
-            $scope.formData     = {};
+            $scope.formData     = {
+                address     : "",
+                batch       : "",
+                birthday    : "",
+                company     : "",
+                email_other : "",
+                email_prefer: "",
+                firstname   : "",
+                gender      : "",
+                lastname    : "",
+                mi          : "",
+                nickname    : "",
+                no_fax      : "",
+                no_home     : "",
+                no_mobile   : "",
+                no_work     : "",
+                position    : ""    
+            };
             $scope.formTitle    = 'Add new record';
 
         }
@@ -192,46 +209,85 @@ angular.module('app').components.controller('AlumniFormController', [
             }
         }
 
-        $scope.hasError     = function(form, field) {
-
-            if (submitted) {
-                return field.$invalid && field.$dirty || (submitted && !field.$dirty && field.$invalid);
-            } else {
-                return form && field.$invalid && field.$dirty;
-            }
-
-            return false;
-
-        }
-
         $scope.submitForm   = function() {
 
-            //to resolve promise and close modal
-            //$modalInstance.close('closed triggered');
-
-            submitted   = true;
+            $scope.submitted    = true;
 
             //check if no client error.. then submit on server to validate and save.
             if ($scope.alumniForm.$valid) {
-                console.log('saved');
+
                 if (mode !== 'edit') {
                     formBlock.start('Adding data...');
                     Alumni.save($scope.formData, function(response) {
-                        console.log(response);
+                        
+                        if (response.status === true) {
+                            $scope.get_alumni();
+                            $modalInstance.close();
+                        } else {
+                            angular.forEach(response.message, function(m, f){
+                                if(f.indexOf("email") >= 0) {
+                                    $scope.alumniForm[f].$setValidity('email', false);
+                                } else {
+                                    $scope.alumniForm[f].$setValidity('required', false);
+                                }
+                            });
+                        }
+
                         formBlock.stop();
+
                     });
                 } else {
                     formBlock.start('Updating data...');
                     Alumni.update($scope.formData, function(response) {
-                        console.log(response);
+
+                        if (response.status === true) {
+
+                            toastr["success"](response.message, "Alumni");
+                            angular.copy($scope.formData, $scope.alumni.data[$scope.itemIndex]);
+                            $modalInstance.close();
+
+                        } else {
+
+                            if (angular.isDefined(response.code) && response.code === 400) {
+
+                                toastr["warning"]("Update failed. Record was not found.", "Alumni");
+                                $modalInstance.close();
+                                $scope.get_alumni();
+
+                            } else {
+
+                                angular.forEach(response.message, function(m, f){
+                                    if(f.indexOf("email") >= 0) {
+                                        $scope.alumniForm[f].$setValidity('email', false);
+                                    } else {
+                                        $scope.alumniForm[f].$setValidity('required', false);
+                                    }
+                                });
+
+                                toastr["error"]("There are some invalid inputs on the alumni form.", "Alumni");
+
+                            }
+
+                        }
+                        
                         formBlock.stop();
+
                     });
                 }
 
             } else {
-                console.log($scope.formData, 'invalid');
-            }
+                toastr["error"]("There are some invalid inputs on the alumni form.", "Alumni");
+            } 
             
+        };
+
+        $scope.hasError = function(field, validation){
+
+            if (validation) {
+                return ($scope.alumniForm[field].$dirty && $scope.alumniForm[field].$error[validation]) || ($scope.submitted && $scope.alumniForm[field].$error[validation]);
+            }
+            return ($scope.alumniForm[field].$dirty && $scope.alumniForm[field].$invalid) || ($scope.submitted && $scope.alumniForm[field].$invalid);
+
         };
 
         $scope.close        = function(result) {

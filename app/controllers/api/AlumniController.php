@@ -31,13 +31,81 @@ class AlumniController extends BaseController {
 	}
 
 	public function store() {
-		sleep(5);
-		return Response::json(array('type'=>'add', 'data' => Input::all()));
+		
+		$validator = $this->validate();
+		if ($validator->passes()) {
+
+			$alumni = new Alumni;
+			$alumni->fill(Input::all());
+			$alumni->birthday	= date('Y-m-d', strtotime($alumni->birthday));
+			$alumni->created_by	= Auth::id();
+
+			if ($alumni->save()) {
+				return Response::json(array(
+						'status'	=> true,
+						'message'	=> 'Record has been saved successfully.'
+					));
+			}
+
+		} else {
+			return Response::json(array(
+					'status'	=> false,
+					'message'	=> $validator->messages()
+				));
+		}
 	}
 
 	public function update($id) {
-		sleep(5);
-		return Response::json(array('type'=>'edit', 'data' => Input::all()));
+
+		$validator = $this->validate();
+		if ($validator->passes()) {
+
+			$alumni = Alumni::find($id);
+			if ($alumni) {
+
+				$alumni->fill(Input::except('logo','name','acronym'));
+				$alumni->birthday	= date('Y-m-d', strtotime($alumni->birthday));
+				$alumni->updated_by	= Auth::id();
+
+				if ($alumni->save()) {
+					return Response::json(array(
+							'status'	=> true,
+							'message'	=> 'Record has been saved successfully.'
+						));
+				}
+			} else {
+				return Response::json(array(
+						'status'	=> false,
+						'code'		=> 400,
+						'message'	=> 'Record not found.'
+					));
+			}
+
+		} else {
+			return Response::json(array(
+					'status'	=> false,
+					'message'	=> $validator->messages()
+				));
+		}
+	}
+
+	private function validate() {
+
+		$messages = array(
+			'email' 				=> 'The email field must be a valid email address.',
+			'program_id.required'	=> 'The program field is required.'
+		);
+
+		$validator	= Validator::make(Input::all(), array(
+				'firstname'		=> 'required',
+				'lastname'		=> 'required',
+				'program_id'	=> 'required',
+				'email_prefer'	=> 'email',
+				'email_other'	=> 'email',
+			), $messages);
+
+		return $validator;
+
 	}
 
 	public function destroy($id) {
