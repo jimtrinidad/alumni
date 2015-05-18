@@ -162,6 +162,12 @@ angular.module('app').components.controller('AlumniFormController', [
         if (mode === 'edit') {
 
             angular.copy($scope.alumni.data[$scope.itemIndex], $scope.formData);
+            angular.forEach($scope.formData, function(value, field){
+                if (typeof(value) == 'string') {
+                    $scope.formData[field] = value.trim();
+                }
+            });
+            
             $scope.formTitle        = $scope.formData.firstname + ' ' + $scope.formData.lastname;
 
             birthday                = $scope.formData.birthday;
@@ -221,6 +227,7 @@ angular.module('app').components.controller('AlumniFormController', [
                     Alumni.save($scope.formData, function(response) {
                         
                         if (response.status === true) {
+                            toastr["success"](response.message, "Alumni");
                             $scope.get_alumni();
                             $modalInstance.close();
                         } else {
