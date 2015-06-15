@@ -141,6 +141,17 @@ angular.module('app').components.controller('AlumniController', [
 
         }
 
+        /**
+        * Remove record
+        */
+        $scope.removeAlumni = function(item, index) {
+            bootbox.confirm("Are you sure you want to remove " + item.firstname + " " + item.lastname + "?", function(result) {
+                if (result) {
+                    Alumni.delete({id: item.id});
+                }
+            });
+        }
+
     }
 ]);
 
@@ -149,8 +160,14 @@ angular.module('app').components.controller('AlumniFormController', [
     '$scope',
     '$modalInstance',
     '$filter',
+    '$timeout',
     'Alumni',
-    function($scope, $modalInstance, $filter, Alumni) {
+    function($scope, $modalInstance, $filter, $timeout, Alumni) {
+
+        //manual add scroll fix on open, because uibootstrap does not trigger bootstrap modal events
+        if ( $(window).height() < $(document).height() ) {
+            $(document.body).addClass( 'modal-scrollbar' );
+        }
 
         var formBlock       = uiBlocker.instances.get('alumniFormBlock');
         var mode            = angular.isDefined($scope.alumni.data[$scope.itemIndex]) ? 'edit' : 'add';
@@ -299,6 +316,12 @@ angular.module('app').components.controller('AlumniFormController', [
 
         $scope.close        = function(result) {
             $modalInstance.dismiss('cancel');
+
+            //manual remove scroll fix on close, because uibootstrap does not trigger bootstrap modal events
+            $timeout(function() {
+                $(document.body).removeClass( 'modal-scrollbar' );
+            }, 297);
+            
         };
 
     }

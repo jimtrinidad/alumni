@@ -21,21 +21,21 @@ div[ng-view].ng-enter {
 }
 
 
-.modal {
+.modal:not(.bootbox) {
     /*! adjust transition time */
     -webkit-transition: all ease-out !important;
     -moz-transition: all 0.3s ease-out !important;
     -o-transition: all 0.3s ease-out !important;
     transition: all 0.3s ease-out !important;
 }
-.modal.in .modal-dialog {
+.modal.in:not(.bootbox) .modal-dialog {
     /*! editthis transform to any transform you want */
     -webkit-animation: fadeInDownBig 0.1s;
     -moz-animation: fadeInDownBig 0.1s;
   	-ms-animation: fadeInDownBig 0.1s;
     animation: fadeInDownBig 0.1s;
 }
-.modal.fade .modal-dialog {
+.modal.fade:not(.bootbox) .modal-dialog {
     /*! editthis transform to any transform you want */
     -webkit-animation: fadeInUpBig 0.5s;
     -moz-animation: fadeInUpBig 0.5s;

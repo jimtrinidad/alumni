@@ -29,12 +29,6 @@
     padding-left:10px;
 }
 
-/*
-* removes the annoying effect when opening a modal
-*/
-body.modal-open {
-	margin-right: 0px !important;
-}
 
 #subheader {
 	position: fixed;
@@ -148,3 +142,20 @@ tr > .currentSelected:first-child, tr > .currentSelected:first-child ~ td{
 #alumni-container .block-ui-container {
 	z-index: 1001 !important;
 }
+
+
+/*
+* removes the annoying effect when opening a modal
+*/
+.modal {
+  overflow-y: auto;
+}
+/* custom class to add space for scrollbar */
+.modal-scrollbar {
+    margin-right: 17px !important;
+}
+
+.modal-scrollbar #subheader {
+	margin-right: 0 !important;
+}
+/*end*/

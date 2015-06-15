@@ -19,7 +19,7 @@
                         <thead>
                             <tr>
                                 <th ng-repeat="item in rights.data.viewables" ng-show="viewable(item.id)">{{item.label}}</th>
-                                <th></th>
+                                <th style="width: 50px;"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -27,7 +27,7 @@
                                 <td ng-repeat="itm in rights.data.viewables" ng-show="viewable(itm.id)" data-title="{{itm.label}}">
                                     {{displayData(item, itm.id)}}
                                 </td>
-                                <td>
+                                <td class="text-right">
                                     <a href="javascript:;" ng-click="openForm(index)"><i class='fa fa-pencil'></i></a>
                                     <a href="javascript:;" ng-click="removeAlumni(item, index)"><i class='fa fa-trash'></i></a>
                                 </td>
