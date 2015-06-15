@@ -147,7 +147,14 @@ angular.module('app').components.controller('AlumniController', [
         $scope.removeAlumni = function(item, index) {
             bootbox.confirm("Are you sure you want to remove " + item.firstname + " " + item.lastname + "?", function(result) {
                 if (result) {
-                    Alumni.delete({id: item.id});
+                    Alumni.delete({id: item.id}, function(response) {
+                        if (response.status === true) {
+                            $scope.get_alumni();
+                            toastr["success"](response.message, "Alumni");
+                        } else {
+                            toastr["danger"](response.message, "Alumni");
+                        }
+                    });
                 }
             });
         }
