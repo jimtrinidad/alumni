@@ -149,7 +149,9 @@ angular.module('app').components.controller('AlumniController', [
                 if (result) {
                     Alumni.delete({id: item.id}, function(response) {
                         if (response.status === true) {
-                            $scope.get_alumni();
+                            //$scope.get_alumni();
+                            $scope.alumni.data.splice(index, 1);
+                            $scope.alumni.total = $scope.alumni.total - 1;
                             toastr["success"](response.message, "Alumni");
                         } else {
                             toastr["danger"](response.message, "Alumni");
