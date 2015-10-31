@@ -115,14 +115,14 @@
 			<div class="col-sm-6 col-xs-6">
 				<div class="form-group" ng-class="{ 'has-error' : hasError('email_prefer') }">
 		            <label>Primary Email</label>
-		            <input type="email" name="email_prefer" class="form-control" ng-model="formData.email_prefer">
+		            <input type="email" name="email_prefer" class="form-control" ng-model="formData.email_prefer" ng-model-options="{ allowInvalid: true }">
 		            <span class='help-block' ng-show="hasError('email_prefer', 'email')">The email field must be a valid email address.</span>
 		        </div>
 			</div>
 			<div class="col-sm-6 col-xs-6">
 				<div class="form-group" ng-class="{ 'has-error' : hasError('email_other') }">
 		            <label>Secondary Email</label>
-		            <input type="email" name="email_other" class="form-control" ng-model="formData.email_other">
+		            <input type="email" name="email_other" class="form-control" ng-model="formData.email_other" ng-model-options="{ allowInvalid: true }">
 		            <span class='help-block' ng-show="hasError('email_other', 'email')">The email field must be a valid email address.</span>
 		        </div>
 			</div>

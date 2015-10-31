@@ -67,7 +67,66 @@ toastr.options = {
 }
 
 bootbox.setDefaults({
+
+  /**
+   * @optional String
+   * @default: en
+   * which locale settings to use to translate the three
+   * standard button labels: OK, CONFIRM, CANCEL
+   */
+  locale: "en",
   
-  container: '#main-content'
+  /**
+   * @optional Boolean
+   * @default: true
+   * whether the dialog should be shown immediately
+   */
+  show: true,
+  
+  /**
+   * @optional Boolean
+   * @default: true
+   * whether the dialog should be have a backdrop or not
+   */
+  backdrop: true,
+  
+  /**
+   * @optional Boolean
+   * @default: true
+   * show a close button
+   */
+  closeButton: false,
+  
+  /**
+   * @optional Boolean
+   * @default: true
+   * animate the dialog in and out (not supported in < IE 10)
+   */
+  animate: true,
+  
+  /**
+   * @optional String
+   * @default: null
+   * an additional class to apply to the dialog wrapper
+   */
+  className: "confirmModal",
   
 });
+
+
+(function($) {
+
+$(document)
+    .on( 'hidden.bs.modal', '.modal', function() {
+        $(document.body).removeClass( 'modal-scrollbar' );
+    })
+    .on( 'show.bs.modal', '.modal', function() {
+        // Bootstrap's .modal-open class hides any scrollbar on the body,
+        // so if there IS a scrollbar on the body at modal open time, then
+        // add a right margin to take its place.
+        if ( $(window).height() < $(document).height() ) {
+            $(document.body).addClass( 'modal-scrollbar' );
+        }
+    });
+
+})(window.jQuery);

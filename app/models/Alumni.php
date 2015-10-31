@@ -12,6 +12,18 @@ class Alumni extends Eloquent {
 	protected $table		= 'alumni';
 	protected $guarded		= array();
 
+	public static function boot() {
+
+		parent::boot();
+
+		// We set the deleted_by attribute before deleted event so we doesn't get an error if Customer was deleted by force (without soft delete).
+		static::deleting(function($model){
+			$model->deleted_by = Auth::user()->id;
+			$model->save();
+		});
+
+	}
+
 	
 	public static function get_listing() {
 
@@ -23,6 +35,8 @@ class Alumni extends Eloquent {
 		$query->addSelect( array_keys($user_fields) );
 
 		$query->join('programs', 'alumni.program_id', '=', 'programs.id');
+
+		$query->whereNull('alumni.deleted_at');
 
 		if (!User::can('admin')) {
 

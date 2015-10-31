@@ -187,7 +187,7 @@ angular.module('app').directive('tableCheckbox', ['$compile', '$timeout',
                 scope.allItems      = [];
                 scope.init          = function() {
                     
-                    scope.selectAllTpl  = angular.element('<th class="table-checkbox" ng-click="toggleAll()"><input type="checkbox" ng-checked="isSelectedAll()"></th>');
+                    scope.selectAllTpl  = angular.element('<th style="width: 24px;" class="table-checkbox" ng-click="toggleAll()"><input type="checkbox" ng-checked="isSelectedAll()"></th>');
                     $compile(scope.selectAllTpl)(scope);
                     element.find('thead > tr').prepend(scope.selectAllTpl);
 

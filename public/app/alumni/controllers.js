@@ -168,8 +168,14 @@ angular.module('app').components.controller('AlumniFormController', [
     '$scope',
     '$modalInstance',
     '$filter',
+    '$timeout',
     'Alumni',
-    function($scope, $modalInstance, $filter, Alumni) {
+    function($scope, $modalInstance, $filter, $timeout, Alumni) {
+
+        //manual add scroll fix on open, because uibootstrap does not trigger bootstrap modal events
+        if ( $(window).height() < $(document).height() ) {
+            $(document.body).addClass( 'modal-scrollbar' );
+        }
 
         var formBlock       = uiBlocker.instances.get('alumniFormBlock');
         var mode            = angular.isDefined($scope.alumni.data[$scope.itemIndex]) ? 'edit' : 'add';
@@ -181,6 +187,12 @@ angular.module('app').components.controller('AlumniFormController', [
         if (mode === 'edit') {
 
             angular.copy($scope.alumni.data[$scope.itemIndex], $scope.formData);
+            angular.forEach($scope.formData, function(value, field){
+                if (typeof(value) == 'string') {
+                    $scope.formData[field] = value.trim();
+                }
+            });
+            
             $scope.formTitle        = $scope.formData.firstname + ' ' + $scope.formData.lastname;
 
             birthday                = $scope.formData.birthday;
@@ -248,6 +260,7 @@ angular.module('app').components.controller('AlumniFormController', [
                     Alumni.save($scope.formData, function(response) {
                         
                         if (response.status === true) {
+                            toastr["success"](response.message, "Alumni");
                             $scope.get_alumni();
                             $modalInstance.close();
                         } else {
@@ -319,6 +332,12 @@ angular.module('app').components.controller('AlumniFormController', [
 
         $scope.close        = function(result) {
             $modalInstance.dismiss('cancel');
+
+            //manual remove scroll fix on close, because uibootstrap does not trigger bootstrap modal events
+            $timeout(function() {
+                $(document.body).removeClass( 'modal-scrollbar' );
+            }, 297);
+            
         };
 
     }

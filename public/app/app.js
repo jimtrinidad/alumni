@@ -7,6 +7,24 @@
 //INIT
 var permissionList;
 var uiBlocker; //value is set on global controller
+
+angular.module('services.httpInterceptor', []).factory('myHttpInterceptor', ['$q','$location', function($q, $location) {
+	return {
+		response: function(response) {
+			// do something on success
+			return response;
+		},
+		responseError: function(response) {
+			// do something on error
+			if (response.status === 401) {
+				$location.path('/unauthorized');
+				return $q.reject(response);
+			}
+			return $q.reject(response);
+		}
+	};
+}]);
+
 var app = angular.module('app', [
 			'ngRoute', 
 			'LazyLoad', 
@@ -15,6 +33,7 @@ var app = angular.module('app', [
 			'ngAnimate', 
 			'ngResource', 
 			'blockUI',
+			'services.httpInterceptor'
 		]);
 
 /**
@@ -71,8 +90,9 @@ app.config(['$routeProvider', 'lazyProvider', function ($routeProvider, lazyProv
 /**
 * Http Interceptor
 */
-app.config(['$httpProvider',function($httpProvider) {
-	$httpProvider.responseInterceptors.push(['$q', '$location', function($q, $location) { 
+
+app.config(['$httpProvider', function($httpProvider) {
+/*	$httpProvider.responseInterceptors.push(['$q', '$location', function($q, $location) { 
 		return function(promise) { 
 			return promise.then( 
 				// Success: just return the response 
@@ -89,6 +109,10 @@ app.config(['$httpProvider',function($httpProvider) {
 			); 
 		} 
 	}]);
+*/
+
+	$httpProvider.interceptors.push('myHttpInterceptor');
+
 }]);
 
 

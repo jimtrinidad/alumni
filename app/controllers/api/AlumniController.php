@@ -117,16 +117,25 @@ class AlumniController extends BaseController {
 
 			if ($result) {
 
-				$result->delete();
-
-				return Response::json(array(
+				if ($result->delete()) {
+					
+					return Response::json(array(
 						'status'	=> true,
 						'message'	=> 'Record has been deleted successfully.'
 					));
 
+				} else {
+
+					return Response::json(array(
+						'status'	=> false,
+						'message'	=> 'Deleting record failed. Please try again.'
+					));
+
+				}
+
 			} else {
 
-				return Response::json(array(
+					return Response::json(array(
 						'status'	=> false,
 						'message'	=> 'Deleting record failed! Record not found.'
 					));
