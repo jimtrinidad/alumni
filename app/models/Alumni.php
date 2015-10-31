@@ -53,6 +53,12 @@ class Alumni extends Eloquent {
 
 		}
 
+		if (Input::get('status') == 'deleted') {
+			$query->whereNotNull('alumni.deleted_at');
+		} else {
+			$query->whereNull('alumni.deleted_at');
+		}
+
 		$orderType	= 'ASC';
 		if (Input::get('sort') == 'alumni.created_at') {
 			$orderType = 'DESC';

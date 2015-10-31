@@ -65,3 +65,9 @@ toastr.options = {
   "showMethod"      : "fadeIn",
   "hideMethod"      : "fadeOut"
 }
+
+bootbox.setDefaults({
+  
+  container: '#main-content'
+  
+});

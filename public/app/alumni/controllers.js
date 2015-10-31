@@ -83,9 +83,9 @@ angular.module('app').components.controller('AlumniController', [
             Alumni.query(params, function(response) {
                 $timeout(function() {
                     $scope.alumni = response;
+                    resultBlocker.stop();
                 });
 
-                resultBlocker.stop();
             });
 
         };
@@ -141,6 +141,25 @@ angular.module('app').components.controller('AlumniController', [
 
         }
 
+        /**
+        * Delete
+        */
+        $scope.removeAlumni = function(item, index) {
+            bootbox.confirm('Are you sure you want to remove ' + item.firstname + ' ' + item.lastname + ' from ' + item.acronym + ' ' + item.batch + '?', function(result) {
+                if (result) {
+                    Alumni.delete({id: item.id}, function(response) {
+                        if (response.status) {
+                            $scope.alumni.data.splice(index, 1);
+                            $scope.alumni.total--; 
+                            toastr["success"](response.message, "Alumni");
+                        } else {
+                            toastr["warning"](response.message, "Alumni");
+                        }
+                    });
+                }
+            }); 
+        }
+
     }
 ]);
 
@@ -169,6 +188,14 @@ angular.module('app').components.controller('AlumniFormController', [
                 $scope.formData.birthday    = $filter('date')(birthday, 'mediumDate');
             } else {
                 $scope.formData.birthday    = '';
+            }
+
+            if ($scope.formData.email_prefer.toLowerCase() == 'na' || $scope.formData.email_prefer.toLowerCase() == 'n/a') {
+                $scope.formData.email_prefer = '';
+            }
+
+            if ($scope.formData.email_other.toLowerCase() == 'na' || $scope.formData.email_other.toLowerCase() == 'n/a') {
+                $scope.formData.email_other = '';
             }
             
         } else {

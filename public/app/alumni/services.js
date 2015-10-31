@@ -12,6 +12,10 @@ angular.module('app').components.provide.factory('Alumni', ['$resource', functio
         save	: {
         		method	: 'POST',
         		ignoreLoadingBar	: true
+        },
+        delete    : {
+                method  : 'DELETE',
+                ignoreLoadingBar    : true
         }
     });
 }]);

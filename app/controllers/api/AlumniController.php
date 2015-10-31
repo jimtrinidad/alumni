@@ -110,23 +110,50 @@ class AlumniController extends BaseController {
 
 	public function destroy($id) {
 
-		$result = Alumni::find($id);
+		//single
+		if (strpos($id, ',') === false) {
 
-		if ($result) {
+			$result = Alumni::find($id);
 
-			$result->delete();
+			if ($result) {
 
-			return Response::json(array(
-					'status'	=> true,
-					'data'		=> 'Record has been deleted successfully.'
-				));
+				$result->delete();
+
+				return Response::json(array(
+						'status'	=> true,
+						'message'	=> 'Record has been deleted successfully.'
+					));
+
+			} else {
+
+				return Response::json(array(
+						'status'	=> false,
+						'message'	=> 'Deleting record failed! Record not found.'
+					));
+
+			}
 
 		} else {
 
-			return Response::json(array(
-					'status'	=> false,
-					'message'	=> 'Deleting record failed! Record not found.'
-				));
+			//multiple
+			$ids		= explode(',', $id);
+			$deleted 	= Alumni::destroy($ids);
+
+			if ($deleted > 0) {
+
+				return Response::json(array(
+						'status'	=> true,
+						'message'	=> $deleted . ' record(s) has been deleted successfully.'
+					));
+
+			} else {
+
+				return Response::json(array(
+						'status'	=> false,
+						'message'	=> 'Deleting records failed!'
+					));
+
+			}
 
 		}
 

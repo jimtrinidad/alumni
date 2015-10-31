@@ -282,7 +282,7 @@ ul.sidebar-menu li a.active i, ul.sidebar-menu li a:focus i, ul.sidebar-menu li 
     left: 0;
     right: 0;
     z-index: 1002;
-    background: #fff;
+    background: #FFF;
 /*     -webkit-transition: all .3s ease-in-out;
 -moz-transition: all .3s ease-in-out;
 -o-transition: all .3s ease-in-out;
