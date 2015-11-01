@@ -70,7 +70,7 @@ class AlumniController extends BaseController {
 				if ($alumni->save()) {
 					return Response::json(array(
 							'status'	=> true,
-							'message'	=> 'Record has been saved successfully.'
+							'message'	=> $alumni->firstname . ' ' . $alumni->lastname . ' records has been saved successfully.'
 						));
 				}
 			} else {

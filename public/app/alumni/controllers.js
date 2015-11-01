@@ -82,7 +82,8 @@ angular.module('app').components.controller('AlumniController', [
 
             Alumni.query(params, function(response) {
                 $timeout(function() {
-                    $scope.alumni = response;
+                    $scope.alumni           = response;
+                    $scope.selectedItem     = [];
                     resultBlocker.stop();
                 });
 
@@ -151,6 +152,22 @@ angular.module('app').components.controller('AlumniController', [
                         if (response.status) {
                             $scope.alumni.data.splice(index, 1);
                             $scope.alumni.total--; 
+                            toastr["success"](response.message, "Alumni");
+                        } else {
+                            toastr["warning"](response.message, "Alumni");
+                        }
+                    });
+                }
+            }); 
+        }
+
+        $scope.removeMultipleAlumni = function() {
+            console.log($scope.selectedItem);
+            bootbox.confirm('Are you sure you want to remove selected items (' + $scope.selectedItem.length + ')?', function(result) {
+                if (result) {
+                    Alumni.delete({id: $scope.selectedItem.join(',')}, function(response) {
+                        if (response.status) {
+                            $scope.get_alumni();
                             toastr["success"](response.message, "Alumni");
                         } else {
                             toastr["warning"](response.message, "Alumni");
