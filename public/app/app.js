@@ -59,7 +59,7 @@ app.config(['$routeProvider', 'lazyProvider', function ($routeProvider, lazyProv
 			//permission: 'admin'
 		})
 		.when('/programs', {
-			templateUrl: 'app/alumni/views/main.html',
+			templateUrl: 'app/program/views/main.html',
 			resolve: {
 				load: function (){
 					return $lazy('app').load([

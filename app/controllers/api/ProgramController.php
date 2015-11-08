@@ -4,12 +4,12 @@ class ProgramController extends BaseController {
 
 	public function index() {
 
-		$program_results	= Program::all();
+		$program_results	= Program::orderBy('name')->get();
 		$programs 			= array();
 
 		foreach ($program_results as $item) {
 
-			$programs[] 	= $this->format_program($item);
+			$programs[] 	= AppHelpers\programLogo($item);
 
 		}
 

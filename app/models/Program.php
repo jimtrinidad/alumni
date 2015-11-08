@@ -23,6 +23,8 @@ class Program extends Eloquent {
 			});
 		}
 
+		$query->orderBy('programs.acronym', 'asc');
+
 		return $query->get();
 
 	}

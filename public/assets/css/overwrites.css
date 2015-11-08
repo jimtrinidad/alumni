@@ -159,3 +159,12 @@ tr > .currentSelected:first-child, tr > .currentSelected:first-child ~ td{
 	margin-right: 0 !important;
 }
 /*end*/
+
+
+/*program listing thumbnail*/
+.thumb.right-caption > img {float: left;margin-right: 9px;width: 100px; height: 100px;}
+.thumb.right-caption {float: left;margin-bottom: 10px;}
+.thumb.right-caption > .caption {padding: 4px;}
+.thumb.right-caption > .caption > h5 {font-weight: bold;padding: 1px;margin: 1px;}
+.thumb.right-caption > .caption .button {display: none;}
+.thumb.right-caption:hover > .caption .button {display: inline-block;}

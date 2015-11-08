@@ -62,17 +62,13 @@ angular.module('app').components.controller('AlumniController', [
             }, 1000);
         }, true);
 
-        $scope.searchAlumni = function() {
-            console.log('test');
-        }
-
 
         /**
         * Functions
         */
         $scope.get_alumni   = function() {
 
-            var resultBlocker  = uiBlocker.instances.get('alumniResultBlock');
+            var resultBlocker  = uiBlocker.instances.get('resultBlock');
             var params  = angular.copy($scope.filters);
 
             params      = angular.extend(params, {

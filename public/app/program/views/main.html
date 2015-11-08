@@ -1,5 +1,31 @@
-<div class="row" ng-controller="ProgramController">
+<div class="row" ng-controller="ProgramController" block-ui="resultBlock">
     <div class="col-sm-12">
-
+    	<section class="panel">
+            <header class="panel-heading">
+		        Programs &nbsp;
+		         <span class="right-button-group">
+		            <a href="javascript:;" class="btn btn-primary btn-responsive" ng-click="openForm('new')" title="Add new program"><i class="fa fa-plus-square"></i><span class="hidden-xs"> Add</span></a>
+		         </span>
+		    </header>
+            <div class="panel-body">
+                <div ng-show="programs.status == true">
+                	<!-- list results here -->
+					<div ng-repeat="(index, item) in programs.data" class="col-xs-12 col-sm-6 col-md-4 thumb right-caption ">
+						<img ng-src="{{item.logo}}">
+						<div class="caption">
+							<h5>
+								{{item.acronym}}
+								<div class="button">
+									<a class="btn btn-xs btn-primary"><i class='fa fa-pencil-square-o'></i></a> 
+									<a class="btn btn-xs btn-danger"><i class='fa fa-trash'></i></a>
+								</div>
+							</h5>
+							<p>{{item.name}}</p>
+						</div>
+					</div>
+                </div>
+                <h3 ng-show="programs.status == false">No records found...</h3>
+            </div>
+        </section>
     </div>
 </div>
