@@ -84,44 +84,5 @@ class ProgramController extends BaseController {
 		}
 
 	}
-
-	public function get_assigned_programs() {
-
-		$program_results	= Program::get_by_user(Auth::id());
-		$programs 			= array();
-
-		foreach ($program_results as $item) {
-			
-			$programs[] 	= $this->format_program($item);
-
-		}
-
-		if (count($programs)) {
-
-			return Response::json(array(
-					'status'	=> true,
-					'data'		=> $programs
-				));
-
-		} else {
-
-			return Response::json(array(
-					'status'	=> false,
-					'message'	=> 'Record not found!'
-				));
-
-		}
-
-	}
-
-
-	private function format_program($item) {
-
-		$filepath 		= 'assets/img/program_logo/';		
-		$item['logo'] 	= File::exists(public_path($filepath . $item['logo'])) ? asset($filepath . $item['logo']) : asset($filepath . 'default.jpg');
-		
-		return $item;
-
-	}
-
+	
 }

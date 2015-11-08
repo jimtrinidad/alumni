@@ -7,7 +7,11 @@ angular.module('app').controller('GlobalController', [
 	'$location', 
 	'permissions', 
 	'blockUI',
-	function($scope, $location, permissions, blockUI){
+    'Config',
+	function($scope, $location, permissions, blockUI, Config){
+
+		$scope.configRights           = Config.rights();
+        $scope.configPrograms         = Config.programs();
 
 		// set block ui on a global variable
 		uiBlocker	= blockUI;

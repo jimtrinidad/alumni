@@ -185,6 +185,7 @@ angular.module('app').directive('tableCheckbox', ['$compile', '$timeout',
 
                 var lastChecked     = false;
                 scope.allItems      = [];
+
                 scope.init          = function() {
                     
                     scope.selectAllTpl  = angular.element('<th style="width: 24px;" class="table-checkbox" ng-click="toggleAll()"><input type="checkbox" ng-checked="isSelectedAll()"></th>');
@@ -195,7 +196,11 @@ angular.module('app').directive('tableCheckbox', ['$compile', '$timeout',
 
                 scope.setCheckboxes = function() {
 
+
+                    //reset
                     scope.checkedItem   = [];
+                    scope.allItems      = [];
+                    lastChecked         = false;
 
                     angular.forEach(scope.results, function(i) {
                         scope.allItems.push(i.id);

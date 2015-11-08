@@ -1,4 +1,26 @@
 /**
+* Global resource
+*/
+angular.module('app').factory('Config', ['$resource', function($resource){
+    return $resource('api/v1/config/:action:id', {
+        id: '@id',
+        action: '@action'
+    }, 
+    {
+        rights  : {
+                method  : 'GET',
+                params  : {action: 'rights'},
+                cache   : true
+        },
+        programs    : {
+                method  : 'GET',
+                params  : {action: 'programs'},
+                cache   : true
+        }
+    });
+}]);
+
+/**
 * Modal service
 */
 angular.module('app').service('modalService', ['$modal',

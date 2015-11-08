@@ -4,7 +4,7 @@ class AlumniController extends BaseController {
 
 	public function index() {
 
-		return Alumni::get_listing();
+		return Alumni::get_alumnis();
 
 	}
 
@@ -70,7 +70,8 @@ class AlumniController extends BaseController {
 				if ($alumni->save()) {
 					return Response::json(array(
 							'status'	=> true,
-							'message'	=> $alumni->firstname . ' ' . $alumni->lastname . ' records has been saved successfully.'
+							'message'	=> $alumni->firstname . ' ' . $alumni->lastname . ' records has been saved successfully.',
+							'data'		=> Alumni::get_alumnis($alumni->id)
 						));
 				}
 			} else {

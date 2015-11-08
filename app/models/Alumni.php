@@ -25,7 +25,7 @@ class Alumni extends Eloquent {
 	}
 
 	
-	public static function get_listing() {
+	public static function get_alumnis($id = null) {
 
 		$user_fields	= User::can('admin') ? json_decode(Settings::get('viewables'), true) : json_decode(User::privilege('viewables'), true);
 
@@ -71,6 +71,11 @@ class Alumni extends Eloquent {
 			$query->whereNotNull('alumni.deleted_at');
 		} else {
 			$query->whereNull('alumni.deleted_at');
+		}
+
+		//return single row
+		if ($id !== null) {
+			return $query->where('alumni.id' , '=', $id)->first();
 		}
 
 		$orderType	= 'ASC';

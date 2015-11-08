@@ -52,25 +52,35 @@ app.config(['$routeProvider', 'lazyProvider', function ($routeProvider, lazyProv
 				load: function (){
 					return $lazy('app').load([
 						'app/alumni/controllers',
-						'app/alumni/services',
-						'app/program/services',
-						'app/user/services'
+						'app/alumni/services'
 					]);
 				}
 			},
 			//permission: 'admin'
 		})
 		.when('/programs', {
-			permission: 'admin'
+			templateUrl: 'app/alumni/views/main.html',
+			resolve: {
+				load: function (){
+					return $lazy('app').load([
+						'app/program/controllers',
+						'app/program/services'
+					]);
+				}
+			},
+			permission: 'manageProgram'
 		})
 		.when('/users', {
-
+			permission: 'manageUser'
 		})
 		.when('/settings/general', {
+			permission: 'manageSettings'
 		})
 		.when('/settings/notifications', {
+			permission: 'manageSettings'
 		})
 		.when('/settings/security', {
+			permission: 'manageSettings'
 		})
 		.when('/404', { //page not found
 			templateUrl: 'app/shared/views/404.html'

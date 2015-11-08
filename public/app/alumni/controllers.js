@@ -6,17 +6,13 @@ angular.module('app').components.controller('AlumniController', [
     '$timeout', 
     '$filter',
     'Alumni', 
-    'Program',
-    'User',
     'modalService',
-    function($scope, $timeout, $filter, Alumni, Program, User, modalService) {
+    function($scope, $timeout, $filter, Alumni, modalService) {
 
         /**
         * Inits
         */
         var timeoutPromise;
-        $scope.rights           = User.rights();
-        $scope.programs         = Program.user();
         $scope.alumni 			= [];
         $scope.selectedItem     = [];
         $scope.displayedFields  = ['firstname','lastname', 'batch', 'company', 'position','acronym'];
@@ -56,6 +52,7 @@ angular.module('app').components.controller('AlumniController', [
 
         $scope.$watch("filters", function(e, i) {
             $timeout.cancel(timeoutPromise);
+            if (e.field != i.field) return; //cancel request if only field type changes
             timeoutPromise = $timeout(function() {
 
                 //return to firstpage
@@ -64,6 +61,10 @@ angular.module('app').components.controller('AlumniController', [
 
             }, 1000);
         }, true);
+
+        $scope.searchAlumni = function() {
+            console.log('test');
+        }
 
 
         /**
@@ -162,7 +163,6 @@ angular.module('app').components.controller('AlumniController', [
         }
 
         $scope.removeMultipleAlumni = function() {
-            console.log($scope.selectedItem);
             bootbox.confirm('Are you sure you want to remove selected items (' + $scope.selectedItem.length + ')?', function(result) {
                 if (result) {
                     Alumni.delete({id: $scope.selectedItem.join(',')}, function(response) {
@@ -300,7 +300,7 @@ angular.module('app').components.controller('AlumniFormController', [
                         if (response.status === true) {
 
                             toastr["success"](response.message, "Alumni");
-                            angular.copy($scope.formData, $scope.alumni.data[$scope.itemIndex]);
+                            angular.copy(response.data, $scope.alumni.data[$scope.itemIndex]);
                             $modalInstance.close();
 
                         } else {

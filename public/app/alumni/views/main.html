@@ -18,18 +18,18 @@
                     <table ng-show="alumni.data.length > 0" class="table table-condensed table-hover" table-checkbox="alumni.data" checked-item="selectedItem">
                         <thead>
                             <tr>
-                                <th ng-repeat="item in rights.data.viewables" ng-show="viewable(item.id)">{{item.label}}</th>
+                                <th ng-repeat="item in configRights.data.viewables" ng-show="viewable(item.id)">{{item.label}}</th>
                                 <th style="width: 50px;"></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="animate-repeat" ng-repeat="(index, item) in alumni.data" data-id="{{item.id}}">
-                                <td ng-repeat="itm in rights.data.viewables" ng-show="viewable(itm.id)" data-title="{{itm.label}}">
+                                <td ng-repeat="itm in configRights.data.viewables" ng-show="viewable(itm.id)" data-title="{{itm.label}}">
                                     {{displayData(item, itm.id)}}
                                 </td>
                                 <td class="text-right">
-                                    <a href="javascript:;" ng-click="openForm(index)"><i class='fa fa-pencil'></i></a>
-                                    <a href="javascript:;" ng-click="removeAlumni(item, index)"><i class='fa fa-trash'></i></a>
+                                    <a has-permission='editAlumni' href="javascript:;" ng-click="openForm(index)"><i class='fa fa-pencil'></i></a>
+                                    <a has-permission='deleteAlumni' href="javascript:;" ng-click="removeAlumni(item, index)"><i class='fa fa-trash'></i></a>
                                 </td>
                             </tr>
                         </tbody>
@@ -69,11 +69,11 @@
                         <input type="text" ng-model="filters.search" class="form-control small" placeholder="Keyword">
                     </div>
 
-                    <div class='form-group ' ng-show='programs.data.length > 1'>
+                    <div class='form-group ' ng-show='configPrograms.data.length > 1'>
                         <label class='sr-only'>Program</label>
                         <select ng-model='filters.program' class="form-control">
                             <option value="">All Programs</option>
-                            <option ng-repeat="item in programs.data" value="{{item.id}}">{{item.acronym}}</option>
+                            <option ng-repeat="item in configPrograms.data" value="{{item.id}}">{{item.acronym}}</option>
                         </select>    
                     </div>
 
@@ -112,13 +112,13 @@
 <script type="text/ng-template" id="alumniHeader">
     <header class="panel-heading">
         Alumni listing &nbsp;
-         <span class="right-button-group" has-permission='add_alumni'>
-            <a href="javascript:;" class="btn btn-primary btn-responsive" ng-click="openForm('new')" title="Add new record"><i class="fa fa-plus-square"></i><span class="hidden-xs"> Add</span></a>
-            <a href="javascript:;" class="btn btn-primary btn-responsive" title="Upload records from excel file"><i class="fa fa-upload"></i><span class="hidden-xs"> Upload</span></a>
-            <a ng-show="selectedItem.length > 0" href="javascript:;" class="btn btn-danger btn-responsive" ng-click="removeMultipleAlumni()" title="Delete selected items"><i class="fa fa-trash"></i><span class="hidden-xs"> Delete selected</span></a>
+         <span class="right-button-group">
+            <a has-permission='addAlumni' href="javascript:;" class="btn btn-primary btn-responsive" ng-click="openForm('new')" title="Add new record"><i class="fa fa-plus-square"></i><span class="hidden-xs"> Add</span></a>
+            <a has-permission='addAlumni' href="javascript:;" class="btn btn-primary btn-responsive" title="Upload records from excel file"><i class="fa fa-upload"></i><span class="hidden-xs"> Upload</span></a>
+            <a has-permission='deleteAlumni' ng-show="selectedItem.length > 0" href="javascript:;" class="btn btn-danger btn-responsive" ng-click="removeMultipleAlumni()" title="Delete selected items"><i class="fa fa-trash"></i><span class="hidden-xs"> Delete selected</span></a>
          </span>
          <span class="pull-right">
-            <checklist model="displayedFields" options="rights.data.viewables" label="Displayed Fields" close-scroll="true" id="displayedFields"></checklist>
+            <checklist model="displayedFields" options="configRights.data.viewables" label="Displayed Fields" close-scroll="true" id="displayedFields"></checklist>
          </span>
     </header>
 </script>

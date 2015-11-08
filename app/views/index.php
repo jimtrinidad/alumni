@@ -72,17 +72,17 @@
 							<i class="fa fa-group"></i><span> Alumni</span>
 						</a>
 					</li>
-					<li>
+					<li has-permission='manageProgram'>
 						<a href="#/programs" ng-class="{ active: isActive('/programs') }">
 							<i class="fa fa-institution"></i><span> Programs</span>
 						</a>
 					</li>
-					<li>
+					<li has-permission='manageUser'>
 						<a href="#/users" ng-class="{ active: isActive('/users') }">
 							<i class="fa fa-user"></i><span> Users</span>
 						</a>
 					</li>
-					<li class="sub-menu">
+					<li has-permission='manageSettings' class="sub-menu">
 						<a href="javascript:;" ng-class="{ active: isActive('/settings', 1) }">
 							<i class="fa fa-cog"></i><span> Settings</span>
 						</a>

@@ -45,10 +45,10 @@
 				<div class="form-group">
 		            <label>Gender</label><br>
 		            <label class="radio-inline">
-					  <input type="radio" name="gender" id="" value="M"> Male
+					  <input type="radio" ng-model="formData.gender" name="gender" id="" value="M"> Male
 					</label>
 					<label class="radio-inline">
-					  <input type="radio" name="gender" id="" value="F"> Female
+					  <input type="radio" ng-model="formData.gender" name="gender" id="" value="F"> Female
 					</label>
 		        </div>
 			</div>
@@ -59,7 +59,7 @@
 		            <label>Program</label>
 		            <select name='program_id' class="form-control" ng-model="formData.program_id" required>
 		            	<option value=""></option>
-                        <option ng-repeat="item in programs.data" value="{{item.id}}" ng-selected="formData.program_id === item.id">{{item.name}} - ({{item.acronym}})</option>
+                        <option ng-repeat="item in $parent.configPrograms.data" value="{{item.id}}" ng-selected="formData.program_id === item.id">{{item.name}} - ({{item.acronym}})</option>
                     </select>
                     <span class='help-block' ng-show="hasError('program_id', 'required')">Program field is required.</span>
 		        </div>

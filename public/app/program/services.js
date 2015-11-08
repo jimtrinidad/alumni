@@ -8,11 +8,6 @@ angular.module('app').components.provide.factory('Program', ['$resource', functi
                 method  : 'GET', 
                 params  : {id: ''},
                 isArray : false
-            },
-        user 	: {
-        		method	: 'GET',
-        		params 	: {action: 'user'},
-                cache   : true
-        }
+            }
     });
 }]);
