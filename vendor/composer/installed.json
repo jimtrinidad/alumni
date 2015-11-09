@@ -286,12 +286,12 @@
         "target-dir": "Symfony/Component/Debug",
         "source": {
             "type": "git",
-            "url": "https://github.com/symfony/Debug.git",
+            "url": "https://github.com/symfony/debug.git",
             "reference": "2538d5099b9728b6ca09b261566a766f4f847459"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/Debug/zipball/2538d5099b9728b6ca09b261566a766f4f847459",
+            "url": "https://api.github.com/repos/symfony/debug/zipball/2538d5099b9728b6ca09b261566a766f4f847459",
             "reference": "2538d5099b9728b6ca09b261566a766f4f847459",
             "shasum": ""
         },
@@ -343,12 +343,12 @@
         "target-dir": "Symfony/Component/HttpFoundation",
         "source": {
             "type": "git",
-            "url": "https://github.com/symfony/HttpFoundation.git",
+            "url": "https://github.com/symfony/http-foundation.git",
             "reference": "56111fc8ba8bcad93d367532babecc6ce17f66ce"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/56111fc8ba8bcad93d367532babecc6ce17f66ce",
+            "url": "https://api.github.com/repos/symfony/http-foundation/zipball/56111fc8ba8bcad93d367532babecc6ce17f66ce",
             "reference": "56111fc8ba8bcad93d367532babecc6ce17f66ce",
             "shasum": ""
         },
@@ -398,12 +398,12 @@
         "target-dir": "Symfony/Component/EventDispatcher",
         "source": {
             "type": "git",
-            "url": "https://github.com/symfony/EventDispatcher.git",
+            "url": "https://github.com/symfony/event-dispatcher.git",
             "reference": "804eb28dbbfba9ffdab21fe2066744906cea2212"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/804eb28dbbfba9ffdab21fe2066744906cea2212",
+            "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/804eb28dbbfba9ffdab21fe2066744906cea2212",
             "reference": "804eb28dbbfba9ffdab21fe2066744906cea2212",
             "shasum": ""
         },
@@ -457,12 +457,12 @@
         "target-dir": "Symfony/Component/HttpKernel",
         "source": {
             "type": "git",
-            "url": "https://github.com/symfony/HttpKernel.git",
+            "url": "https://github.com/symfony/http-kernel.git",
             "reference": "cf8f6935f383cf5501499fef7677c36d4205e398"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/HttpKernel/zipball/cf8f6935f383cf5501499fef7677c36d4205e398",
+            "url": "https://api.github.com/repos/symfony/http-kernel/zipball/cf8f6935f383cf5501499fef7677c36d4205e398",
             "reference": "cf8f6935f383cf5501499fef7677c36d4205e398",
             "shasum": ""
         },
@@ -580,12 +580,12 @@
         "target-dir": "Symfony/Component/DomCrawler",
         "source": {
             "type": "git",
-            "url": "https://github.com/symfony/DomCrawler.git",
+            "url": "https://github.com/symfony/dom-crawler.git",
             "reference": "5b45ef9b8a8e6dda47eb9b9b982f61e8b2caa21e"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/DomCrawler/zipball/5b45ef9b8a8e6dda47eb9b9b982f61e8b2caa21e",
+            "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/5b45ef9b8a8e6dda47eb9b9b982f61e8b2caa21e",
             "reference": "5b45ef9b8a8e6dda47eb9b9b982f61e8b2caa21e",
             "shasum": ""
         },
@@ -635,12 +635,12 @@
         "target-dir": "Symfony/Component/CssSelector",
         "source": {
             "type": "git",
-            "url": "https://github.com/symfony/CssSelector.git",
+            "url": "https://github.com/symfony/css-selector.git",
             "reference": "7cdf543a3f31935aae58de4e6e607d4bdeb3f5dc"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/CssSelector/zipball/7cdf543a3f31935aae58de4e6e607d4bdeb3f5dc",
+            "url": "https://api.github.com/repos/symfony/css-selector/zipball/7cdf543a3f31935aae58de4e6e607d4bdeb3f5dc",
             "reference": "7cdf543a3f31935aae58de4e6e607d4bdeb3f5dc",
             "shasum": ""
         },
@@ -688,12 +688,12 @@
         "target-dir": "Symfony/Component/Console",
         "source": {
             "type": "git",
-            "url": "https://github.com/symfony/Console.git",
+            "url": "https://github.com/symfony/console.git",
             "reference": "6f177fca24200a5b97aef5ce7a5c98124a0f0db0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/Console/zipball/6f177fca24200a5b97aef5ce7a5c98124a0f0db0",
+            "url": "https://api.github.com/repos/symfony/console/zipball/6f177fca24200a5b97aef5ce7a5c98124a0f0db0",
             "reference": "6f177fca24200a5b97aef5ce7a5c98124a0f0db0",
             "shasum": ""
         },
@@ -745,12 +745,12 @@
         "target-dir": "Symfony/Component/BrowserKit",
         "source": {
             "type": "git",
-            "url": "https://github.com/symfony/BrowserKit.git",
+            "url": "https://github.com/symfony/browser-kit.git",
             "reference": "0cb9e603b1850c9495bfb96b3c4caf7ea17700d4"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/BrowserKit/zipball/0cb9e603b1850c9495bfb96b3c4caf7ea17700d4",
+            "url": "https://api.github.com/repos/symfony/browser-kit/zipball/0cb9e603b1850c9495bfb96b3c4caf7ea17700d4",
             "reference": "0cb9e603b1850c9495bfb96b3c4caf7ea17700d4",
             "shasum": ""
         },
@@ -1437,12 +1437,12 @@
         "version_normalized": "1.0.8.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/d11wtq/boris.git",
+            "url": "https://github.com/borisrepl/boris.git",
             "reference": "125dd4e5752639af7678a22ea597115646d89c6e"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/d11wtq/boris/zipball/125dd4e5752639af7678a22ea597115646d89c6e",
+            "url": "https://api.github.com/repos/borisrepl/boris/zipball/125dd4e5752639af7678a22ea597115646d89c6e",
             "reference": "125dd4e5752639af7678a22ea597115646d89c6e",
             "shasum": ""
         },
@@ -1474,12 +1474,12 @@
         "target-dir": "Symfony/Component/Filesystem",
         "source": {
             "type": "git",
-            "url": "https://github.com/symfony/Filesystem.git",
+            "url": "https://github.com/symfony/filesystem.git",
             "reference": "4e62fab0060a826561c78b665925b37c870c45f5"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/Filesystem/zipball/4e62fab0060a826561c78b665925b37c870c45f5",
+            "url": "https://api.github.com/repos/symfony/filesystem/zipball/4e62fab0060a826561c78b665925b37c870c45f5",
             "reference": "4e62fab0060a826561c78b665925b37c870c45f5",
             "shasum": ""
         },
@@ -1522,12 +1522,12 @@
         "version_normalized": "1.0.2.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/mtdowling/ClassPreloader.git",
+            "url": "https://github.com/ClassPreloader/ClassPreloader.git",
             "reference": "2c9f3bcbab329570c57339895bd11b5dd3b00877"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/mtdowling/ClassPreloader/zipball/2c9f3bcbab329570c57339895bd11b5dd3b00877",
+            "url": "https://api.github.com/repos/ClassPreloader/ClassPreloader/zipball/2c9f3bcbab329570c57339895bd11b5dd3b00877",
             "reference": "2c9f3bcbab329570c57339895bd11b5dd3b00877",
             "shasum": ""
         },
@@ -1680,6 +1680,238 @@
         "keywords": [
             "framework",
             "laravel"
+        ]
+    },
+    {
+        "name": "imagine/imagine",
+        "version": "v0.6.3",
+        "version_normalized": "0.6.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/avalanche123/Imagine.git",
+            "reference": "149041d2a1b517107bfe270ca2b1a17aa341715d"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/avalanche123/Imagine/zipball/149041d2a1b517107bfe270ca2b1a17aa341715d",
+            "reference": "149041d2a1b517107bfe270ca2b1a17aa341715d",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.2"
+        },
+        "require-dev": {
+            "sami/sami": "dev-master"
+        },
+        "suggest": {
+            "ext-gd": "to use the GD implementation",
+            "ext-gmagick": "to use the Gmagick implementation",
+            "ext-imagick": "to use the Imagick implementation"
+        },
+        "time": "2015-09-19 16:54:05",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-develop": "0.7-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Imagine": "lib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Bulat Shakirzyanov",
+                "email": "mallluhuct@gmail.com",
+                "homepage": "http://avalanche123.com"
+            }
+        ],
+        "description": "Image processing for PHP 5.3",
+        "homepage": "http://imagine.readthedocs.org/",
+        "keywords": [
+            "drawing",
+            "graphics",
+            "image manipulation",
+            "image processing"
+        ]
+    },
+    {
+        "name": "folklore/image",
+        "version": "v0.1.6",
+        "version_normalized": "0.1.6.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Folkloreatelier/laravel-image.git",
+            "reference": "e7ada5c03a210fa970d02d09c2576876f162dc48"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Folkloreatelier/laravel-image/zipball/e7ada5c03a210fa970d02d09c2576876f162dc48",
+            "reference": "e7ada5c03a210fa970d02d09c2576876f162dc48",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/support": "4.2.*",
+            "imagine/imagine": "0.6.*",
+            "php": ">=5.4.0"
+        },
+        "require-dev": {
+            "orchestra/testbench": "2.2.*"
+        },
+        "time": "2015-06-29 21:14:03",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [],
+            "psr-0": {
+                "Folklore\\Image\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Folklore",
+                "email": "info@atelierfolklore.ca",
+                "homepage": "http://atelierfolklore.ca"
+            },
+            {
+                "name": "David Mongeau-Petitpas",
+                "email": "dmp@atelierfolklore.ca",
+                "homepage": "http://mongo.ca",
+                "role": "Developer"
+            }
+        ],
+        "description": "Image manipulation library for Laravel 4 based on Imagine and inspired by Croppa for easy url based manipulation",
+        "homepage": "http://github.com/Folkloreatelier/laravel-image",
+        "keywords": [
+            "gd",
+            "gmagick",
+            "image",
+            "imagick",
+            "imagine",
+            "laravel",
+            "thumbnail",
+            "watermark"
+        ]
+    },
+    {
+        "name": "psr/http-message",
+        "version": "1.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/php-fig/http-message.git",
+            "reference": "85d63699f0dbedb190bbd4b0d2b9dc707ea4c298"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/php-fig/http-message/zipball/85d63699f0dbedb190bbd4b0d2b9dc707ea4c298",
+            "reference": "85d63699f0dbedb190bbd4b0d2b9dc707ea4c298",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2015-05-04 20:22:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Psr\\Http\\Message\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "PHP-FIG",
+                "homepage": "http://www.php-fig.org/"
+            }
+        ],
+        "description": "Common interface for HTTP messages",
+        "keywords": [
+            "http",
+            "http-message",
+            "psr",
+            "psr-7",
+            "request",
+            "response"
+        ]
+    },
+    {
+        "name": "guzzlehttp/psr7",
+        "version": "1.2.1",
+        "version_normalized": "1.2.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/guzzle/psr7.git",
+            "reference": "4d0bdbe1206df7440219ce14c972aa57cc5e4982"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/guzzle/psr7/zipball/4d0bdbe1206df7440219ce14c972aa57cc5e4982",
+            "reference": "4d0bdbe1206df7440219ce14c972aa57cc5e4982",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4.0",
+            "psr/http-message": "~1.0"
+        },
+        "provide": {
+            "psr/http-message-implementation": "1.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~4.0"
+        },
+        "time": "2015-11-03 01:34:55",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "GuzzleHttp\\Psr7\\": "src/"
+            },
+            "files": [
+                "src/functions_include.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Michael Dowling",
+                "email": "mtdowling@gmail.com",
+                "homepage": "https://github.com/mtdowling"
+            }
+        ],
+        "description": "PSR-7 message implementation",
+        "keywords": [
+            "http",
+            "message",
+            "stream",
+            "uri"
         ]
     }
 ]
