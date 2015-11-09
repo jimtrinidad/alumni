@@ -136,6 +136,7 @@
 	<script type="text/javascript" src="app/shared/controllers.js"></script>
 	<script type="text/javascript" src="app/shared/directives.js"></script>
 	<script type="text/javascript" src="app/shared/services.js"></script>
+	<script type="text/javascript" src="app/shared/filters.js"></script>
 
 	<script type="text/javascript" src="assets/js/scripts.js"></script>
 

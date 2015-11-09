@@ -1,16 +1,16 @@
 <div class="row" ng-controller="ProgramController" block-ui="resultBlock">
     <div class="col-sm-12">
+    	<div id="subheader" ng-class="{hidden:boolScrolledOnTop == false}">
+            <section class="panel">
+                <div ng-include="'programHeader'"></div>
+            </section>
+        </div>
     	<section class="panel">
-            <header class="panel-heading">
-		        Programs &nbsp;
-		         <span class="right-button-group">
-		            <a href="javascript:;" class="btn btn-primary btn-responsive" ng-click="openForm('new')" title="Add new program"><i class="fa fa-plus-square"></i><span class="hidden-xs"> Add</span></a>
-		         </span>
-		    </header>
+    		<div ng-include="'programHeader'"></div>
             <div class="panel-body">
                 <div ng-show="programs.status == true">
                 	<!-- list results here -->
-					<div ng-repeat="(index, item) in programs.data" class="col-xs-12 col-sm-6 col-md-4 thumb right-caption ">
+					<div ng-repeat="(index, item) in programs.data | array | filter:searchProgram" class="col-xs-12 col-sm-6 col-md-4 thumb right-caption ">
 						<img ng-src="{{item.logo}}">
 						<div class="caption">
 							<h5>
@@ -29,3 +29,21 @@
         </section>
     </div>
 </div>
+<script type="text/ng-template" id="programHeader">
+	<header class="panel-heading">
+        <div class="row">
+			<div class="col-xs-7 col-sm-8">
+				<span class="h5">Programs </span>
+				<span class="right-button-group">
+		            <a href="javascript:;" class="btn btn-primary btn-responsive" ng-click="openForm('new')" title="Add new program"><i class="fa fa-plus-square"></i><span class="hidden-xs"> Add</span></a>
+		         </span>
+			</div>
+			<div class="col-xs-5 col-sm-4 text-right">
+				<div class="input-group">
+				    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+				    <input type="text" ng-model="$parent.searchProgram"  class="form-control input-sm" type="text" placeholder="Search">
+				</div>
+			</div>
+		</div>
+    </header>
+</script>

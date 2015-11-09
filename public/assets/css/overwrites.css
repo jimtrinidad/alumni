@@ -35,7 +35,6 @@
 	padding: 0px 15px;
 	margin: -15px;
 	z-index: 100;
-	background: #f1f2f7;
 	right: 15px;
 	left: 255px;
 	-webkit-transition: all .3s ease-in-out;
@@ -45,9 +44,9 @@
 }
 
 @media (max-width: 768px) {
-	#subheader {
+/*	#subheader {
 		display: none !important;
-	}
+	}*/
 }
 
 .merge-left #subheader {

@@ -111,14 +111,18 @@
 </script>
 <script type="text/ng-template" id="alumniHeader">
     <header class="panel-heading">
-        Alumni listing &nbsp;
-         <span class="right-button-group">
-            <a has-permission='addAlumni' href="javascript:;" class="btn btn-primary btn-responsive" ng-click="openForm('new')" title="Add new record"><i class="fa fa-plus-square"></i><span class="hidden-xs"> Add</span></a>
-            <a has-permission='addAlumni' href="javascript:;" class="btn btn-primary btn-responsive" title="Upload records from excel file"><i class="fa fa-upload"></i><span class="hidden-xs"> Upload</span></a>
-            <a has-permission='deleteAlumni' ng-show="selectedItem.length > 0" href="javascript:;" class="btn btn-danger btn-responsive" ng-click="removeMultipleAlumni()" title="Delete selected items"><i class="fa fa-trash"></i><span class="hidden-xs"> Delete selected</span></a>
-         </span>
-         <span class="pull-right">
-            <checklist model="displayedFields" options="configRights.data.viewables" label="Displayed Fields" close-scroll="true" id="displayedFields"></checklist>
-         </span>
+        <div class="row">
+            <div class="col-xs-7 col-sm-8">
+                <span class="h5">Alumni listing </span>
+                <span class="right-button-group">
+                    <a has-permission='addAlumni' href="javascript:;" class="btn btn-primary btn-responsive" ng-click="openForm('new')" title="Add new record"><i class="fa fa-plus-square"></i><span class="hidden-xs"> Add</span></a>
+                    <a has-permission='addAlumni' href="javascript:;" class="btn btn-primary btn-responsive" title="Upload records from excel file"><i class="fa fa-upload"></i><span class="hidden-xs"> Upload</span></a>
+                    <a has-permission='deleteAlumni' ng-show="selectedItem.length > 0" href="javascript:;" class="btn btn-danger btn-responsive" ng-click="removeMultipleAlumni()" title="Delete selected items"><i class="fa fa-trash"></i><span class="hidden-xs"> Delete selected</span></a>
+                 </span>
+            </div>
+            <div class="col-xs-5 col-sm-4 text-right">
+                <checklist model="displayedFields" options="configRights.data.viewables" label="Displayed Fields" close-scroll="true" id="displayedFields"></checklist>
+            </div>
+        </div>
     </header>
 </script>

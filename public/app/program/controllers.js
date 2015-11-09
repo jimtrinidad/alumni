@@ -23,10 +23,6 @@ angular.module('app').components.controller('ProgramController', [
                     $scope.programs           = response;
                     $scope.selectedItem     = [];
                     resultBlocker.stop();
-
-                    
-
-    	console.log($scope.programs);
                 });
 
             });
