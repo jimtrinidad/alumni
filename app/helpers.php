@@ -2,10 +2,15 @@
 
 namespace AppHelpers;
 
-function programLogo($item) {
+function programLogo($item, $recache = false) {
 
-	$filepath 		= 'assets/img/programs/';
-	$item['logo'] 	= \File::exists(public_path($filepath . $item['logo'])) ? asset($filepath . $item['logo']) : asset($filepath . 'default.png');
+	$ts = '';
+	if ($recache) {
+		$ts = '?' . time();
+	}
+
+	$filepath 		= \Config::get('constants.PROGRAM_LOGO_PATH');
+	$item['logo'] 	= !empty($item['logo']) && \File::exists(public_path($filepath . $item['logo'])) ? asset($filepath . $item['logo']) . $ts : asset($filepath . 'default.png');
 	
 	return $item;
 

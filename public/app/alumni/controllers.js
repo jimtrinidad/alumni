@@ -63,9 +63,6 @@ angular.module('app').components.controller('AlumniController', [
         }, true);
 
 
-        /**
-        * Functions
-        */
         $scope.get_alumni   = function() {
 
             var resultBlocker  = uiBlocker.instances.get('resultBlock');

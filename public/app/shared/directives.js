@@ -304,3 +304,46 @@ angular.module('app').directive('tableCheckbox', ['$compile', '$timeout',
         };
     }
 ]);
+
+
+/**
+ * this directive makes it so that every time the content of the file input changes, a FileList object is put inside the binded property instead of a fakepath
+ * usage: <input type="file" files-model="someObject.files" multiple>
+ * generate:
+ *  - imagePreview: contains image data
+ *  - uploadMsg: upload status
+ */
+angular.module('app').directive("filesModel", function () {
+        return {
+            controller: function($parse, $element, $attrs, $scope){
+              var exp = $parse($attrs.filesModel);
+
+              $element.on('change', function(){
+                exp.assign($scope, this.files);
+                $scope.uploadMsg = null;
+                reader = new FileReader();
+                if (typeof this.files[0] !== 'undefined') {
+                    file = this.files[0];
+                    if (file.size <= 3145728) { //max of 3mb
+                        var ext = file.type.split('/')[1];
+                        if (['jpeg','png','gif','jpg'].indexOf(ext) !== -1) {
+                            reader.readAsDataURL(file);
+                            reader.onload = function (evt) {
+                                $scope.imgPreview = evt.target.result;
+                                $scope.$apply();
+                            };
+                        } else {
+                            $scope.imgPreview   = null;
+                            $scope.uploadMsg    = 'Invalid file type! Image files only.';
+                        }
+                    } else {
+                        $scope.imgPreview   = null;
+                        $scope.uploadMsg    = 'Invalid file size! Maximum of 3MB.';
+                    }
+                }
+                $scope.$apply();
+              });
+            }
+        };
+    }
+);

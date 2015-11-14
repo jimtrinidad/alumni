@@ -33,6 +33,9 @@ Route::group(array('prefix' => 'api/v1', 'before' => 'apiauth'), function() {
 	Route::get('config/programs', 'ConfigController@getUserPrograms');
 	Route::get('config/rights', 'ConfigController@getUserRights');
 
+	//hack for program edit, because PUT request do not accept multipart/form-data
+	Route::post('program/{id}', 'ProgramController@update');
+
 	Route::resource('alumni', 'AlumniController');
 	Route::resource('program', 'ProgramController');
 	Route::resource('user', 'UserController');

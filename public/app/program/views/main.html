@@ -16,11 +16,14 @@
 							<h5>
 								{{item.acronym}}
 								<div class="button">
-									<a class="btn btn-xs btn-primary"><i class='fa fa-pencil-square-o'></i></a> 
-									<a class="btn btn-xs btn-danger"><i class='fa fa-trash'></i></a>
+									<a class="btn btn-xs btn-primary" ng-click="openForm(index)"><i class='fa fa-pencil-square-o'></i></a> 
+									<a class="btn btn-xs btn-danger" ng-click="removeItem(item, index)"><i class='fa fa-trash'></i></a>
 								</div>
 							</h5>
-							<p>{{item.name}}</p>
+							<p>
+								{{item.name}}
+								<small class="show">{{item.created_at | myDate:'mediumDate'}}</small>
+							</p>
 						</div>
 					</div>
                 </div>

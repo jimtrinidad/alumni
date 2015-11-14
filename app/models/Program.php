@@ -10,6 +10,19 @@ class Program extends Eloquent {
 	protected $softDelete 	= true;
 
 	protected $table		= 'programs';
+	protected $guarded		= array();
+
+	public static function boot() {
+
+		parent::boot();
+
+		// We set the deleted_by attribute before deleted event so we doesn't get an error if Customer was deleted by force (without soft delete).
+		static::deleting(function($model){
+			$model->deleted_by = Auth::user()->id;
+			$model->save();
+		});
+
+	}
 
 	public static function get_by_user($user) {
 
