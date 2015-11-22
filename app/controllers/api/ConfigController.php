@@ -4,8 +4,8 @@ class ConfigController extends BaseController {
 
 	public function getUserRights() {
 
-		$viewables_results	= User::can('admin') ? json_decode(Settings::get('viewables'), true) : json_decode(User::privilege('viewables'), true);
-		$editables_results	= User::can('admin') ? json_decode(Settings::get('editables'), true) : json_decode(User::privilege('editables'), true);
+		$viewables_results	= User::rights('admin') ? json_decode(Settings::get('viewables'), true) : json_decode(User::privilege('viewables'), true);
+		$editables_results	= User::rights('admin') ? json_decode(Settings::get('editables'), true) : json_decode(User::privilege('editables'), true);
 		$viewables 			= array();
 		$editables 			= array();
 

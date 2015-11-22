@@ -27,7 +27,7 @@ class Alumni extends Eloquent {
 	
 	public static function get_alumnis($id = null) {
 
-		$user_fields	= User::can('admin') ? json_decode(Settings::get('viewables'), true) : json_decode(User::privilege('viewables'), true);
+		$user_fields	= User::rights('admin') ? json_decode(Settings::get('viewables'), true) : json_decode(User::privilege('viewables'), true);
 
 		$query			= DB::table('alumni');
 
@@ -38,7 +38,7 @@ class Alumni extends Eloquent {
 
 		$query->whereNull('alumni.deleted_at');
 
-		if (!User::can('admin')) {
+		if (!User::rights('admin')) {
 
 			$query->join('user_program', 'user_program.program_id', '=', 'programs.id');
 			$query->where('user_program.user_id', '=', Auth::id());
@@ -50,6 +50,9 @@ class Alumni extends Eloquent {
 			$query->where('alumni.program_id', '=', Input::get('program'));
 
 		}
+
+		//do not include deactivated programs
+		$query->whereNull('programs.deleted_at');
 
 		if (Input::get('batch') != '') {
 

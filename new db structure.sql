@@ -213,3 +213,5 @@ ALTER TABLE `alumni`
   CHANGE COLUMN `address` `address` TEXT NULL DEFAULT '' AFTER `birthday`,
   CHANGE COLUMN `photo` `photo` VARCHAR(100) NULL DEFAULT '' AFTER `address`,
   CHANGE COLUMN `created_by` `created_by` INT(9) NULL DEFAULT NULL AFTER `photo`;
+
+  ALTER TABLE `users` ADD COLUMN `photo` VARCHAR(100) NULL DEFAULT '' AFTER `lastname`;

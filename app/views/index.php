@@ -46,7 +46,7 @@
 					<!-- user login dropdown start-->
 					<li class="dropdown">
 						<a class="dropdown-toggle">
-							<img alt="" src="http://placehold.it/29x29">
+							<img alt="" src="<?php echo AppHelpers\userPhoto(Auth::user()->photo); ?>">
 							<span class="username"><?php echo ucfirst(Auth::user()->firstname . ' ' . Auth::user()->lastname); ?></span>
 						</a>
 					</li>
@@ -72,17 +72,17 @@
 							<i class="fa fa-group"></i><span> Alumni</span>
 						</a>
 					</li>
-					<li has-permission='manageProgram'>
+					<li has-permission='manageProgram' class="hidden">
 						<a href="#/programs" ng-class="{ active: isActive('/programs') }">
 							<i class="fa fa-institution"></i><span> Programs</span>
 						</a>
 					</li>
-					<li has-permission='manageUser'>
+					<li has-permission='manageUser' class="hidden">
 						<a href="#/users" ng-class="{ active: isActive('/users') }">
 							<i class="fa fa-user"></i><span> Users</span>
 						</a>
 					</li>
-					<li has-permission='manageSettings' class="sub-menu">
+					<li has-permission='manageSettings' class="sub-menu hidden">
 						<a href="javascript:;" ng-class="{ active: isActive('/settings', 1) }">
 							<i class="fa fa-cog"></i><span> Settings</span>
 						</a>

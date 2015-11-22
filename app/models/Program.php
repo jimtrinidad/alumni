@@ -30,11 +30,14 @@ class Program extends Eloquent {
 
 		$query->select(DB::raw('programs.*'));
 
-		if (!User::can('admin')) {
+		if (!User::rights('admin')) {
 			$query->join('user_program', function($join) use ($user) {
 				$join->on('user_program.program_id', '=', 'programs.id')->where('user_program.user_id' , '=', DB::raw($user));
 			});
 		}
+
+		//do not include deactivated programs
+		$query->whereNull('programs.deleted_at');
 
 		$query->orderBy('programs.acronym', 'asc');
 

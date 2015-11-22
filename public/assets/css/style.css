@@ -492,7 +492,8 @@ ul.top-menu>li>a:focus, ul.top-menu>li>a:hover {
 .top-nav img {
     border-radius: 50%;
     -webkit-border-radius: 50%;
-    width: 33px
+    /*width: 33px - orig size*/
+    width: 44px;
 }
 .top-nav ul.top-menu>li .dropdown-menu.logout {
     width: 170px!important

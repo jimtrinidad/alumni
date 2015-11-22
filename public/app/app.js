@@ -71,6 +71,15 @@ app.config(['$routeProvider', 'lazyProvider', function ($routeProvider, lazyProv
 			permission: 'manageProgram'
 		})
 		.when('/users', {
+			templateUrl: 'app/user/views/main.html',
+			resolve: {
+				load: function (){
+					return $lazy('app').load([
+						'app/user/controllers',
+						'app/user/services'
+					]);
+				}
+			},
 			permission: 'manageUser'
 		})
 		.when('/settings/general', {

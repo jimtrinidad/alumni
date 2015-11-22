@@ -36,6 +36,8 @@ angular.module('app').directive('hasPermission', function(permissions) {
             function removeElement() {
                 if (!permissions.hasPermission(value)) { 
                 	element.remove();
+                } else {
+                    element.removeClass('hidden');
                 }
             }
 

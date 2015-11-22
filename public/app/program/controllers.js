@@ -40,7 +40,7 @@ angular.module('app').components.controller('ProgramController', [
             {
 
                 controller  : 'ProgramFormController',
-                templateUrl : 'app/program/views/modal.form.program.html?' + "bust=" + (new Date()).getTime(),
+                templateUrl : 'app/program/views/modal.form.program.html',
                 size        : 'md',
                 keyboard    : false,
                 scope       : $scope

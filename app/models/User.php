@@ -4,10 +4,14 @@ use Illuminate\Auth\UserTrait;
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 class User extends Eloquent implements UserInterface, RemindableInterface {
 
-	use UserTrait, RemindableTrait;
+	use UserTrait, RemindableTrait, SoftDeletingTrait;
+
+	protected $dates 		= ['deleted_at'];
+	protected $softDelete 	= true;
 
 	/**
 	 * The database table used by the model.
@@ -27,7 +31,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	/**
 	* Check user rights
 	*/
-	public static function can($key) {
+	public static function rights($key) {
 
 		$rights = json_decode(self::privilege('rights'), true);
 

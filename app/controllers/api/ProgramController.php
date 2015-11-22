@@ -124,7 +124,7 @@ class ProgramController extends BaseController {
 					return Response::json(array(
 							'status'	=> true,
 							'message'	=> $program->name . ' has been updated successfully.',
-							'data'		=> AppHelpers\programLogo(Program::orderBy('name')->where('id', '=', $id)->select('id', 'acronym', 'name', 'logo', 'created_at')->get()->first(), true)
+							'data'		=> AppHelpers\programLogo(Program::where('id', '=', $id)->select('id', 'acronym', 'name', 'logo', 'created_at')->get()->first(), true)
 						));
 				}
 			} else {

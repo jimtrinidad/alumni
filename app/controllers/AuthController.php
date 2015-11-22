@@ -22,6 +22,8 @@ class AuthController extends BaseController {
 			}
 
 			if (Auth::attempt( array( 'username' => Input::get('username'), 'password' => Input::get('password') ) )) {
+				$user->last_logged = new DateTime();
+				$user->save();
 				return Redirect::home();
 			} else {
 				$viewData['error']	= 'The username or password entered is incorrect.';
