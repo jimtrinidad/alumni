@@ -6,7 +6,8 @@
 	"type": "project",
 	"require": {
 		"laravel/framework": "4.2.*",
-		"folklore/image": "0.1.*"
+		"folklore/image": "0.1.*",
+		"spatie/activitylog": "0.3.*"
 	},
 	"autoload": {
 		"classmap": [

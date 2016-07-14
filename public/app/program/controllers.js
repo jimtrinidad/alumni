@@ -32,8 +32,9 @@ angular.module('app').components.controller('ProgramController', [
     	/**
         * Adding program
         */
-        $scope.openForm = function(index) {
+        $scope.openForm = function(item) {
 
+            var index = $scope.programs.data.indexOf(item);
             $scope.itemIndex = index;
 
             modalService.showModal(
@@ -53,12 +54,46 @@ angular.module('app').components.controller('ProgramController', [
         /**
         * Delete
         */
-        $scope.removeItem = function(item, index) {
-            bootbox.confirm('Are you sure you want to remove ' + item.name + '?', function(result) {
+        $scope.removeItem = function(item) {
+            var index = $scope.programs.data.indexOf(item);
+            bootbox.confirm('Are you sure you want to disable ' + item.name + '?', function(result) {
                 if (result) {
                     Program.delete({id: item.id}, function(response) {
                         if (response.status) {
                             $scope.programs.data.splice(index, 1);
+                            $scope.getPrograms();
+                            toastr["success"](response.message, "Program");
+                        } else {
+                            toastr["warning"](response.message, "Program");
+                        }
+                    });
+                }
+            }); 
+        }
+
+        $scope.restoreItem = function(item) {
+            var index = $scope.programs.data.indexOf(item);
+            bootbox.confirm('Are you sure you want to restore ' + item.name + '?', function(result) {
+                if (result) {
+                    Program.restore({action: 'restore',id: item.id}, function(response) {
+                        if (response.status) {
+                            $scope.getPrograms();
+                            toastr["success"](response.message, "Program");
+                        } else {
+                            toastr["warning"](response.message, "Program");
+                        }
+                    });
+                }
+            }); 
+        }
+
+        $scope.deleteItem = function(item) {
+            var index = $scope.programs.data.indexOf(item);
+            bootbox.confirm('Are you sure you want to permanently delete ' + item.name + '?', function(result) {
+                if (result) {
+                    Program.forceDelete({action: 'delete',id: item.id}, function(response) {
+                        if (response.status) {
+                            $scope.getPrograms();
                             toastr["success"](response.message, "Program");
                         } else {
                             toastr["warning"](response.message, "Program");
@@ -146,7 +181,7 @@ angular.module('app').components.controller('ProgramFormController', [
                         if (response.status === true) {
 
                             toastr["success"](response.message, "Program");
-                            angular.copy(response.data, $scope.programs.data[$scope.itemIndex]);
+                            angular.extend($scope.programs.data[$scope.itemIndex], response.data);
                             $modalInstance.close();
                             //$scope.getPrograms();
 
@@ -176,7 +211,7 @@ angular.module('app').components.controller('ProgramFormController', [
                 }
 
             } else {
-                toastr["error"]("There are some invalid inputs on the program form.", "Alumni");
+                toastr["error"]("There are some invalid inputs on the program form.", "Program");
             } 
             
         };

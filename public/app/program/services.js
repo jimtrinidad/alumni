@@ -1,5 +1,5 @@
 angular.module('app').components.provide.factory('Program', ['$resource', function($resource){
-    return $resource('api/v1/program/:action:id', {
+    return $resource('api/v1/program/:action/:id', {
     	id: '@id',
     	action: '@action'
     }, 
@@ -39,6 +39,14 @@ angular.module('app').components.provide.factory('Program', ['$resource', functi
         },
         delete    : {
                 method  : 'DELETE',
+                ignoreLoadingBar    : true
+        },
+        restore    : {
+                method  : 'GET',
+                ignoreLoadingBar    : true
+        },
+        forceDelete : {
+                'method' : 'DELETE',
                 ignoreLoadingBar    : true
         }
     });

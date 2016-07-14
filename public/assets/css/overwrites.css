@@ -29,6 +29,14 @@
     padding-left:10px;
 }
 
+.mtop2 {
+	margin-top: 2px;
+}
+
+.mtop5 {
+	margin-top: 5px;
+}
+
 
 #subheader {
 	position: fixed;
@@ -43,10 +51,11 @@
     transition: all .3s ease-in-out
 }
 
+
 @media (max-width: 768px) {
-/*	#subheader {
+	#subheader {
 		display: none !important;
-	}*/
+	}
 }
 
 .merge-left #subheader {
@@ -160,10 +169,16 @@ tr > .currentSelected:first-child, tr > .currentSelected:first-child ~ td{
 /*end*/
 
 
-/*program listing thumbnail*/
-.thumb.right-caption > img {float: left;margin-right: 9px;width: 100px; height: 100px;}
+/*program and user listing thumbnail*/
+.thumb.right-caption img {float: left;margin-right: 9px;width: 100px; height: 100px;}
 .thumb.right-caption {float: left;margin-bottom: 10px;}
-.thumb.right-caption > .caption {padding: 4px;}
-.thumb.right-caption > .caption > h5 {font-weight: bold;padding: 1px;margin: 1px;}
-.thumb.right-caption > .caption .button {display: none;}
-.thumb.right-caption:hover > .caption .button {display: inline-block;}
+.thumb.right-caption .caption {padding: 4px;}
+.thumb.right-caption .caption > h5 {font-weight: bold;padding: 1px;margin: 1px;}
+.thumb.right-caption .caption .button {display: none;}
+.thumb.right-caption:hover .caption .button {display: inline-block;}
+
+/*styles of inactive item*/
+.item-deleted {
+	opacity: 0.4;
+	border: 1px solid red;
+}

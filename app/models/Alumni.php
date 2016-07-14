@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
+//use Activity;
 
 class Alumni extends Eloquent {
 
@@ -26,6 +27,8 @@ class Alumni extends Eloquent {
 
 	
 	public static function get_alumnis($id = null) {
+
+		Activity::log('list alumni');
 
 		$user_fields	= User::rights('admin') ? json_decode(Settings::get('viewables'), true) : json_decode(User::privilege('viewables'), true);
 

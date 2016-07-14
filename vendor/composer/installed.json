@@ -128,12 +128,12 @@
         "target-dir": "Symfony/Component/Routing",
         "source": {
             "type": "git",
-            "url": "https://github.com/symfony/Routing.git",
+            "url": "https://github.com/symfony/routing.git",
             "reference": "c7e381f571aac1de9e06f2bac2097984c543096a"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/Routing/zipball/c7e381f571aac1de9e06f2bac2097984c543096a",
+            "url": "https://api.github.com/repos/symfony/routing/zipball/c7e381f571aac1de9e06f2bac2097984c543096a",
             "reference": "c7e381f571aac1de9e06f2bac2097984c543096a",
             "shasum": ""
         },
@@ -1913,5 +1913,54 @@
             "stream",
             "uri"
         ]
+    },
+    {
+        "name": "spatie/activitylog",
+        "version": "0.3.0",
+        "version_normalized": "0.3.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/spatie/activitylog.git",
+            "reference": "9ff9887353cdf078967af7604063fe799a01f876"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/spatie/activitylog/zipball/9ff9887353cdf078967af7604063fe799a01f876",
+            "reference": "9ff9887353cdf078967af7604063fe799a01f876",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/support": "~4.1|5.*",
+            "php": ">=5.4.0"
+        },
+        "time": "2015-01-26 21:01:49",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "src/migrations"
+            ],
+            "psr-0": {
+                "Spatie\\Activitylog\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Freek Van der Herten",
+                "email": "freek@spatie.be"
+            }
+        ],
+        "description": "A very simple activity logger to monitor the users of your website or application",
+        "keywords": [
+            "activity",
+            "laravel",
+            "log",
+            "user"
+        ],
+        "abandoned": "spatie/laravel-activitylog"
     }
 ]

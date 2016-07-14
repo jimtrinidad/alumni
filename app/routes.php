@@ -35,6 +35,13 @@ Route::group(array('prefix' => 'api/v1', 'before' => 'apiauth'), function() {
 
 	//hack for program edit, because PUT request do not accept multipart/form-data
 	Route::post('program/{id}', 'ProgramController@update');
+	Route::post('user/{id}', 'UserController@update');
+
+	Route::get('program/restore/{id}', 'ProgramController@restore');
+	Route::delete('program/delete/{id}', 'ProgramController@forceDelete');
+
+	Route::get('user/restore/{id}', 'UserController@restore');
+	Route::delete('user/delete/{id}', 'UserController@forceDelete');
 
 	Route::resource('alumni', 'AlumniController');
 	Route::resource('program', 'ProgramController');

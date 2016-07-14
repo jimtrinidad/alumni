@@ -4,6 +4,7 @@ class AlumniController extends BaseController {
 
 	public function index() {
 
+		//sleep(100);
 		return Alumni::get_alumnis();
 
 	}

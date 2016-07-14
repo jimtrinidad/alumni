@@ -9,8 +9,8 @@
 		<div class="row no-gutter pad-10">
 			<div class="col-sm-8">
 				<div class="form-group" ng-class="{ 'has-error' : uploadMsg }">
-		            <label>Logo <small class="hidden-xs">(image files only and maximum of 3mb)</small></label>
-		            <input type="file" files-model="formData.logo" accept="image/*">
+		            <label>Photo <small class="hidden-xs">(image files only and maximum of 2mb)</small></label>
+		            <input type="file" files-model="formData.photo" accept="image/*">
 		            <span class='help-block' ng-show="uploadMsg">{{uploadMsg}}</span>
 		        </div>
 			</div>
@@ -20,18 +20,57 @@
 			<div class="col-sm-4 visible-xs" ng-show="imgPreview">
 		        <img ng-src="{{imgPreview}}" width="100" height="100" />
 			</div>
-			<div class="col-sm-12">
-				<div class="form-group" ng-class="{ 'has-error' : hasError('acronym') }">
-		            <label>Acronym</label>
-		            <input type="text" name="acronym" class="form-control" ng-model="formData.acronym" required autocomplete="off">
-		            <span class='help-block' ng-show="hasError('acronym', 'required')">Acronym field is required.</span>
+			<div class="col-sm-6 col-xs-12">
+				<div class="form-group" ng-class="{ 'has-error' : hasError('firstname') }">
+		            <label>Firstname</label>
+		            <input type="text" name="firstname" class="form-control" ng-model="formData.firstname" required autocomplete="off">
+		            <span class='help-block' ng-show="hasError('firstname', 'required')">Firstname field is required.</span>
+		        </div>
+			</div>
+			<div class="col-sm-6 col-xs-12">
+				<div class="form-group" ng-class="{ 'has-error' : hasError('lastname') }">
+		            <label>Lastname</label>
+		            <input type="text" name="lastname" class="form-control" ng-model="formData.lastname" required autocomplete="off">
+		            <span class='help-block' ng-show="hasError('lastname', 'required')">Lastname field is required.</span>
 		        </div>
 			</div>
 			<div class="col-sm-12">
-				<div class="form-group" ng-class="{ 'has-error' : hasError('name') }">
-		            <label>Program name</label>
-		            <input type="text" name="name" class="form-control" ng-model="formData.name" required autocomplete="off">
-		            <span class='help-block' ng-show="hasError('name', 'required')">Program name field is required.</span>
+				<div class="form-group" ng-class="{ 'has-error' : hasError('email') }">
+		            <label>Email</label>
+		            <input type="email" name="email" class="form-control" ng-model="formData.email" required autocomplete="off">
+		            <span class='help-block' ng-show="hasError('email', 'required')">Email field is required.</span>
+		            <span class='help-block' ng-show="hasError('email', 'email')">{{errors.email}}</span>
+		        </div>
+			</div>
+			<div class="col-xs-12" ng-class="{'edit':'col-sm-6', 'add':'col-sm-12'}[mode]">
+				<div class="form-group" ng-class="{ 'has-error' : hasError('username') }">
+		            <label>Username</label>
+		            <input type="text" name="username" class="form-control" ng-model="formData.username" required autocomplete="off">
+		            <span class='help-block' ng-show="hasError('username', 'required')">Username field is required.</span>
+		            <span class='help-block' ng-show="hasError('username', 'username')">{{errors.username}}</span>
+		        </div>
+			</div>
+			<div class="col-sm-6 col-xs-12" ng-show="mode == 'edit'">
+				<div class="form-group">
+		            <label>Password</label>
+		            <select class="form-control" ng-model="formData.pwoption" ng-change="showPasswordField()">
+		            	<option value="keep">Keep old</option>
+		            	<option value="change">Change</option>
+		            </select>
+		        </div>
+			</div>
+			<div class="col-sm-6 col-xs-12" ng-show="changePassword">
+				<div class="form-group" ng-class="{ 'has-error' : hasError('password') }">
+		            <label>New Password</label>
+		            <input type="password" id="userPassword" name="password" class="form-control" ng-model="formData.password" ng-required="changePassword" autocomplete="off">
+		            <!-- <span class='help-block' ng-show="hasError('password', 'required')">Password field is required.</span> -->
+		            <span class='help-block' ng-show="hasError('password', 'password')">{{errors.password}}</span>
+		        </div>
+			</div>
+			<div class="col-sm-6 col-xs-12" ng-show="changePassword">
+				<div class="form-group" ng-class="{ 'has-error' : hasError('password') }">
+		            <label>Confirm Password</label>
+		            <input type="password" name="password_confirmation" class="form-control" ng-model="formData.password_confirmation" ng-required="changePassword" autocomplete="off">		            
 		        </div>
 			</div>
 		</div>

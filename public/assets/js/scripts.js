@@ -36,6 +36,14 @@ var Script = function() {
         }
     });
 
+    //hide menu on click
+    $("#sidebar a[href^='#']").click(function() {
+      if ($('#main-content').hasClass('merge-left')) {
+        $('#sidebar').toggleClass('hide-left-bar');
+        $('#main-content').toggleClass('merge-left');
+      }
+    });
+
     // custom scroll bar
     $("#sidebar").niceScroll({
         styler: "fb",

@@ -10,20 +10,29 @@
             <div class="panel-body">
                 <div ng-show="users.status == true">
                 	<!-- list results here -->
-					<div ng-repeat="(index, item) in users.data | array | filter:searchUser" class="col-xs-12 col-sm-6 col-md-4 thumb right-caption ">
-						<img ng-src="{{item.photo}}">
-						<div class="caption">
-							<h5>
-								{{item.firstname}} {{item.lastname}}
-								<div class="button">
-									<a class="btn btn-xs btn-primary" ng-click="openForm(index)"><i class='fa fa-pencil-square-o'></i></a> 
-									<a class="btn btn-xs btn-danger" ng-click="removeItem(item, index)"><i class='fa fa-trash'></i></a>
-								</div>
-							</h5>
-							<p>
-								{{item.username}}
-								<small class="show">{{item.created_at | myDate:'mediumDate'}}</small>
-							</p>
+					<div ng-repeat="(index, item) in users.data | array | filter:searchUser" class="col-xs-12 col-sm-6 col-md-4 thumb right-caption">
+						<div ng-class="item.active == 0 ? 'item-deleted' : ''">
+							<img ng-src="{{item.photo}}">
+							<div class="caption">
+								<h5>
+									{{item.firstname}} {{item.lastname}}
+									<div class="button">
+										<span ng-if="item.active == 1">
+											<a class="btn btn-xs btn-info" ng-click="openForm(item)"><i class='fa fa-pencil-square-o'></i></a> 
+											<a class="btn btn-xs btn-danger" ng-click="removeItem(item)"><i class='fa fa-trash'></i></a>
+										</span>
+										<span ng-if="item.active == 0">
+											<a class="btn btn-xs btn-success" ng-click="restoreItem(item)"><i class='fa fa-recycle'></i></a>
+											<a class="btn btn-xs btn-danger" ng-click="deleteItem(item)"><i class='fa fa-trash'></i></a>
+										</span>
+									</div>
+								</h5>
+								<p>
+									{{item.username}}
+									<small class="show">{{item.created_at | myDate:'mediumDate'}}</small>
+								</p>
+							</div>
+							<div class="clearfix"></div>
 						</div>
 					</div>
                 </div>
@@ -35,14 +44,14 @@
 <script type="text/ng-template" id="userHeader">
 	<header class="panel-heading">
         <div class="row">
-			<div class="col-xs-7 col-sm-8">
-				<span class="h5 v-align">Users </span>
+			<div class="col-xs-5 col-sm-8">
+				<span class="h5 v-align inline-block">Users </span>
 				<span class="right-button-group">
-		            <a href="javascript:;" class="btn btn-primary btn-responsive" ng-click="openForm('new')" title="Add new user"><i class="fa fa-plus-square"></i><span class="hidden-xs"> Add</span></a>
+		            <a href="javascript:;" class="btn btn-primary" ng-click="openForm()" title="Add new user"><i class="fa fa-plus-square"></i><span class="hidden-xs"> Add</span></a>
 		         </span>
 			</div>
-			<div class="col-xs-5 col-sm-4 text-right">
-				<div class="input-group">
+			<div class="col-xs-7 col-sm-4 text-right">
+				<div class="input-group mtop2">
 				    <span class="input-group-addon"><i class="fa fa-search"></i></span>
 				    <input type="text" ng-model="$parent.searchUser"  class="form-control input-sm" type="text" placeholder="Search">
 				</div>

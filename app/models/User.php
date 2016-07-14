@@ -12,6 +12,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	protected $dates 		= ['deleted_at'];
 	protected $softDelete 	= true;
+	protected $guarded		= array();
 
 	/**
 	 * The database table used by the model.
@@ -26,6 +27,19 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 * @var array
 	 */
 	protected $hidden = array('password', 'remember_token');
+
+
+	public static function boot() {
+
+		parent::boot();
+
+		// We set the deleted_by attribute before deleted event so we doesn't get an error if Customer was deleted by force (without soft delete).
+		static::deleting(function($model){
+			$model->deleted_by = Auth::user()->id;
+			$model->save();
+		});
+
+	}
 
 
 	/**

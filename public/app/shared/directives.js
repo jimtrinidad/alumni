@@ -126,7 +126,7 @@ angular.module('app').directive('checklist', ['$window',
                 closeScroll: '='
             },
             template: "<div class='btn-group dropdown'>" +
-                         "<a class='btn btn-primary btn-responsive btn-text-size dropdown-toggle'><i class='fa fa-list'></i> <span class='hidden-xs'>{{label}}</span> <span class='caret'></span></a>" + 
+                         "<a class='btn btn-primary btn-text-size dropdown-toggle'><i class='fa fa-list'></i> <span class='hidden-xs'>{{label}}</span> <span class='caret'></span></a>" + 
                          "<ul class='dropdown-menu dropdown-menu-right' aria-labelledby='dropdownMenu'>" + 
                             "<li ng-repeat='option in options' class='checklist'> <a href='javascript:;' ng-click='setSelectedItem(option.id); $event.stopPropagation()'><i class='fa' ng-class='isChecked(option.id)'></i><span>{{option.label}}</span></a></li>" + 
                         "</ul>" + 
@@ -324,7 +324,7 @@ angular.module('app').directive("filesModel", function () {
                 reader = new FileReader();
                 if (typeof this.files[0] !== 'undefined') {
                     file = this.files[0];
-                    if (file.size <= 3145728) { //max of 3mb
+                    if (file.size <= 2097152) { //max of 2mb, in bytes
                         var ext = file.type.split('/')[1];
                         if (['jpeg','png','gif','jpg'].indexOf(ext) !== -1) {
                             reader.readAsDataURL(file);
@@ -338,7 +338,7 @@ angular.module('app').directive("filesModel", function () {
                         }
                     } else {
                         $scope.imgPreview   = null;
-                        $scope.uploadMsg    = 'Invalid file size! Maximum of 3MB.';
+                        $scope.uploadMsg    = 'Invalid file size! Maximum of 2MB.';
                     }
                 }
                 $scope.$apply();
@@ -347,3 +347,21 @@ angular.module('app').directive("filesModel", function () {
         };
     }
 );
+
+angular.module('app').directive('pwCheck', [function () {
+    return {
+      require: 'ngModel',
+      link: function (scope, elem, attrs, ctrl) {
+        console.log(attrs.pwCheck, ctrl);
+        var firstPassword = '#' + attrs.pwCheck;
+        elem.add(firstPassword).on('keyup', function () {
+            console.log('test');
+          scope.$apply(function () {
+            console.log(elem.val(), $(firstPassword).val());
+            var v = elem.val()===$(firstPassword).val();
+            ctrl.$setValidity('pwmatch', v);
+          });
+        });
+      }
+    }
+  }]);

@@ -4,12 +4,18 @@ class UserController extends BaseController {
 
 	public function index() {
 
-		$user_results		= User::orderBy('firstname')->select('id', 'username', 'firstname', 'lastname', 'photo', 'created_at')->get();
+		$user_results		= User::withTrashed()->orderBy('deleted_at')->orderBy('firstname')->select('id', 'username', 'email', 'firstname', 'lastname', 'photo', 'created_at', 'deleted_at')->get();
 		$users 				= array();
 
 		foreach ($user_results as $item) {
 
-			$users[] 	= AppHelpers\userPhoto($item);
+			$item 	= AppHelpers\userPhoto($item);
+			$item['active'] = 1;
+			if ($item['deleted_at'] != null) {
+				$item['active'] = 0;
+			}
+
+			$users[] = $item;
 
 		}
 
@@ -55,30 +61,34 @@ class UserController extends BaseController {
 
 	public function store() {
 
-		$validator = $this->validate();
+		$validator = $this->validate('new');
 		if ($validator->passes()) {
 
 			$user = new User;
-			$user->fill(Input::all());
+			$user->fill(Input::only('username','firstname','lastname','email'));
+			$user->password 	= Hash::make(Input::get('password'));
 			$user->created_by	= Auth::id();
 
-			if (Input::hasFile('photo')) {
-
-				$file 		= Input::file('photo');
-				$photoName	= $user->id . '-photo.' . $file->getClientOriginalExtension();
-
-				$file->move(Config::get('constants.USER_PHOTO_PATH'), $photoName);
-
-				Image::make(Config::get('constants.USER_PHOTO_PATH') . $photoName,array(
-				    'width' => 300,
-				    'height' => 300
-				))->save();
-
-				$user->photo = $photoName;
-
-			}
-
 			if ($user->save()) {
+
+				if (Input::hasFile('photo')) {
+
+					$file 		= Input::file('photo');
+					$photoName	= $user->id . '-photo.' . $file->getClientOriginalExtension();
+
+					$file->move(Config::get('constants.USER_PHOTO_PATH'), $photoName);
+
+					Image::make(Config::get('constants.USER_PHOTO_PATH') . $photoName,array(
+					    'width' => 300,
+					    'height' => 300
+					))->save();
+
+					$user->photo = $photoName;
+
+					$user->save();
+
+				}
+
 				return Response::json(array(
 						'status'	=> true,
 						'message'	=> 'Record has been saved successfully.'
@@ -96,13 +106,18 @@ class UserController extends BaseController {
 
 	public function update($id) {
 
-		$validator = $this->validate();
+		$validator = $this->validate('update');
 		if ($validator->passes()) {
 
-			$user = user::find($id);
+			$user = User::find($id);
 			if ($user) {
 
-				$user->fill(Input::all());
+				$user->fill(Input::only('username','firstname','lastname','email'));
+
+				if (Input::get('pwoption') == 'change') {
+					$user->password = Hash::make(Input::get('password'));
+				}
+
 				$user->updated_by	= Auth::id();
 				if (Input::hasFile('photo')) {
 
@@ -124,7 +139,7 @@ class UserController extends BaseController {
 					return Response::json(array(
 							'status'	=> true,
 							'message'	=> $user->name . ' has been updated successfully.',
-							'data'		=> AppHelpers\userPhoto(User::where('id', '=', $id)->select('id', 'acronym', 'name', 'logo', 'created_at')->get()->first(), true)
+							'data'		=> AppHelpers\userPhoto(User::where('id', '=', $id)->select('id', 'username', 'email', 'firstname', 'lastname', 'photo', 'created_at')->get()->first(), true)
 						));
 				}
 			} else {
@@ -144,12 +159,26 @@ class UserController extends BaseController {
 
 	}
 
-	private function validate() {
+	private function validate($method) {
 
-		$validator	= Validator::make(Input::all(), array(
-				'acronym'		=> 'required',
-				'name'			=> 'required'
-			));
+		$rules = array(
+				'firstname'		=> 'required',
+				'lastname'		=> 'required'
+			);
+
+		if (Input::get('pwoption','change') == 'change') {
+			$rules['password'] = 'required|min:3|confirmed';
+		}
+
+		if ($method == 'update') {
+			$rules['username']	= 'required|alpha_num|min:3|max:32|unique:users,username,' . Input::get('id');
+			$rules['email']		= 'required|email|unique:users,email,' . Input::get('id');
+		} else {
+			$rules['username']	= 'required|alpha_num|min:3|max:32|unique:users,username';
+			$rules['email']		= 'required|email|unique:users,email';
+		}
+
+		$validator	= Validator::make(Input::all(), $rules);	
 
 		return $validator;
 
@@ -157,11 +186,35 @@ class UserController extends BaseController {
 
 	public function destroy($id) {
 
-		$result = user::find($id);
+		$result = User::find($id);
 
 		if ($result) {
 
 			$result->delete();
+
+			return Response::json(array(
+					'status'	=> true,
+					'message'		=> 'Record has been disabled successfully.'
+				));
+
+		} else {
+
+			return Response::json(array(
+					'status'	=> false,
+					'message'	=> 'Disable record failed! Record not found.'
+				));
+
+		}
+
+	}
+
+	public function forceDelete($id) {
+
+		$result = User::withTrashed()->find($id);
+
+		if ($result) {
+
+			$result->forceDelete();
 
 			return Response::json(array(
 					'status'	=> true,
@@ -172,7 +225,27 @@ class UserController extends BaseController {
 
 			return Response::json(array(
 					'status'	=> false,
-					'message'	=> 'Deleting record failed! Record not found.'
+					'message'	=> 'Delete record failed! Record not found.'
+				));
+
+		}
+
+	}
+
+	public function restore($id) {
+
+		if (User::withTrashed()->where('id', $id)->restore()) {
+
+			return Response::json(array(
+					'status'	=> true,
+					'message'		=> 'Record has been restored successfully.'
+				));
+
+		} else {
+
+			return Response::json(array(
+					'status'	=> false,
+					'message'	=> 'Restoring record failed! Record not found.'
 				));
 
 		}

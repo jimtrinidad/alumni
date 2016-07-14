@@ -122,6 +122,7 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Folklore\Image\ImageServiceProvider',
+		'Spatie\Activitylog\ActivitylogServiceProvider',
 
 	),
 
@@ -190,6 +191,7 @@ return array(
 		'Validator'         => 'Illuminate\Support\Facades\Validator',
 		'View'              => 'Illuminate\Support\Facades\View',
 		'Image' 			=> 'Folklore\Image\Facades\Image',
+		'Activity' 			=> 'Spatie\Activitylog\ActivitylogFacade',
 
 	),
 

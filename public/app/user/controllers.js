@@ -32,8 +32,9 @@ angular.module('app').components.controller('UserController', [
     	/**
         * Adding user
         */
-        $scope.openForm = function(index) {
+        $scope.openForm = function(item) {
 
+            var index = $scope.users.data.indexOf(item);
             $scope.itemIndex = index;
 
             modalService.showModal(
@@ -53,12 +54,46 @@ angular.module('app').components.controller('UserController', [
         /**
         * Delete
         */
-        $scope.removeItem = function(item, index) {
-            bootbox.confirm('Are you sure you want to remove ' + item.firstname + ' ' + item.lastname + '?', function(result) {
+        $scope.removeItem = function(item) {
+            var index = $scope.users.data.indexOf(item);
+            bootbox.confirm('Are you sure you want to disable ' + item.firstname + ' ' + item.lastname + '?', function(result) {
                 if (result) {
                     User.delete({id: item.id}, function(response) {
                         if (response.status) {
                             $scope.users.data.splice(index, 1);
+                            $scope.getUsers();
+                            toastr["success"](response.message, "User");
+                        } else {
+                            toastr["warning"](response.message, "User");
+                        }
+                    });
+                }
+            }); 
+        }
+
+        $scope.restoreItem = function(item) {
+            var index = $scope.users.data.indexOf(item);
+            bootbox.confirm('Are you sure you want to restore ' + item.firstname + ' ' + item.lastname + '\'s account?', function(result) {
+                if (result) {
+                    User.restore({action: 'restore',id: item.id}, function(response) {
+                        if (response.status) {
+                            $scope.getUsers();
+                            toastr["success"](response.message, "User");
+                        } else {
+                            toastr["warning"](response.message, "User");
+                        }
+                    });
+                }
+            }); 
+        }
+
+        $scope.deleteItem = function(item) {
+            var index = $scope.users.data.indexOf(item);
+            bootbox.confirm('Are you sure you want to permanently delete ' + item.firstname + ' ' + item.lastname + '\'s account?', function(result) {
+                if (result) {
+                    User.forceDelete({action: 'delete',id: item.id}, function(response) {
+                        if (response.status) {
+                            $scope.getUsers();
                             toastr["success"](response.message, "User");
                         } else {
                             toastr["warning"](response.message, "User");
@@ -85,32 +120,39 @@ angular.module('app').components.controller('UserFormController', [
         }
 
         var formBlock       = uiBlocker.instances.get('modalFormBlock');
-        var mode            = angular.isDefined($scope.programs.data[$scope.itemIndex]) ? 'edit' : 'add';
+        var mode            = angular.isDefined($scope.users.data[$scope.itemIndex]) ? 'edit' : 'add';
 
+        $scope.mode         = mode;
         $scope.submitted    = false;
         $scope.formData     = {};
+        $scope.errors       = {};
 
         if (mode === 'edit') {
 
-            angular.copy($scope.programs.data[$scope.itemIndex], $scope.formData);
+            angular.copy($scope.users.data[$scope.itemIndex], $scope.formData);
             angular.forEach($scope.formData, function(value, field){
                 if (typeof(value) == 'string') {
                     $scope.formData[field] = value.trim();
                 }
             });
-            $scope.imgPreview 		= $scope.formData.logo;
+            $scope.imgPreview 		= $scope.formData.photo;
             
             $scope.formTitle        = $scope.formData.name;
+
+            $scope.changePassword       = false;
+            $scope.formData.pwoption    = 'keep';
             
         } else {
 
             $scope.formData     = {
-                acronym     : "",
-                name       	: "",
-                logo    	: ""    
+                firstname   : "",
+                lastname    : "",
+                email    	: "",
+                username    : "",
             };
 
-            $scope.formTitle    = 'Add new record';
+            $scope.formTitle        = 'Add new user';
+            $scope.changePassword   = true;
 
         }
 
@@ -123,15 +165,16 @@ angular.module('app').components.controller('UserFormController', [
 
                 if (mode !== 'edit') {
                     formBlock.start('Adding data...');
-                    Program.save($scope.formData, function(response) {
+                    User.save($scope.formData, function(response) {
                         
                         if (response.status === true) {
-                            toastr["success"](response.message, "Program");
-                            $scope.getPrograms();
+                            toastr["success"](response.message, "User");
+                            $scope.getUsers();
                             $modalInstance.close();
                         } else {
-                            angular.forEach(response.message, function(m, f){
-								$scope.modalForm[f].$setValidity('required', false);
+                            angular.forEach(response.message, function(m, f) {
+                                $scope.errors[f] = m[0];
+                                $scope.modalForm[f].$setValidity(f, false);
                             });
                         }
 
@@ -141,30 +184,30 @@ angular.module('app').components.controller('UserFormController', [
                 } else {
                     formBlock.start('Updating data...');
                     //use save method, because will use post verb to pass to server, laravel do not accept multipart/form-data on put request
-                    Program.save($scope.formData, function(response) {
+                    User.save($scope.formData, function(response) {
 
                         if (response.status === true) {
 
-                            toastr["success"](response.message, "Program");
-                            angular.copy(response.data, $scope.programs.data[$scope.itemIndex]);
+                            toastr["success"](response.message, "User");
+                            angular.extend($scope.users.data[$scope.itemIndex], response.data);
                             $modalInstance.close();
-                            //$scope.getPrograms();
 
                         } else {
 
                             if (angular.isDefined(response.code) && response.code === 400) {
 
-                                toastr["warning"]("Update failed. Record was not found.", "Program");
+                                toastr["warning"]("Update failed. Record was not found.", "User");
                                 $modalInstance.close();
-                                $scope.getPrograms();
+                                $scope.getUsers();
 
                             } else {
 
                                 angular.forEach(response.message, function(m, f){
-                                    $scope.modalForm[f].$setValidity('required', false);
+                                    $scope.errors[f] = m[0];
+                                    $scope.modalForm[f].$setValidity(f, false);
                                 });
 
-                                toastr["error"]("There are some invalid inputs on the program form.", "Program");
+                                toastr["error"]("There are some invalid inputs on the user form.", "User");
 
                             }
 
@@ -176,7 +219,8 @@ angular.module('app').components.controller('UserFormController', [
                 }
 
             } else {
-                toastr["error"]("There are some invalid inputs on the program form.", "Alumni");
+                //console.log($scope.modalForm.$error)
+                toastr["error"]("There are some invalid inputs on the user form.", "User");
             } 
             
         };
@@ -199,6 +243,24 @@ angular.module('app').components.controller('UserFormController', [
             }, 297);
             
         };
+
+        $scope.showPasswordField = function() {
+
+            if ($scope.formData.pwoption == 'keep') {
+                $scope.changePassword = false;
+            } else {
+                $scope.changePassword = true;
+            }
+
+        }
+
+        //unset field error on change
+        angular.forEach(['username','email','password'], function(f) {
+            $scope.$watch("formData." + f, function(i,e){
+                $scope.modalForm[f].$setValidity(f, true);
+            });
+        });
+        
 
     }
 

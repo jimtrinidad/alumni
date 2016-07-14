@@ -4,12 +4,17 @@ class ProgramController extends BaseController {
 
 	public function index() {
 
-		$program_results	= Program::orderBy('name')->select('id', 'acronym', 'name', 'logo', 'created_at')->get();
+		$program_results	= Program::withTrashed()->orderBy('deleted_at')->orderBy('name')->select('id', 'acronym', 'name', 'logo', 'created_at', 'deleted_at')->get();
 		$programs 			= array();
 
 		foreach ($program_results as $item) {
 
-			$programs[] 	= AppHelpers\programLogo($item);
+			$item 	= AppHelpers\programLogo($item);
+			$item['active'] = 1;
+			if ($item['deleted_at'] != null) {
+				$item['active'] = 0;
+			}
+			$programs[] = $item;
 
 		}
 
@@ -59,26 +64,29 @@ class ProgramController extends BaseController {
 		if ($validator->passes()) {
 
 			$program = new Program;
-			$program->fill(Input::all());
+			$program->fill(Input::only('acronym','name'));
 			$program->created_by	= Auth::id();
-
-			if (Input::hasFile('logo')) {
-
-				$file 		= Input::file('logo');
-				$logoName	= $program->id . '-logo.' . $file->getClientOriginalExtension();
-
-				$file->move(Config::get('constants.PROGRAM_LOGO_PATH'), $logoName);
-
-				Image::make(Config::get('constants.PROGRAM_LOGO_PATH') . $logoName,array(
-				    'width' => 300,
-				    'height' => 300
-				))->save();
-
-				$program->logo = $logoName;
-
-			}
+			$program->acronym 		= strtoupper($program->acronym);
 
 			if ($program->save()) {
+
+				if (Input::hasFile('logo')) {
+
+					$file 		= Input::file('logo');
+					$logoName	= $program->id . '-logo.' . $file->getClientOriginalExtension();
+
+					$file->move(Config::get('constants.PROGRAM_LOGO_PATH'), $logoName);
+
+					Image::make(Config::get('constants.PROGRAM_LOGO_PATH') . $logoName,array(
+					    'width' => 300,
+					    'height' => 300
+					))->save();
+
+					$program->logo = $logoName;
+					$program->save();
+
+				}
+
 				return Response::json(array(
 						'status'	=> true,
 						'message'	=> 'Record has been saved successfully.'
@@ -102,8 +110,9 @@ class ProgramController extends BaseController {
 			$program = Program::find($id);
 			if ($program) {
 
-				$program->fill(Input::all());
+				$program->fill(Input::only('acronym','name'));
 				$program->updated_by	= Auth::id();
+				$program->acronym 		= strtoupper($program->acronym);
 				if (Input::hasFile('logo')) {
 
 					$file 		= Input::file('logo');
@@ -165,6 +174,30 @@ class ProgramController extends BaseController {
 
 			return Response::json(array(
 					'status'	=> true,
+					'message'		=> 'Record has been disabled successfully.'
+				));
+
+		} else {
+
+			return Response::json(array(
+					'status'	=> false,
+					'message'	=> 'Disable record failed! Record not found.'
+				));
+
+		}
+
+	}
+
+	public function forceDelete($id) {
+
+		$result = Program::withTrashed()->find($id);
+
+		if ($result) {
+
+			$result->forceDelete();
+
+			return Response::json(array(
+					'status'	=> true,
 					'message'		=> 'Record has been deleted successfully.'
 				));
 
@@ -172,7 +205,27 @@ class ProgramController extends BaseController {
 
 			return Response::json(array(
 					'status'	=> false,
-					'message'	=> 'Deleting record failed! Record not found.'
+					'message'	=> 'Delete record failed! Record not found.'
+				));
+
+		}
+
+	}
+
+	public function restore($id) {
+
+		if (Program::withTrashed()->where('id', $id)->restore()) {
+
+			return Response::json(array(
+					'status'	=> true,
+					'message'		=> 'Record has been restored successfully.'
+				));
+
+		} else {
+
+			return Response::json(array(
+					'status'	=> false,
+					'message'	=> 'Restoring record failed! Record not found.'
 				));
 
 		}

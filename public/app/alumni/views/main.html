@@ -19,7 +19,7 @@
                         <thead>
                             <tr>
                                 <th ng-repeat="item in configRights.data.viewables" ng-show="viewable(item.id)">{{item.label}}</th>
-                                <th style="width: 50px;"></th>
+                                <th style="width: 60px;"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -28,8 +28,8 @@
                                     {{displayData(item, itm.id)}}
                                 </td>
                                 <td class="text-right">
-                                    <a has-permission='editAlumni' href="javascript:;" ng-click="openForm(index)"><i class='fa fa-pencil'></i></a>
-                                    <a has-permission='deleteAlumni' href="javascript:;" ng-click="removeAlumni(item, index)"><i class='fa fa-trash'></i></a>
+                                    <a class="btn btn-xs btn-info" has-permission='editAlumni' href="javascript:;" ng-click="openForm(index)"><i class='fa fa-pencil-square-o'></i></a>
+                                    <a class="btn btn-xs btn-danger" has-permission='deleteAlumni' href="javascript:;" ng-click="removeAlumni(item, index)"><i class='fa fa-trash'></i></a>
                                 </td>
                             </tr>
                         </tbody>
@@ -112,15 +112,15 @@
 <script type="text/ng-template" id="alumniHeader">
     <header class="panel-heading">
         <div class="row">
-            <div class="col-xs-7 col-sm-8">
+            <div class="col-xs-9 col-sm-8">
                 <span class="h5 v-align">Alumni listing </span>
                 <span class="right-button-group">
-                    <a has-permission='addAlumni' href="javascript:;" class="btn btn-primary btn-responsive" ng-click="openForm('new')" title="Add new record"><i class="fa fa-plus-square"></i><span class="hidden-xs"> Add</span></a>
-                    <a has-permission='addAlumni' href="javascript:;" class="btn btn-primary btn-responsive" title="Upload records from excel file"><i class="fa fa-upload"></i><span class="hidden-xs"> Upload</span></a>
-                    <a has-permission='deleteAlumni' ng-show="selectedItem.length > 0" href="javascript:;" class="btn btn-danger btn-responsive" ng-click="removeMultipleAlumni()" title="Delete selected items"><i class="fa fa-trash"></i><span class="hidden-xs"> Delete selected</span></a>
+                    <a has-permission='addAlumni' href="javascript:;" class="btn btn-primary" ng-click="openForm('new')" title="Add new record"><i class="fa fa-plus-square"></i><span class="hidden-xs"> Add</span></a>
+                    <a has-permission='addAlumni' href="javascript:;" class="btn btn-primary" title="Upload records from excel file"><i class="fa fa-upload"></i><span class="hidden-xs"> Upload</span></a>
+                    <a has-permission='deleteAlumni' ng-show="selectedItem.length > 0" href="javascript:;" class="btn btn-danger" ng-click="removeMultipleAlumni()" title="Delete selected items"><i class="fa fa-trash"></i><span class="hidden-xs"> Delete selected</span></a>
                  </span>
             </div>
-            <div class="col-xs-5 col-sm-4 text-right">
+            <div class="col-xs-3 col-sm-4 text-right">
                 <checklist model="displayedFields" options="configRights.data.viewables" label="Displayed Fields" close-scroll="true" id="displayedFields"></checklist>
             </div>
         </div>
